@@ -8,3 +8,4 @@ English
 
 # Commands
 Fly
+Heal
