@@ -20,3 +20,10 @@ heal-syntax: <yellow>/heal <player></yellow>
 playerGotHealed: <gray>Du wurdest geheilt.</gray>
 playerHealedTarget: <gray>Du hast den Spieler</gray> <green>{0}</green> <gray>geheilt.</gray>
 targetGotHealed: <gray>Du wurdest geheilt.</gray>
+
+# Permission aocommands.vote /vote
+vote: <newline><gray><click:open_url:https://vote2.atramis.de>2. Vote</click></gray><newline><red><click:open_url:https://vote.atramis.de>1. Vote</click></red><newline><blue><click:open_url:https://vote3.atramis.de>3. Vote</click></blue>
+
+# Permission aocommands.vanish /vanish
+nonVanish: <gray>Du bist</gray> <red>nicht</red> <gray>mehr für andere Spieler unsichtbar.</gray>
+setVanish: <gray>Du bist</gray> <green>nun</green> <gray>für andere Spieler unsichtbar.</gray>
