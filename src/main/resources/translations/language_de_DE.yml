@@ -45,3 +45,19 @@ feed-syntax: <yellow>/feed [<player>]</yellow>
 fed: <gray>Dein Hunger wurde gestillt.</gray>
 playerFeedTarget: <gray>Der Hunger von {0} wurde gestillt.</gray>
 fedTarget: <gray>Dein Hunger wurde gestillt.</gray>
+
+# Permission aocommands.fix /repair
+# Permission aocommands.fix.all /repairall
+toolNotFixable: <gray>Der Gegenstand kann</gray> <red>nicht</red> <gray>repariert werden!</gray>
+cmdToolNotFixable: <gray>Gegenstände mit einer CustomModelId können</gray> <red>nicht</red> <gray>repariert werden!</gray>
+toolsNotFixable: <gray>Die Gegenstände können</gray> <red>nicht</red> <gray>repariert werden!</gray>
+toolRepaired: <gray>Dein Gegenstand</gray> <green>wurde</green> <gray>repariert.</gray>
+toolsRepaired: <gray>Dein Gegenstände</gray> <green>wurden</green> <gray>repariert.</gray>
+
+# Permission aocommands.give /give <player> <item_name> [<amount>] [<custom_model_data_id>]
+give-syntax: <yellow>/give <player> <item_name> [<amount>] [<custom_model_data_id>]</yellow>
+itemDoesNotExists: <gray>Der Gegenstand {0}</gray> <red>existiert</red> <gray>nicht!</gray>
+itemCannotBeAir: <gray>Der Gegenstand kann nicht</gray> <red>air</red> <gray>sein!</gray>
+cmdIsNotValid: <gray>Die CustomModelId ist</gray> <red>nicht</red> <gray>gültig!</gray>
+addedItemToInventory: <gray>Du hast den Gegenstand</gray> <green>{0} {1}x</green> <gray>mit der CustomModelId</gray> <green>{2}</green> <gray>erhalten.</gray>
+addedItemToTargetInventory: <gray>Der Spieler</gray> <green>{0}</green> <gray>hat den Gegenstand</gray> <green>{1} {2}x</green> <gray>mit der CustomModelId</gray> <green>{3}</green> <gray>erhalten.</gray>

@@ -42,8 +42,8 @@ public record Feed(AOCommands pl) {
             msg.sendMessage("playerFeedTarget", true, false);
         }
 
-        final Message msgT = new Message(target);
+        final Message msgTarget = new Message(target);
         target.setFoodLevel(foodLevel);
-        msgT.sendMessage("fedTarget", false, true);
+        msgTarget.sendMessage("fedTarget", false, true);
     }
 }

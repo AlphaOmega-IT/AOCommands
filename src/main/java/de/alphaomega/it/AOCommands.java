@@ -78,6 +78,8 @@ public class AOCommands extends JavaPlugin {
         cmdF.registerCommands(new Rename(this));
         cmdF.registerCommands(new Hat());
         cmdF.registerCommands(new Feed(this));
+        cmdF.registerCommands(new Repair(this));
+        cmdF.registerCommands(new Give());
     }
 
     private void registerListener() {

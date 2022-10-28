@@ -11,3 +11,6 @@ rename_custom_model_data_items: true
 
 ### Feed ###
 food_level_amount: 20
+
+### Repair ###
+allowed_custom_model_data_item_fix: true
