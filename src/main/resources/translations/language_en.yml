@@ -1,3 +1,16 @@
-{
+###
+### Please make sure to read the document of https://docs.adventure.kyori.net/minimessage/format.html#minimessage-format
+### Since the default color code design is disabled! §, & will not work!
+### Creator of this Plugin: AlphaOmega-IT | SaltyFeaRz
+### Unique Oneblock: Atramis.de | 1.19.X |
+###
 
-}
+prefix: <color:#cc0000>AOCommands</color> <gray><bold>»</bold></gray> <gray>
+noPerms: <gray>You have</gray> <red>no</red> <gray>permission to execute this command!</gray>
+playerNotOnline: <gray>The player</gray> <red>{0}</red> <gray>is</gray> <red>not</red> <gray>Online!</gray>
+
+# Permission aocommands.fly
+fly-syntax: <yellow>/fly <player> <speed></yellow>
+setFlySpeed: <gray>Your fly speed was set to</gray> <yellow>{0}</yellow> <gray>.</gray>
+flyDisabled: <gray>You are</gray> <red>not</red> <gray>able to fly anymore!</gray>
+flyEnabled: <gray>You are</gray> <green>able</green> <gray>to fly!</gray>

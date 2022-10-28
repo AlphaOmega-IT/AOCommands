@@ -1,5 +1,7 @@
 package de.alphaomega.it.cmdHandler;
 
+import de.alphaomega.it.AOCommands;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.*;
@@ -59,7 +61,11 @@ public class CommandFramework implements CommandExecutor {
                 de.alphaomega.it.cmdHandler.Command command = method.getAnnotation(de.alphaomega.it.cmdHandler.Command.class);
                 if (sender instanceof Player player) {
                     if (!command.permission().equals("") && !sender.hasPermission(command.permission()) && !sender.isOp()) {
-                            sender.sendMessage(command.noPerm());
+                        if (player.locale().getLanguage() == "de") {
+                            sender.sendMessage(MiniMessage.miniMessage().deserialize(AOCommands.getNoPermsMessage().get("de")));
+                        } else {
+                            sender.sendMessage(MiniMessage.miniMessage().deserialize(AOCommands.getNoPermsMessage().get("en")));
+                        }
                         return true;
                     }
                     try {

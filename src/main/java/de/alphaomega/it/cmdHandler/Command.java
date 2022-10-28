@@ -1,5 +1,7 @@
 package de.alphaomega.it.cmdHandler;
 
+import de.alphaomega.it.AOCommands;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,8 +14,6 @@ public @interface Command {
 	String name();
 	
 	String permission() default "";
-
-	String noPerm() default "You do not have the permissions to execute this command";
 
 	String[] aliases() default {};
 	

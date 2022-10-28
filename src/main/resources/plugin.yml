@@ -1,0 +1,8 @@
+name: AOCommands
+version: 1.0
+main: de.alphaomega.it.AOCommands
+api-version: 1.19
+prefix: AOCommands
+authors: [AlphaOmega-IT, SaltyFeaRz, Justin]
+description: Several useful commands for your server network!
+website: https://atramis.de | https://alphaomega-it.de
