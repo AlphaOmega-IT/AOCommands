@@ -8,3 +8,6 @@
 ### Rename ###
 allowed_rename_char_length: 64
 rename_custom_model_data_items: true
+
+### Feed ###
+food_level_amount: 20

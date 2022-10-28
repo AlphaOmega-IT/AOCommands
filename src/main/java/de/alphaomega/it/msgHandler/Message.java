@@ -31,11 +31,13 @@ public class Message {
         File folder = new File(pl.getDataFolder() + "/translations");
         HashMap<String, FileConfiguration> translations = new HashMap<>();
         for (File f : Objects.requireNonNull(folder.listFiles())) {
-            final String localeStr = f.getName().substring(9, 11);
-            if (localeStr.equalsIgnoreCase("en")) {
-                translations.put("en", YamlConfiguration.loadConfiguration(f));
-            } else if (localeStr.equalsIgnoreCase("de")) {
-                translations.put("de", YamlConfiguration.loadConfiguration(f));
+            final String localeStr = f.getName().substring(9, 14);
+            if (localeStr.equalsIgnoreCase("en_US")) {
+                translations.put("en_US", YamlConfiguration.loadConfiguration(f));
+            } else if (localeStr.equalsIgnoreCase("de_DE")) {
+                translations.put("de_DE", YamlConfiguration.loadConfiguration(f));
+            } else if (localeStr.equalsIgnoreCase("pt_BR")) {
+                translations.put("pt_BR", YamlConfiguration.loadConfiguration(f));
             }
         }
         return translations;
@@ -85,10 +87,10 @@ public class Message {
     }
 
     private FileConfiguration getFileConfig() {
-        if (AOCommands.getInstance().getTranslations().get(p.locale().getLanguage()) == null) {
-            return AOCommands.getInstance().getTranslations().get("en");
+        if (AOCommands.getInstance().getTranslations().get(p.locale().toString()) == null) {
+            return AOCommands.getInstance().getTranslations().get("en_US");
         }
-        return AOCommands.getInstance().getTranslations().get(p.locale().getLanguage());
+        return AOCommands.getInstance().getTranslations().get(p.locale().toString());
     }
 
     private String getPath(final String key, final FileConfiguration fileConfig) {

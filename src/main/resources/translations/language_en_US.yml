@@ -39,3 +39,9 @@ itemSuccessfullyRenamed: <gray>The item has been</gray> <green>successfully</gre
 # Permission aocommands.hat /hat
 noValidItemInHand-hat: <gray>You need a</gray> <red>valid</red> <gray>item in your hand!</gray>
 hatCommandExecuted: <gray>You put</gray> <green>successfully</green> <gray>a item on your head.</gray>
+
+# Permission aocommands.feed /feed <player>
+feed-syntax: <yellow>/feed [<player>]</yellow>
+fed: <gray>Your hunger has been satisfied.</gray>
+playerFeedTarget: <gray>{0}'s hunger has been satisfied.</gray>
+fedTarget: <gray>Your hunger has been satisfied.</gray>

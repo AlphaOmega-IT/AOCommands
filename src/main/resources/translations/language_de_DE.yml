@@ -39,3 +39,9 @@ itemSuccessfullyRenamed: <gray>Der Gegenstand wurde</gray> <green>erfolgreich</g
 # Permission aocommands.hat /hat
 noValidItemInHand-hat: <gray>Du benötigst einen</gray> <red>gültigen</red> <gray>Gegenstand in deiner Hand!</gray>
 hatCommandExecuted: <gray>Du hast den Gegenstand</gray> <green>erfolgreich</green> <gray>auf deinen Kopf gesetzt.</gray>
+
+# Permission aocommands.feed /feed <player>
+feed-syntax: <yellow>/feed [<player>]</yellow>
+fed: <gray>Dein Hunger wurde gestillt.</gray>
+playerFeedTarget: <gray>Der Hunger von {0} wurde gestillt.</gray>
+fedTarget: <gray>Dein Hunger wurde gestillt.</gray>

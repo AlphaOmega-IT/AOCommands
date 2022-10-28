@@ -1,0 +1,48 @@
+###
+### Please make sure to read the document of https://docs.adventure.kyori.net/minimessage/format.html#minimessage-format
+### Since the default color code design is disabled! §, & will not work!
+### Creator of this Plugin: AlphaOmega-IT | SaltyFeaRz
+### Unique Oneblock: Atramis.de | 1.19.X |
+### Contribution by: DeskTecc
+###
+
+prefix: <color:#cc0000>AOCommands</color> <gray><bold>»</bold></gray> <gray>
+noPerms: <gray>Você</gray> <red>não tem</red> <gray>permissão para executar esse comando!</gray>
+playerNotOnline: <gray>O jogador</gray> <red>{0}</red> <red>não</red> <gray>está</gray> <gray>Online!</gray>
+
+# Permission aocommands.fly /fly <player> <speed>
+fly-syntax: <yellow>/fly <jogador> <velocidade></yellow>
+setFlySpeed: <gray>Sua velocidade de voo foi definida para</gray> <yellow>{0}</yellow> <gray>.</gray>
+flyDisabled: <gray>Você</gray> <red>não está</red> <gray>permitido a voar!</gray>
+flyEnabled: <gray>Você está</gray> <green>permitido</green> <gray>a voar!</gray>
+
+# Permission aocommands.heal /heal <player>
+heal-syntax: <yellow>/heal <jogador></yellow>
+playerGotHealed: <gray>Você foi curado.</gray>
+playerHealedTarget: <gray>Você curou o jogador</gray> <green>{0}</green> <gray>.</gray>
+targetGotHealed: <gray>Você foi curado.</gray>
+
+# Permission aocommands.vote /vote
+vote: <newline><gray><click:open_url:https://vote2.atramis.de>2. Vote</click></gray><newline><red><click:open_url:https://vote.atramis.de>1. Vote</click></red><newline><blue><click:open_url:https://vote3.atramis.de>3. Vote</click></blue>
+
+# Permission aocommands.vanish /vanish
+nonVanish: <gray>Você</gray> <red>não está</red> <gray>invisivel para outros jogadores.</gray>
+setVanish: <gray>Você</gray> <green>está</green> <gray>invisivel para outros jogadores.</gray>
+
+# Permission aocommands.rename /rename <text>
+rename-syntax: <yellow>/rename <text></yellow>
+allowedCharLengthReached: <gray>Você pode usar um máximo de</gray> <red>{0}</red> <gray>caracteres!</gray>
+noValidItemInHand-rename: <gray>Você precisa de um item</gray> <red>válido</red> <gray>na sua mão!</gray>
+cmdItemsNotRenameable: <gray>Itens com um CustomModelId</gray> <red>não podem</red> <gray>ser renomeados!</gray>
+itemContainsNoItemMeta: <gray>Esse item</gray> <red>não tem ItemMeta</red> <gray>e por isso não pode ser renomeado!</gray>
+itemSuccessfullyRenamed: <gray>O item foi renomeado com</gray> <green>sucesso</green> <gray>.</gray>
+
+# Permission aocommands.hat /hat
+noValidItemInHand-hat: <gray>Você precisa de um item</gray> <red>válido</red> <gray>na sua mão!</gray>
+hatCommandExecuted: <gray>Você colocou com</gray> <green>sucesso</green> <gray>o item na sua cabeça.</gray>
+
+# Permission aocommands.feed /feed <player>
+feed-syntax: <yellow>/feed [<player>]</yellow>
+fed: <gray>Your hunger has been satisfied.</gray>
+playerFeedTarget: <gray>{0}'s hunger has been satisfied.</gray>
+fedTarget: <gray>Your hunger has been satisfied.</gray>

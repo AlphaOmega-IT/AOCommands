@@ -11,7 +11,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.awt.*;
 import java.io.File;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -35,8 +34,9 @@ public class AOCommands extends JavaPlugin {
                 Bukkit.getLogger().log(Level.INFO, "[AOCommands] - Translations got created");
             }
         }
-        this.saveResource("translations/language_de.yml", true);
-        this.saveResource("translations/language_en.yml", true);
+        this.saveResource("translations/language_de_DE.yml", true);
+        this.saveResource("translations/language_en_US.yml", true);
+        this.saveResource("translations/language_pt_BR.yml", true);
 
         if (this.getResource("config.yml") != null)
             this.saveResource("config.yml", true);
@@ -48,8 +48,9 @@ public class AOCommands extends JavaPlugin {
 
         translations = Message.loadTranslationFiles(this);
 
-        noPermsMessage.put("de", translations.get("de").getString("noPerms"));
-        noPermsMessage.put("en", translations.get("en").getString("noPerms"));
+        noPermsMessage.put("de_DE", translations.get("de_DE").getString("noPerms"));
+        noPermsMessage.put("en_US", translations.get("en_US").getString("noPerms"));
+        noPermsMessage.put("pt_BR", translations.get("pt_BR").getString("noPerms"));
 
         if (baseConfig == null) {
             Bukkit.getLogger().log(Level.SEVERE, "[AOCommands] - Config.yml can not be found!");
@@ -76,6 +77,7 @@ public class AOCommands extends JavaPlugin {
         cmdF.registerCommands(new Vanish());
         cmdF.registerCommands(new Rename(this));
         cmdF.registerCommands(new Hat());
+        cmdF.registerCommands(new Feed(this));
     }
 
     private void registerListener() {
