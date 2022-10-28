@@ -3,7 +3,8 @@ AOCommands - Multilanguage System with helpful commands and functions, it takes 
 
 # Supported Languages by now
 German,
-English
+English,
+Brazilian Portuguese
 (more will be added in the future)
 
 # Commands
@@ -11,3 +12,6 @@ Fly,
 Heal,
 Vanish,
 Vote,
+Rename (Hexcolor),
+Hat,
+Feed,
