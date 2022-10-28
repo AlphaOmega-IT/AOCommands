@@ -7,5 +7,7 @@ English
 (more will be added in the future)
 
 # Commands
-Fly
-Heal
+Fly,
+Heal,
+Vanish,
+Vote,
