@@ -2,11 +2,13 @@ package de.alphaomega.it;
 
 import de.alphaomega.it.cmdHandler.CommandFramework;
 import de.alphaomega.it.commands.Fly;
+import de.alphaomega.it.commands.Heal;
 import de.alphaomega.it.msgHandler.Message;
 import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.HashMap;
 
 @Getter
@@ -24,8 +26,8 @@ public class AOCommands extends JavaPlugin {
         if (!this.getDataFolder().exists()) {
             if (this.getDataFolder().mkdir()) {
                 this.saveResource("translations/", false);
-                this.saveResource("translations/language_de.yml", false);
-                this.saveResource("translations/language_en.yml", false);
+                this.saveResource("translations/language_de.yml", true);
+                this.saveResource("translations/language_en.yml", true);
             }
         }
 
@@ -48,6 +50,7 @@ public class AOCommands extends JavaPlugin {
     private void registerCommands() {
         CommandFramework cmdF = new CommandFramework(this);
         cmdF.registerCommands(new Fly());
+        cmdF.registerCommands(new Heal());
     }
 
     public static AOCommands getInstance() { return instance; }
