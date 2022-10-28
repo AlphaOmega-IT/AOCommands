@@ -27,3 +27,11 @@ vote: <newline><gray><click:open_url:https://vote2.atramis.de>2. Vote</click></g
 # Permission aocommands.vanish /vanish
 nonVanish: <gray>Du bist</gray> <red>nicht</red> <gray>mehr für andere Spieler unsichtbar.</gray>
 setVanish: <gray>Du bist</gray> <green>nun</green> <gray>für andere Spieler unsichtbar.</gray>
+
+# Permission aocommands.rename /rename <text>
+rename-syntax: <yellow>/rename <text></yellow>
+allowedCharLengthReached: <gray>Du darfst maximal</gray> <red>{0}</red> <gray>Zeichen verwenden!</gray>
+noValidItemInHand: <gray>Du benötigst einen</gray> <red>gültigen</red> <gray>Gegenstand in deiner Hand!</gray>
+cmdItemsNotRenameable: <gray>Gegenstände mit einer CustomModelId können</gray> <red>nicht</red> <gray>umbenannt werden!</gray>
+itemContainsNoItemMeta: <gray>Der Gegenstand enthält</gray> <red>keine ItemMeta</red> <gray>und kann somit nicht umbenannt werden!</gray>
+itemSuccessfullyRenamed: <gray>Der Gegenstand wurde</gray> <green>erfolgreich</green> <gray>umbenannt.</gray>

@@ -6,7 +6,7 @@
 
     <groupId>de.alphaomega.it</groupId>
     <artifactId>AOCommands</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <dependencies>
         <dependency>
             <groupId>io.papermc.paper</groupId>
@@ -17,7 +17,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
+            <version>1.18.24</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

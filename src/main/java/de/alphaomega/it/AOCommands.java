@@ -1,18 +1,17 @@
 package de.alphaomega.it;
 
 import de.alphaomega.it.cmdHandler.CommandFramework;
-import de.alphaomega.it.commands.Fly;
-import de.alphaomega.it.commands.Heal;
-import de.alphaomega.it.commands.Vanish;
-import de.alphaomega.it.commands.Vote;
+import de.alphaomega.it.commands.*;
 import de.alphaomega.it.listeners.OnJoin;
 import de.alphaomega.it.msgHandler.Message;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.awt.*;
 import java.io.File;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -24,6 +23,7 @@ public class AOCommands extends JavaPlugin {
     private HashMap<String, FileConfiguration> translations = new HashMap<>();
 
     private static final HashMap<String, String> noPermsMessage = new HashMap<>();
+    private FileConfiguration baseConfig;
 
     @Override
     public void onLoad() {
@@ -38,11 +38,23 @@ public class AOCommands extends JavaPlugin {
         this.saveResource("translations/language_de.yml", true);
         this.saveResource("translations/language_en.yml", true);
 
+        if (this.getResource("config.yml") != null)
+            this.saveResource("config.yml", true);
+
+        File configFile = new File(this.getDataFolder() + "/config.yml");
+        if (configFile.exists())
+            baseConfig = YamlConfiguration.loadConfiguration(configFile);
+
 
         translations = Message.loadTranslationFiles(this);
 
         noPermsMessage.put("de", translations.get("de").getString("noPerms"));
         noPermsMessage.put("en", translations.get("en").getString("noPerms"));
+
+        if (baseConfig == null) {
+            Bukkit.getLogger().log(Level.SEVERE, "[AOCommands] - Config.yml can not be found!");
+            getServer().shutdown();
+        }
     }
 
     @Override
@@ -62,6 +74,7 @@ public class AOCommands extends JavaPlugin {
         cmdF.registerCommands(new Heal());
         cmdF.registerCommands(new Vote());
         cmdF.registerCommands(new Vanish());
+        cmdF.registerCommands(new Rename(this));
     }
 
     private void registerListener() {

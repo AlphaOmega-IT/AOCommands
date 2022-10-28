@@ -1,0 +1,10 @@
+###
+### Please make sure to read the document of https://docs.adventure.kyori.net/minimessage/format.html#minimessage-format
+### Since the default color code design is disabled! §, & will not work!
+### Creator of this Plugin: AlphaOmega-IT | SaltyFeaRz
+### Unique Oneblock: Atramis.de | 1.19.X |
+###
+
+### Rename ###
+allowed_rename_char_length: 64
+rename_custom_model_data_items: true
