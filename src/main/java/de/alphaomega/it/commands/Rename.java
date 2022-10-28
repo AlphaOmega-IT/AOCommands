@@ -41,7 +41,7 @@ public record Rename(AOCommands pl) {
 
         ItemStack iS = p.getInventory().getItemInMainHand().clone();
         if (!iS.getType().isItem()) {
-            msg.sendMessage("noValidItemInHand", false, true);
+            msg.sendMessage("noValidItemInHand-rename", false, true);
             return;
         }
 

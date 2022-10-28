@@ -75,6 +75,7 @@ public class AOCommands extends JavaPlugin {
         cmdF.registerCommands(new Vote());
         cmdF.registerCommands(new Vanish());
         cmdF.registerCommands(new Rename(this));
+        cmdF.registerCommands(new Hat());
     }
 
     private void registerListener() {

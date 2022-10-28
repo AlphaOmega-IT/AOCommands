@@ -31,7 +31,11 @@ setVanish: <gray>You are</gray> <green>now</green> <gray>invisible for other pla
 # Permission aocommands.rename /rename <text>
 rename-syntax: <yellow>/rename <text></yellow>
 allowedCharLengthReached: <gray>You can use a maximum of</gray> <red>{0}</red> <gray>characters!</gray>
-noValidItemInHand: <gray>You need a</gray> <red>valid</red> <gray>item in your hand!</gray>
+noValidItemInHand-rename: <gray>You need a</gray> <red>valid</red> <gray>item in your hand!</gray>
 cmdItemsNotRenameable: <gray>Items with a CustomModelId</gray> <red>cannot</red> <gray>be renamed!</gray>
 itemContainsNoItemMeta: <gray>The item contains</gray> <red>no ItemMeta</red> <gray>so it cannot be renamed!</gray>
 itemSuccessfullyRenamed: <gray>The item has been</gray> <green>successfully</green> <gray>renamed.</gray>
+
+# Permission aocommands.hat /hat
+noValidItemInHand-hat: <gray>You need a</gray> <red>valid</red> <gray>item in your hand!</gray>
+hatCommandExecuted: <gray>You put</gray> <green>successfully</green> <gray>a item on your head.</gray>
