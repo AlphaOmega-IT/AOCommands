@@ -62,3 +62,17 @@ itemCannotBeAir: <gray>The item</gray> <red>cannot</red> <gray>be air!</gray>
 cmdIsNotValid: <gray>The CustomModelId is</gray> <red>not</red> <gray>valid!</gray>
 addedItemToInventory: <gray>You have received the item</gray> <green>{0} {1}x</green> <gray>with the CustomModelId</gray> <green>{2}</green><gray>.</gray>
 addedItemToTargetInventory: <gray>The player</gray> <green>{0}</green> has received the item</gray> <green>{1} {2}x</green> <gray>with the CustomModelId</gray> <green>{3}</green><gray>.</gray>
+
+# Permission aocommands.workbench /workbench
+
+# Permission aocommands.message /msg <player> <text>
+msg-syntax: <yellow>/msg <player> <text></yellow>
+noMessageToYourself: <gray>You can</gray> <red>not</red> <gray>send messages to yourself.</gray>
+
+# Permission aocommands.message.reply /reply <text>
+reply-syntax: <yellow>/reply <text></yellow>
+noConversation: <gray>You are</gray> <red>not</red> <gray>in any other conversations!</gray>
+
+### MSG / REPLY DESIGN ### {0} Playername {1} Message
+msgSent: <gray>You →</gray> <gold>{0}</gold> <gray>| {1}</gray>
+msgReceived: <gold>{0} →</gold> <gray>You | {1}</gray>

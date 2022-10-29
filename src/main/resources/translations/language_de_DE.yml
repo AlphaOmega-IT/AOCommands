@@ -61,3 +61,17 @@ itemCannotBeAir: <gray>Der Gegenstand kann nicht</gray> <red>air</red> <gray>sei
 cmdIsNotValid: <gray>Die CustomModelId ist</gray> <red>nicht</red> <gray>gültig!</gray>
 addedItemToInventory: <gray>Du hast den Gegenstand</gray> <green>{0} {1}x</green> <gray>mit der CustomModelId</gray> <green>{2}</green> <gray>erhalten.</gray>
 addedItemToTargetInventory: <gray>Der Spieler</gray> <green>{0}</green> <gray>hat den Gegenstand</gray> <green>{1} {2}x</green> <gray>mit der CustomModelId</gray> <green>{3}</green> <gray>erhalten.</gray>
+
+# Permission aocommands.workbench /workbench
+
+# Permission aocommands.message /msg <player> <text>
+msg-syntax: <yellow>/msg <player> <text></yellow>
+noMessageToYourself: <gray>Du kannst dir selber</gray> <red>keine</red> <gray>Nachrichten schicken.</gray>
+
+# Permission aocommands.message.reply /reply <text>
+reply-syntax: <yellow>/reply <text></yellow>
+noConversation: <gray>Aktuell bist du in</gray> <red>keiner</red> <gray>Konversation, worauf du antworten könntest!</gray>
+
+### MSG / REPLY DESIGN ### {0} Playername {1} Message
+msgSent: <gray>Du →</gray> <gold>{0}</gold> <gray>| {1}</gray>
+msgReceived: <gold>{0} →</gold> <gray>Dir | {1}</gray>
