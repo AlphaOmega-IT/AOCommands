@@ -82,10 +82,31 @@ targetInvCleared: <gray>Das Inventar von dem Spieler</gray> <gold>{0}</gold> <gr
 InvClearedBy: <gray>Dein Inventar wurde von dem Spieler</gray> <gold>{0}</gold> <gray>gelöscht.</gray>
 invCleared: <gray>Dein Inventar wurde geleert.</gray>
 
+# Permission aocommands.armorstand
+asNameCreate: <green>Erstellen</green>
+asLoreCreate: <gray>Erstelle einen neuen Rüstungsständer.</gray>
+asNameGlow: <green>Leuchteffekt</green>
+asLoreGlow: <gray>Stelle den Leuchteffekt ein.</gray>
+asNamePlate: <green>Steinplatte</green>
+asLorePlate: <gray>Stelle die Steinplatte ein.</gray>
+asNameArms: <green>Arme</green>
+asLoreArms: <gray>Schalte die Arme des Rüstungsständer um.</gray>
+asNameName: <green>Armorstand Name</green>
+asLoreName: <gray>Ändere den Namen des Rüstungsständer.</gray>
+asNameGravity: <green>Schwerkraft</green>
+asLoreGravity: <gray>Schaltet die Schwerkraft des Rüstungsständer um.</gray>
+
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml
 ### You can add as many lines in lore as you want!
+###
+### BackArrowHead ###
 backArrowName: Zurück
 backArrowLore:
   lore1: <gray>Klicke hier um</gray>
   lore2: <gray>zurück zu gelangen.</gray>
+### ConfirmHead ###
+confirmName: Bestätigen
+confirmLore:
+  lore1: <gray>Klicke hier um</gray>
+  lore2: <gray>deine Eingaben zu bestätigen.</gray>

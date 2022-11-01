@@ -83,10 +83,30 @@ targetInvCleared: <gray>The inventory of player</gray> <gold>{0}</gold> <gray>ha
 InvClearedBy: <gray>Your inventory has been cleared by player</gray> <gold>{0}</gold><gray>.</gray>
 invCleared: <gray>Your inventory has been cleared.</gray>
 
+# Permission aocommands.armorstand
+asNameCreate: <green>Create</green>
+asLoreCreate: <gray>Create a new Armorstand.</gray>
+asNameGlow: <green>Glow Effect</green>
+asLoreGlow: <gray>Setup the glow effect.</gray>
+asNamePlate: <green>Stone Plate</green>
+asLorePlate: <gray>Setup the stone plate.</gray>
+asNameArms: <green>Arms</green>
+asLoreArms: <gray>Toggle the arms of the Armorstand.</gray>
+asNameName: <green>Armorstand Name</green>
+asLoreName: <gray>Change the name of the Armorstand.</gray>
+asNameGravity: <green>Gravity</green>
+asLoreGravity: <gray>Toggle the gravity of the Armorstand.</gray>
+
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml
 ### You can add as many lines in lore as you want!
+#### BackArrowHead ###
 backArrowName: Back
 backArrowLore:
   lore1: <gray>Click here</gray>
   lore2: <gray>to go back.</gray>
+### ConfirmHead ###
+confirmName: Confirm
+confirmLore:
+  lore1: <gray>Click here</gray>
+  lore2: <gray>to confirm your edits.</gray>

@@ -2,11 +2,15 @@ package de.alphaomega.it.utils;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -38,6 +42,14 @@ public class ItemBuilder {
 
     public ItemBuilder setName(final String name) {
         this.iM.displayName(MiniMessage.miniMessage().deserialize(name).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE));
+        return this;
+    }
+
+    public ItemBuilder setLore(final String... lines) {
+        final List<String> sLore = new ArrayList<>(List.of(lines));
+        final List<Component> cLore = new ArrayList<>();
+        sLore.forEach(line -> cLore.add(MiniMessage.miniMessage().deserialize(line).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE)));
+        this.iM.lore(cLore);
         return this;
     }
 

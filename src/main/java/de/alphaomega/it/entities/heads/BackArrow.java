@@ -14,7 +14,7 @@ public class BackArrow extends AHead {
 
     private final static String NAME = "backArrow";
     private final static String UUID_STRING = AOCommands.getInstance().getBaseConfig().getString(NAME + "-uuid");
-    private final static String TEXTURE = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODE2ZWEzNGE2YTZlYzVjMDUxZTY5MzJmMWM0NzFiNzAxMmIyOThkMzhkMTc5ZjFiNDg3YzQxM2Y1MTk1OWNkNCJ9fX0=";
+    private final static String TEXTURE = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvY2RjOWU0ZGNmYTQyMjFhMWZhZGMxYjViMmIxMWQ4YmVlYjU3ODc5YWYxYzQyMzYyMTQyYmFlMWVkZDUifX19";
     private final static String DEFAULT_NAME = "Oak Wood Backward II";
 
     public BackArrow() {
@@ -49,7 +49,7 @@ public class BackArrow extends AHead {
             getLores().put(LANGUAGE.BRAZILIAN.getLocale(), AOCommands.getInstance().getTranslations().get(LANGUAGE.BRAZILIAN.getLocale()).getConfigurationSection("backArrowLore").getValues(false).values().stream().map(Object::toString).toList());
         } catch (Exception exc) {
             setLores(new LinkedHashMap<>());
-            Bukkit.getLogger().severe("BackArrow config keys are incorrect. Please make sure they are readable!");
+            Bukkit.getLogger().severe("BackArrowHead config keys are incorrect. Please make sure they are readable!");
         }
         return getLores();
     }
