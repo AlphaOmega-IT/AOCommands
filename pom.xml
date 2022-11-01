@@ -6,7 +6,7 @@
 
     <groupId>de.alphaomega.it</groupId>
     <artifactId>AOCommands</artifactId>
-    <version>1.3</version>
+    <version>1.5</version>
     <dependencies>
         <dependency>
             <groupId>io.papermc.paper</groupId>

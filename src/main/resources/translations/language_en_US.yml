@@ -75,3 +75,17 @@ noConversation: <gray>You are</gray> <red>not</red> <gray>in any other conversat
 ### MSG / REPLY DESIGN ### {0} Playername {1} Message
 msgSent: <gray>You →</gray> <gold>{0}</gold> <gray>| {1}</gray>
 msgReceived: <gold>{0} →</gold> <gray>You | {1}</gray>
+
+# Permission aocommands.clearinv /clearinv [<player>]
+clearinv-syntax: <yellow>/clearinv [<player>]</yellow>
+targetInvCleared: <gray>The inventory of player</gray> <gold>{0}</gold> <gray>has been cleared.</gray>
+InvClearedBy: <gray>Your inventory has been cleared by player</gray> <gold>{0}</gold><gray>.</gray>
+invCleared: <gray>Your inventory has been cleared.</gray>
+
+### Custom Inventory Heads
+### Color of name is changeable in config.yml
+### You can add as many lines in lore as you want!
+backArrowName: Back
+backArrowLore:
+  lore1: <gray>Click here</gray>
+  lore2: <gray>to go back.</gray>

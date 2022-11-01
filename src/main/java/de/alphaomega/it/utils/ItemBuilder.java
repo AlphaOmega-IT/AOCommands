@@ -1,9 +1,15 @@
 package de.alphaomega.it.utils;
 
+import lombok.Getter;
+import lombok.Setter;
+import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+@Getter
+@Setter
 public class ItemBuilder {
 
     private ItemStack iS;
@@ -27,6 +33,11 @@ public class ItemBuilder {
 
     public ItemBuilder setCustomModelData(final int id) {
         this.iM.setCustomModelData(id);
+        return this;
+    }
+
+    public ItemBuilder setName(final String name) {
+        this.iM.displayName(MiniMessage.miniMessage().deserialize(name).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE));
         return this;
     }
 

@@ -2,6 +2,7 @@ package de.alphaomega.it;
 
 import de.alphaomega.it.cmdHandler.CommandFramework;
 import de.alphaomega.it.commands.*;
+import de.alphaomega.it.invHandler.InvManager;
 import de.alphaomega.it.listeners.OnJoin;
 import de.alphaomega.it.msgHandler.Message;
 import lombok.Getter;
@@ -23,6 +24,8 @@ public class AOCommands extends JavaPlugin {
 
     private static final HashMap<String, String> noPermsMessage = new HashMap<>();
     private FileConfiguration baseConfig;
+
+    private InvManager manager;
 
     @Override
     public void onLoad() {
@@ -56,12 +59,15 @@ public class AOCommands extends JavaPlugin {
             Bukkit.getLogger().log(Level.SEVERE, "[AOCommands] - Config.yml can not be found!");
             getServer().shutdown();
         }
+
     }
 
     @Override
     public void onEnable() {
         registerCommands();
         registerListener();
+
+        this.manager = new InvManager();
     }
 
     @Override
@@ -82,6 +88,8 @@ public class AOCommands extends JavaPlugin {
         cmdF.registerCommands(new Give());
         cmdF.registerCommands(new Workbench());
         cmdF.registerCommands(new Msg());
+        cmdF.registerCommands(new Armorstand());
+        cmdF.registerCommands(new ClearInv());
     }
 
     private void registerListener() {

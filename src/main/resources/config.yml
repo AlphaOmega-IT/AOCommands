@@ -1,9 +1,9 @@
-###
+########################################################################################################################################################################
 ### Please make sure to read the document of https://docs.adventure.kyori.net/minimessage/format.html#minimessage-format
 ### Since the default color code design is disabled! §, & will not work!
 ### Creator of this Plugin: AlphaOmega-IT | SaltyFeaRz
 ### Unique Oneblock: Atramis.de | 1.19.X |
-###
+########################################################################################################################################################################
 
 ### Rename ###
 allowed_rename_char_length: 64
@@ -14,3 +14,22 @@ food_level_amount: 20
 
 ### Repair ###
 allowed_custom_model_data_item_fix: true
+
+### Heads ###
+### Default Hex color from inventory heads
+### Default: #cf9c11
+### Heads ###
+############################################################################################################################################################################################################################
+### To obtain the uuid and texture of a custom head go to https://minecraft-heads.com/
+### and click on the custom heads section. Go now to the 'Loot table' field and copy the
+### **textures** and the **Id** it should look like following example:
+### uuid: ca6160ab-3d3a-4cd2-a4d3-a55a4f022d85
+### texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODE2ZWEzNGE2YTZlYzVjMDUxZTY5MzJmMWM0NzFiNzAxMmIyOThkMzhkMTc5ZjFiNDg3YzQxM2Y1MTk1OWNkNCJ9fX0=
+############################################################################################################################################################################################################################
+default-hexColor-from-heads: "#cf9c11"
+
+#default backArrow-texture: eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODE2ZWEzNGE2YTZlYzVjMDUxZTY5MzJmMWM0NzFiNzAxMmIyOThkMzhkMTc5ZjFiNDg3YzQxM2Y1MTk1OWNkNCJ9fX0=
+#default backArrow-uuid: ca6160ab-3d3a-4cd2-a4d3-a55a4f022d85
+backArrow-texture: "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODE2ZWEzNGE2YTZlYzVjMDUxZTY5MzJmMWM0NzFiNzAxMmIyOThkMzhkMTc5ZjFiNDg3YzQxM2Y1MTk1OWNkNCJ9fX0="
+backArrow-uuid: "ca6160ab-3d3a-4cd2-a4d3-a55a4f022d85"
+backArrow-name: "Oak Wood Backward II"
