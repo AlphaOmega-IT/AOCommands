@@ -10,6 +10,8 @@ import de.alphaomega.it.msgHandler.Message;
 import de.alphaomega.it.utils.HeadsUtil;
 import de.alphaomega.it.utils.ItemBuilder;
 import org.bukkit.Material;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 public class ArmorstandInv implements InvProvider {
@@ -31,7 +33,11 @@ public class ArmorstandInv implements InvProvider {
         c.fill(AOCItem.empty());
 
         c.set(1, 4, AOCItem.from(new ItemBuilder(Material.ARMOR_STAND).setName(msg.showMessage("asNameCreate", false, false)).setLore(msg.showMessage("asLoreCreate", false, false)).build(), e -> {
-            ArmorstandSubInv.getInv().open(p);
+            ArmorStand as = (ArmorStand) p.getWorld().spawnEntity(p.getLocation(), EntityType.ARMOR_STAND);
+            as.setVisible(false);
+            as.setGravity(false);
+            as.setBasePlate(false);
+            ArmorstandSubInv.getInv(as).open(p);
         }));
 
         c.set(2, 0, AOCItem.from(HeadsUtil.getSpecifiedHead(BackArrow.class, p), e -> p.closeInventory()));

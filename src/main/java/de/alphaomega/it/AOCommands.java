@@ -9,11 +9,14 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.UUID;
 import java.util.logging.Level;
 
 @Getter
@@ -24,6 +27,8 @@ public class AOCommands extends JavaPlugin {
 
     private static final HashMap<String, String> noPermsMessage = new HashMap<>();
     private FileConfiguration baseConfig;
+
+    private final HashMap<UUID, ArmorStand> armorStands = new LinkedHashMap<>();
 
     private InvManager manager;
 

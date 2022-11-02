@@ -6,6 +6,8 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -50,6 +52,24 @@ public class ItemBuilder {
         final List<Component> cLore = new ArrayList<>();
         sLore.forEach(line -> cLore.add(MiniMessage.miniMessage().deserialize(line).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE)));
         this.iM.lore(cLore);
+        return this;
+    }
+
+    public ItemBuilder addItemFlags(final ItemFlag... flags) {
+        this.iS.addItemFlags(flags);
+        return this;
+    }
+
+    public ItemBuilder setGlow(final boolean isGlowing) {
+        if (isGlowing) {
+            this.iM.addEnchant(Enchantment.DURABILITY, 0, true);
+            this.iM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            this.iM.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        } else {
+            this.iM.removeEnchant(Enchantment.DURABILITY);
+            this.iM.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+            this.iM.removeItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        }
         return this;
     }
 
