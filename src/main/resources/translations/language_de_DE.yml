@@ -91,10 +91,13 @@ asNamePlate: <green>Steinplatte</green>
 asLorePlate: <gray>Stelle die Steinplatte ein.</gray>
 asNameArms: <green>Arme</green>
 asLoreArms: <gray>Schalte die Arme des Rüstungsständer um.</gray>
-asNameName: <green>Armorstand Name</green>
+asNameName: <green>Rüstungsständer Namen</green>
 asLoreName: <gray>Ändere den Namen des Rüstungsständer.</gray>
 asNameGravity: <green>Schwerkraft</green>
 asLoreGravity: <gray>Schaltet die Schwerkraft des Rüstungsständer um.</gray>
+asEnableNameName: <green>Rüstungsständer Namen aktivieren</green>
+asEnableLoreName: <gray>Schaltet die Sichtbarkeit des Namen um.</gray>
+asSaveName: <green>Neuen Namen eingeben</green>
 
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml

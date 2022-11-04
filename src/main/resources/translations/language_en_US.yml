@@ -91,10 +91,13 @@ asNamePlate: <green>Stone Plate</green>
 asLorePlate: <gray>Setup the stone plate.</gray>
 asNameArms: <green>Arms</green>
 asLoreArms: <gray>Toggle the arms of the Armorstand.</gray>
-asNameName: <green>Armorstand Name</green>
+asNameName: <green>Name of Armorstand</green>
 asLoreName: <gray>Change the name of the Armorstand.</gray>
 asNameGravity: <green>Gravity</green>
 asLoreGravity: <gray>Toggle the gravity of the Armorstand.</gray>
+asEnableNameName: <green>Visible Armorstand Name</green>
+asEnableLoreName: <gray>Toggle the visibility of the Armorstands name.</gray>
+asSaveName: <green>Enter new name</green>
 
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml

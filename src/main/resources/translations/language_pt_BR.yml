@@ -96,6 +96,9 @@ asNameName: <green>Armorstand Name</green>
 asLoreName: <gray>Change the name of the Armorstand.</gray>
 asNameGravity: <green>Gravity</green>
 asLoreGravity: <gray>Toggle the gravity of the Armorstand.</gray>
+asEnableNameName: <green>Visible Armorstand Name</green>
+asEnableLoreName: <gray>Toggle the visibility of the Armorstands name.</gray>
+asSaveName: <green>Enter new name</green>
 
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml

@@ -3,6 +3,7 @@ package de.alphaomega.it;
 import de.alphaomega.it.cmdHandler.CommandFramework;
 import de.alphaomega.it.commands.*;
 import de.alphaomega.it.invHandler.InvManager;
+import de.alphaomega.it.inventories.ArmorstandSubInv;
 import de.alphaomega.it.listeners.OnJoin;
 import de.alphaomega.it.msgHandler.Message;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class AOCommands extends JavaPlugin {
     private FileConfiguration baseConfig;
 
     private final HashMap<UUID, ArmorStand> armorStands = new LinkedHashMap<>();
+    private final HashMap<UUID, Boolean> isUsingAnvil = new LinkedHashMap<>();
 
     private InvManager manager;
 
@@ -100,6 +102,7 @@ public class AOCommands extends JavaPlugin {
     private void registerListener() {
         PluginManager plManager = getServer().getPluginManager();
         plManager.registerEvents(new OnJoin(), this);
+        plManager.registerEvents(new ArmorstandSubInv(null), this);
     }
 
     public static AOCommands getInstance() { return instance; }

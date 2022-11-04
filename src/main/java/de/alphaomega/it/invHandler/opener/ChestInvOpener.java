@@ -18,7 +18,6 @@ public class ChestInvOpener implements InvOpener {
 
         InvManager m = aoInv.getManager();
         Inventory inv = Bukkit.createInventory(p, aoInv.getRows() * aoInv.getColumns(), MiniMessage.miniMessage().deserialize(aoInv.getTitle()));
-
         fill(inv, m.getContents(p).get(), p);
 
         p.openInventory(inv);
