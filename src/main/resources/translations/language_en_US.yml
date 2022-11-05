@@ -9,6 +9,12 @@ prefix: <color:#cc0000>AOCommands</color> <gray><bold>»</bold></gray> <gray>
 noPerms: <gray>You have</gray> <red>no</red> <gray>permission to execute this command!</gray>
 playerNotOnline: <gray>The player</gray> <red>{0}</red> <gray>is</gray> <red>not</red> <gray>Online!</gray>
 
+###{0} Player
+joinMessage: <green>»</green> <gray>{0}</gray>
+
+###{0} Player
+leaveMessage: <red>«</red> <gray>{0}</gray>
+
 # Permission aocommands.fly /fly <player> <speed>
 fly-syntax: <yellow>/fly <player> <speed></yellow>
 setFlySpeed: <gray>Your fly speed was set to</gray> <yellow>{0}</yellow> <gray>.</gray>

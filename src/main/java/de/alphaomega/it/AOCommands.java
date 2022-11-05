@@ -5,6 +5,7 @@ import de.alphaomega.it.commands.*;
 import de.alphaomega.it.invHandler.InvManager;
 import de.alphaomega.it.inventories.ArmorstandSubInv;
 import de.alphaomega.it.listeners.OnJoin;
+import de.alphaomega.it.listeners.OnLeave;
 import de.alphaomega.it.msgHandler.Message;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -102,6 +103,7 @@ public class AOCommands extends JavaPlugin {
     private void registerListener() {
         PluginManager plManager = getServer().getPluginManager();
         plManager.registerEvents(new OnJoin(), this);
+        plManager.registerEvents(new OnLeave(), this);
         plManager.registerEvents(new ArmorstandSubInv(null), this);
     }
 
