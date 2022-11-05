@@ -1,6 +1,6 @@
 # AOCommands - Alternate Essentials
 
-AOCommands is a alternate system to all the plugins outside. You gain access to multilanguage files, several commands for version 1.19.X. Additionally it has a custom CommandHandler and InventoryManager. 
+AOCommands is a alternate system to all the plugins outside. You gain access to multilanguage files, several commands for version 1.19.X. Additionally it has a custom CommandHandler and InventoryManager. Also you can obtain Anvil rename texts without packets when trying to rename a armorstand!  
 
 It will also gonna have a own Armorstand Tool GUI with several functions! 
 
