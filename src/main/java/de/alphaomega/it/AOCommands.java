@@ -8,6 +8,7 @@ import de.alphaomega.it.listeners.OnJoin;
 import de.alphaomega.it.listeners.OnLeave;
 import de.alphaomega.it.msgHandler.Message;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -22,6 +23,7 @@ import java.util.UUID;
 import java.util.logging.Level;
 
 @Getter
+@Setter
 public class AOCommands extends JavaPlugin {
 
     private static AOCommands instance;
@@ -100,6 +102,7 @@ public class AOCommands extends JavaPlugin {
         cmdF.registerCommands(new ClearInv());
         cmdF.registerCommands(new Enderchest());
         cmdF.registerCommands(new Gamemode(this));
+        cmdF.registerCommands(new ConfigReload(this));
     }
 
     private void registerListener() {

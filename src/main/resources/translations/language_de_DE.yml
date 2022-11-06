@@ -117,6 +117,10 @@ gmNotExists: <gray>Der Spielmodus</gray> <red>{0}</red> <gray>existiert nicht.</
 gmChanged: <gray>Dein Spielmodus wurde auf</gray> <green><lang:{0}></green> <gray>geändert.</gray>
 gmChangedFrom: <gray>Dein Spielmodus wurde von dem Spieler</gray> <yellow>{0}</yellow> <gray>auf</gray> <red><lang:{0}></red> <gray>geändert.</gray>
 
+# Permission aocommands.reloadconfig
+configFileNotExists: <gray>Die Datei</gray> <yellow>config.yml</yellow> <gray>existiert nicht in dem Plugin Ordner!</gray>
+configFileReloaded: <gray>Die Datei</gray> <yellow>config.yml</yellow> <gray>wurde erfolgreich reloaded!</gray>
+
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml
 ### You can add as many lines in lore as you want!
