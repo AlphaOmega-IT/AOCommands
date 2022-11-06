@@ -106,6 +106,18 @@ asEnableNameName: <green>Visible Armorstand Name</green>
 asEnableLoreName: <gray>Toggle the visibility of the Armorstands name.</gray>
 asSaveName: <green>Enter new name</green>
 
+# Permission aocommands.enderchest (to view in other enderchest)
+# Permission aocommands.enderchest.* (to edit other enderchest)
+enderchest-syntax: <yellow>/enderchest [<player>]</yellow>
+
+# Permission aocommands.gamemode
+gm-syntax: <yellow>/gamemode [gamemode] [<player>]</yellow>
+gmNotAllowedIngame: <gray>The command can only be run from the</gray> <red>console</red><gray>.</gray>
+alreadyInGM: <gray>You are already in gamemode</gray> <green><lang:{0}></green>
+gmNotExists: <gray>The gamemode</gray> <red>{0}</red> <gray>does not exist.</gray>
+gmChanged: <gray>Your gamemode has been changed to</gray> <green><lang:{0}></green><gray>.</gray>
+gmChangedFrom: <gray>Your game mode was changed by the player</gray> <yellow>{0}</yellow> <gray>to</gray> <red><lang:{0}></red><gray>.</gray>
+
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml
 ### You can add as many lines in lore as you want!

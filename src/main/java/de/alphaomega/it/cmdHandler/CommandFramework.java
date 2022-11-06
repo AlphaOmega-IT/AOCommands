@@ -1,6 +1,7 @@
 package de.alphaomega.it.cmdHandler;
 
 import de.alphaomega.it.AOCommands;
+import de.alphaomega.it.msgHandler.Message;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -59,12 +60,13 @@ public class CommandFramework implements CommandExecutor {
                 Method method = (Method) ((Entry) this.commandMap.get(cmdLabel)).getKey();
                 Object methodObject = this.commandMap.get(cmdLabel).getValue();
                 de.alphaomega.it.cmdHandler.Command command = method.getAnnotation(de.alphaomega.it.cmdHandler.Command.class);
-                if (sender instanceof Player player) {
+                if (sender instanceof Player p) {
                     if (!command.permission().equals("") && !sender.hasPermission(command.permission()) && !sender.isOp()) {
-                        if (player.locale().getLanguage() == "de") {
-                            sender.sendMessage(MiniMessage.miniMessage().deserialize(AOCommands.getNoPermsMessage().get("de")));
+                        final Message msg = new Message(p);
+                        if (p.locale().toString() == "de_DE") {
+                            sender.sendMessage(MiniMessage.miniMessage().deserialize(msg.showMessage("prefix", false, false) + AOCommands.getNoPermsMessage().get("de_DE")));
                         } else {
-                            sender.sendMessage(MiniMessage.miniMessage().deserialize(AOCommands.getNoPermsMessage().get("en")));
+                            sender.sendMessage(MiniMessage.miniMessage().deserialize(msg.showMessage("prefix", false, false) + AOCommands.getNoPermsMessage().get("en_US")));
                         }
                         return true;
                     }

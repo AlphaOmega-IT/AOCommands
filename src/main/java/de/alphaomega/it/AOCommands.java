@@ -98,6 +98,8 @@ public class AOCommands extends JavaPlugin {
         cmdF.registerCommands(new Msg());
         cmdF.registerCommands(new Armorstand());
         cmdF.registerCommands(new ClearInv());
+        cmdF.registerCommands(new Enderchest());
+        cmdF.registerCommands(new Gamemode(this));
     }
 
     private void registerListener() {

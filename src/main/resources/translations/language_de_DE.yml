@@ -105,6 +105,18 @@ asEnableNameName: <green>Rüstungsständer Namen aktivieren</green>
 asEnableLoreName: <gray>Schaltet die Sichtbarkeit des Namen um.</gray>
 asSaveName: <green>Neuen Namen eingeben</green>
 
+# Permission aocommands.enderchest (to view in other enderchest)
+# Permission aocommands.enderchest.* (to edit other enderchest)
+enderchest-syntax: <yellow>/enderchest [<player>]</yellow>
+
+# Permission aocommands.gamemode
+gm-syntax: <yellow>/gamemode [gamemode] [<player>]</yellow>
+gmNotAllowedIngame: <gray>Der Befehl kann nur von der</gray> <red>Konsole</red> <gray>aus ausgeführt werden.</gray>
+alreadyInGM: <gray>Du befindest dich bereits in dem Spielmodus</gray> <green><lang:{0}></green>
+gmNotExists: <gray>Der Spielmodus</gray> <red>{0}</red> <gray>existiert nicht.</gray>
+gmChanged: <gray>Dein Spielmodus wurde auf</gray> <green><lang:{0}></green> <gray>geändert.</gray>
+gmChangedFrom: <gray>Dein Spielmodus wurde von dem Spieler</gray> <yellow>{0}</yellow> <gray>auf</gray> <red><lang:{0}></red> <gray>geändert.</gray>
+
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml
 ### You can add as many lines in lore as you want!

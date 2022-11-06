@@ -15,6 +15,9 @@ food_level_amount: 20
 ### Repair ###
 allowed_custom_model_data_item_fix: true
 
+### Gamemode ###
+allowed_ingame_command: true
+
 ### Heads ###
 ### Default Hex color from inventory heads
 ### Default: #cf9c11
