@@ -133,6 +133,13 @@ noValidInputNumber-itemedit: <gray>Du musst eine Ganze Zahl eingeben!</gray>
 invsee-syntax: <yellow>/invsee <player></yellow>
 invseeInvName: <gradient:red:blue>Inventar von {0}</gradient>
 
+# Permission aocommands.clearchat {0} executorName
+chatclear0: <gold>----------</gold> <red>ClearChat</red> <gold>----------</gold>
+chatclear1: <gray></gray>
+chatclear2: <gray>Chat wurde von</gray> <red>{0}</red> <gray>geleert.</gray>
+chatclear3: <gray></gray>
+chatclear4: <gold>----------</gold> <red>ClearChat</red> <gold>----------</gold>
+
 
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml

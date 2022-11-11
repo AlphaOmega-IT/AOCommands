@@ -106,6 +106,7 @@ public class AOCommands extends JavaPlugin {
         cmdF.registerCommands(new ConfigReload(this));
         cmdF.registerCommands(new ItemEdit(this));
         cmdF.registerCommands(new Invsee(this));
+        cmdF.registerCommands(new ClearChat());
     }
 
     private void registerListener() {
