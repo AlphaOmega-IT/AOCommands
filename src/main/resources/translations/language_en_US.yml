@@ -129,6 +129,10 @@ enchantNotValid: <gray>The enchantment</gray> <red>{0}</red> <gray>cannot be fou
 noValidItemInHand-itemedit: <gray>You need a</gray> <red>valid</red> <gray>item in your hand!</gray>
 noValidInputNumber-itemedit: <gray>You must enter a valid number!</gray>
 
+# Permission aocommands.invsee {0} TargetPlayerName
+invsee-syntax: <yellow>/invsee <player></yellow>
+invseeInvName: <gradient:red:blue>Inventory of {0}</gradient>
+
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml
 ### You can add as many lines in lore as you want!

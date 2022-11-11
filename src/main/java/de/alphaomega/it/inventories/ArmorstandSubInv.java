@@ -26,20 +26,21 @@ import org.bukkit.inventory.ItemStack;
 public class ArmorstandSubInv implements InvProvider, Listener {
 
     private ArmorStand as;
-
-
     private AOCommands pl;
 
-    public AOInv getInv(final ArmorStand as, final AOCommands pl) {
+    public ArmorstandSubInv(final AOCommands pl, final ArmorStand as) {
         this.pl = pl;
         this.as = as;
+    }
+
+    public static AOInv getInv(final ArmorStand as, final AOCommands pl) {
         return AOInv.builder()
                 .manager(pl.getManager())
                 .id("ArmorstandSubInv")
                 .closeable(false)
                 .size(6, 9)
                 .title("<color:#d60946>Armorstand</color>")
-                .provider(new ArmorstandSubInv())
+                .provider(new ArmorstandSubInv(pl, as))
                 .build(pl);
     }
 
@@ -58,7 +59,7 @@ public class ArmorstandSubInv implements InvProvider, Listener {
             pl.getArmorStands().remove(p.getUniqueId());
             pl.getArmorStands().put(p.getUniqueId(), as);
             c.inv().setCloseable(true);
-            new ArmorstandInv().getInv(pl).open(p);
+            ArmorstandInv.getInv(pl).open(p);
         }));
 
         c.set(5, 1, AOCItem.from(HeadsUtil.getSpecifiedHead(Confirm.class, p), e -> {
@@ -144,7 +145,7 @@ public class ArmorstandSubInv implements InvProvider, Listener {
             e.getClickedInventory().setItem(1, null);
             e.getClickedInventory().setItem(2, null);
             p.closeInventory();
-            new ArmorstandSubInv().getInv(pl.getArmorStands().get(p.getUniqueId()), pl).open(p);
+            ArmorstandSubInv.getInv(pl.getArmorStands().get(p.getUniqueId()), pl).open(p);
         }
     }
 }

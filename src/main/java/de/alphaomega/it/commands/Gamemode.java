@@ -38,7 +38,7 @@ public record Gamemode(AOCommands pl) {
         }
 
         if (args.length == 1) {
-            setGamemode(p, args, null);
+            setGamemode(p, args, p);
             return;
         }
 
@@ -57,16 +57,22 @@ public record Gamemode(AOCommands pl) {
         return false;
     }
 
-    private void setGamemode(final Player p, final String[] args, final Player target) {
+    private void setGamemode(Player p, final String[] args, final Player target) {
         final String arg0 = args[0].toLowerCase();
-        GameMode oldGM = p.getGameMode();
+
+        GameMode oldGM = GameMode.SURVIVAL;
+        if (p != null)
+            oldGM = p.getGameMode();
         Message msg = new Message(p);
         Message msgTarget = null;
         if (target != null) {
             oldGM = target.getGameMode();
             if (p != target)
                 msgTarget = new Message(target);
+            p = target;
         }
+
+        if (p == null) return;
 
         switch (arg0) {
             case "s", "survival", "0" -> p.setGameMode(GameMode.SURVIVAL);

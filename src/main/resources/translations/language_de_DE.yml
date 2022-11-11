@@ -129,6 +129,11 @@ enchantNotValid: <gray>Die Verzauberung</gray> <red>{0}</red> <gray>existiert ni
 noValidItemInHand-itemedit: <gray>Du benötigst einen</gray> <red>gültigen</red> <gray>Gegenstand in deiner Hand!</gray>
 noValidInputNumber-itemedit: <gray>Du musst eine Ganze Zahl eingeben!</gray>
 
+# Permission aocommands.invsee {0} TargetPlayerName
+invsee-syntax: <yellow>/invsee <player></yellow>
+invseeInvName: <gradient:red:blue>Inventar von {0}</gradient>
+
+
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml
 ### You can add as many lines in lore as you want!

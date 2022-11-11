@@ -1,7 +1,6 @@
 package de.alphaomega.it.inventories;
 
 
-
 import de.alphaomega.it.AOCommands;
 import de.alphaomega.it.entities.heads.BackArrow;
 import de.alphaomega.it.invHandler.AOCItem;
@@ -20,15 +19,18 @@ public class ArmorstandInv implements InvProvider {
 
     private AOCommands pl;
 
-    public AOInv getInv(final AOCommands pl) {
+    public ArmorstandInv(final AOCommands pl) {
         this.pl = pl;
+    }
+
+    public static AOInv getInv(final AOCommands pl) {
         return AOInv.builder()
                 .manager(pl.getManager())
                 .id("ArmorstandSubInv")
                 .closeable(true)
                 .size(3, 9)
                 .title("<color:#d60946>Armorstand</color>")
-                .provider(new ArmorstandInv())
+                .provider(new ArmorstandInv(pl))
                 .build(pl);
     }
 
@@ -42,7 +44,7 @@ public class ArmorstandInv implements InvProvider {
             as.setVisible(false);
             as.setGravity(false);
             as.setBasePlate(false);
-            new ArmorstandSubInv().getInv(as, pl).open(p);
+            ArmorstandSubInv.getInv(as, pl).open(p);
         }));
 
         c.set(2, 0, AOCItem.from(HeadsUtil.getSpecifiedHead(BackArrow.class, p), e -> p.closeInventory()));

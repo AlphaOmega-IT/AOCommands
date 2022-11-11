@@ -31,12 +31,7 @@ public class InvManager {
     private final List<InvOpener> defaultOpeners;
     private final List<InvOpener> openers;
 
-
-    private final AOCommands pl;
-
-
-    public InvManager(final AOCommands pl) {
-        this.pl = pl;
+    public InvManager() {
         this.inventories = new HashMap<>();
         this.contents = new HashMap<>();
         this.updateTasks = new HashMap<>();
@@ -49,7 +44,7 @@ public class InvManager {
     }
 
     public void init() {
-        pl.getServer().getPluginManager().registerEvents(new InvListener(), pl);
+        AOCommands.getInstance().getServer().getPluginManager().registerEvents(new InvListener(), AOCommands.getInstance());
     }
 
     public Optional<InvOpener> findOpener(final InventoryType type) {
@@ -96,7 +91,7 @@ public class InvManager {
 
     protected void scheduleUpdateTask(final Player p, final AOInv inv) {
         PlayerInvTask task = new PlayerInvTask(p, inv.getProvider(), contents.get(p));
-        task.runTaskTimer(pl, 1, inv.getUpdateFrequency());
+        task.runTaskTimer(AOCommands.getInstance(), 1, inv.getUpdateFrequency());
         this.updateTasks.put(p, task);
     }
 
@@ -109,7 +104,6 @@ public class InvManager {
     }
 
     @SuppressWarnings("unchecked")
-
     class InvListener implements Listener {
 
         @EventHandler(priority = EventPriority.LOWEST)
@@ -211,7 +205,7 @@ public class InvManager {
 
                     inventories.remove(p);
                     contents.remove(p);
-                } else Bukkit.getScheduler().runTask(pl, () -> p.openInventory(e.getInventory()));
+                } else Bukkit.getScheduler().runTask(AOCommands.getInstance(), () -> p.openInventory(e.getInventory()));
             }
         }
 

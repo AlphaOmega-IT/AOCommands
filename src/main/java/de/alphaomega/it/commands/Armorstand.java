@@ -16,6 +16,6 @@ public record Armorstand(AOCommands pl) {
     )
     public void onCommand(final CommandArgs arg) {
         final Player p = arg.getPlayer();
-        new ArmorstandInv().getInv(pl).open(p);
+        ArmorstandInv.getInv(pl).open(p);
     }
 }

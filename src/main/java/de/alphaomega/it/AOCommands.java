@@ -65,11 +65,11 @@ public class AOCommands extends JavaPlugin {
             Bukkit.getLogger().log(Level.SEVERE, "[AOCommands] - Config.yml can not be found!");
             getServer().shutdown();
         }
-
     }
 
     @Override
     public void onEnable() {
+        this.manager = new InvManager();
 
         registerCommands();
         registerListener();
@@ -105,13 +105,14 @@ public class AOCommands extends JavaPlugin {
         cmdF.registerCommands(new Gamemode(this));
         cmdF.registerCommands(new ConfigReload(this));
         cmdF.registerCommands(new ItemEdit(this));
+        cmdF.registerCommands(new Invsee(this));
     }
 
     private void registerListener() {
         final PluginManager plManager = getServer().getPluginManager();
         plManager.registerEvents(new OnJoin(), this);
         plManager.registerEvents(new OnLeave(), this);
-        plManager.registerEvents(new ArmorstandSubInv(), this);
+        plManager.registerEvents(new ArmorstandSubInv(this, null), this);
     }
 
     public static HashMap<String, String> getNoPermsMessage() { return noPermsMessage; }

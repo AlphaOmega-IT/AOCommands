@@ -66,6 +66,7 @@ public class Message {
     }
 
     public String showMessage(final String key, final boolean placeholder, final boolean prefix) {
+        if (p == null) return "";
         if (prefix && !placeholder) {
             return getPath(PREFIX, getFileConfig()) + " " + getPath(key, getFileConfig());
         } else if (!placeholder) {
@@ -94,6 +95,7 @@ public class Message {
 
 
     private FileConfiguration getFileConfig() {
+        if (p == null) return pl.getTranslations().get("en_US");
         if (pl.getTranslations().get(p.locale().toString()) == null) {
             return pl.getTranslations().get("en_US");
         }

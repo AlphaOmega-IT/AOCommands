@@ -22,7 +22,7 @@ import java.util.*;
 public abstract class AHead {
 
     protected final String hexColor = "#cf9c11";
-    protected AOCommands pl;
+    protected AOCommands pl = AOCommands.getInstance();
 
     private UUID uuid;
 
@@ -37,11 +37,6 @@ public abstract class AHead {
 
     public abstract Map<String, String> setNames();
     public abstract Map<String, List<String>> setLore();
-
-
-    public AHead(final AOCommands pl) {
-        this.pl = pl;
-    }
 
     public AHead(final String name, final UUID uuid) {
         this.headName = name;
