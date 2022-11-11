@@ -53,7 +53,7 @@ public class InvseeInv implements InvProvider {
 
         final PlayerInventory tInv = t.getInventory();
         for (ItemStack iS : tInv.getContents()) {
-            c.set(x, y, AOCItem.empty(iS == null || iS.getType().isAir() ? AOCItem.empty().getItem() : iS));
+            c.set(y, x, AOCItem.empty(iS == null || iS.getType().isAir() ? AOCItem.empty().getItem() : iS));
             x++;
 
             if (x == 9) {
@@ -64,7 +64,7 @@ public class InvseeInv implements InvProvider {
         }
 
         for (ItemStack iS : tInv.getArmorContents()) {
-            c.set(x, y, AOCItem.empty(iS == null || iS.getType().isAir() ? AOCItem.empty().getItem() : iS));
+            c.set(y, x, AOCItem.empty(iS == null || iS.getType().isAir() ? AOCItem.empty().getItem() : iS));
             x++;
         }
 
