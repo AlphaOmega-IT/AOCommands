@@ -1,13 +1,14 @@
 package de.alphaomega.it.msgHandler;
 
+
 import de.alphaomega.it.AOCommands;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -17,17 +18,21 @@ import java.util.Objects;
 
 @Setter
 @Getter
+@NoArgsConstructor
+
 public class Message {
 
     private final String PREFIX = "prefix";
-    private final Player p;
+    private Player p;
     private List<String> args = new ArrayList<>();
+
+    private AOCommands pl = AOCommands.getInstance();
 
     public Message(final Player p) {
         this.p = p;
     }
 
-    public static HashMap<String, FileConfiguration> loadTranslationFiles(final JavaPlugin pl) {
+    public HashMap<String, FileConfiguration> loadTranslationFiles() {
         File folder = new File(pl.getDataFolder() + "/translations");
         HashMap<String, FileConfiguration> translations = new HashMap<>();
         for (File f : Objects.requireNonNull(folder.listFiles())) {
@@ -43,11 +48,12 @@ public class Message {
         return translations;
     }
 
-    public static HashMap<String, FileConfiguration> updateTranslations(final JavaPlugin pl) {
-        return loadTranslationFiles(pl);
+    public HashMap<String, FileConfiguration> updateTranslations() {
+        return loadTranslationFiles();
     }
 
     public void sendMessage(final String key, final boolean placeholder, final boolean prefix) {
+        if (p == null) return;
         if (prefix && !placeholder) {
             this.p.sendMessage(MiniMessage.miniMessage().deserialize("<reset/>" + getPath(PREFIX, getFileConfig()) + " " + getPath(key, getFileConfig())));
         } else if (!placeholder) {
@@ -86,11 +92,12 @@ public class Message {
         return translatedMessageString;
     }
 
+
     private FileConfiguration getFileConfig() {
-        if (AOCommands.getInstance().getTranslations().get(p.locale().toString()) == null) {
-            return AOCommands.getInstance().getTranslations().get("en_US");
+        if (pl.getTranslations().get(p.locale().toString()) == null) {
+            return pl.getTranslations().get("en_US");
         }
-        return AOCommands.getInstance().getTranslations().get(p.locale().toString());
+        return pl.getTranslations().get(p.locale().toString());
     }
 
     private String getPath(final String key, final FileConfiguration fileConfig) {

@@ -1,7 +1,11 @@
 package de.alphaomega.it.commands;
 
+
+
+import de.alphaomega.it.AOCommands;
 import de.alphaomega.it.cmdHandler.Command;
 import de.alphaomega.it.cmdHandler.CommandArgs;
+
 import de.alphaomega.it.inventories.EnderchestInv;
 import de.alphaomega.it.msgHandler.Message;
 import de.alphaomega.it.utils.CheckPlayer;
@@ -9,6 +13,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class Enderchest {
+
+
+    private AOCommands pl;
 
     @Command(
             name = "enderchest",
@@ -31,7 +38,7 @@ public class Enderchest {
             if (p.isOp() || p.hasPermission("aocommands.enderchest.*"))
                 p.openInventory(target.getEnderChest());
             else
-                EnderchestInv.getInv(target.getEnderChest(), target);
+                new EnderchestInv(target.getEnderChest()).getInv(target.getEnderChest(), target);
             return;
         }
 

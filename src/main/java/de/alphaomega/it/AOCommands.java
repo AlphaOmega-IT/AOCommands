@@ -1,5 +1,6 @@
 package de.alphaomega.it;
 
+
 import de.alphaomega.it.cmdHandler.CommandFramework;
 import de.alphaomega.it.commands.*;
 import de.alphaomega.it.invHandler.InvManager;
@@ -26,7 +27,9 @@ import java.util.logging.Level;
 @Setter
 public class AOCommands extends JavaPlugin {
 
+
     private static AOCommands instance;
+
     private HashMap<String, FileConfiguration> translations = new HashMap<>();
 
     private static final HashMap<String, String> noPermsMessage = new HashMap<>();
@@ -58,13 +61,6 @@ public class AOCommands extends JavaPlugin {
         if (configFile.exists())
             baseConfig = YamlConfiguration.loadConfiguration(configFile);
 
-
-        translations = Message.loadTranslationFiles(this);
-
-        noPermsMessage.put("de_DE", translations.get("de_DE").getString("noPerms"));
-        noPermsMessage.put("en_US", translations.get("en_US").getString("noPerms"));
-        noPermsMessage.put("pt_BR", translations.get("pt_BR").getString("noPerms"));
-
         if (baseConfig == null) {
             Bukkit.getLogger().log(Level.SEVERE, "[AOCommands] - Config.yml can not be found!");
             getServer().shutdown();
@@ -74,10 +70,15 @@ public class AOCommands extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         registerCommands();
         registerListener();
 
-        this.manager = new InvManager();
+        translations = new Message().loadTranslationFiles();
+
+        noPermsMessage.put("de_DE", translations.get("de_DE").getString("noPerms"));
+        noPermsMessage.put("en_US", translations.get("en_US").getString("noPerms"));
+        noPermsMessage.put("pt_BR", translations.get("pt_BR").getString("noPerms"));
     }
 
     @Override
@@ -98,21 +99,22 @@ public class AOCommands extends JavaPlugin {
         cmdF.registerCommands(new Give());
         cmdF.registerCommands(new Workbench());
         cmdF.registerCommands(new Msg());
-        cmdF.registerCommands(new Armorstand());
+        cmdF.registerCommands(new Armorstand(this));
         cmdF.registerCommands(new ClearInv());
         cmdF.registerCommands(new Enderchest());
         cmdF.registerCommands(new Gamemode(this));
         cmdF.registerCommands(new ConfigReload(this));
+        cmdF.registerCommands(new ItemEdit(this));
     }
 
     private void registerListener() {
-        PluginManager plManager = getServer().getPluginManager();
+        final PluginManager plManager = getServer().getPluginManager();
         plManager.registerEvents(new OnJoin(), this);
         plManager.registerEvents(new OnLeave(), this);
-        plManager.registerEvents(new ArmorstandSubInv(null), this);
+        plManager.registerEvents(new ArmorstandSubInv(), this);
     }
 
-    public static AOCommands getInstance() { return instance; }
-
     public static HashMap<String, String> getNoPermsMessage() { return noPermsMessage; }
+
+    public static AOCommands getInstance() { return instance; }
 }

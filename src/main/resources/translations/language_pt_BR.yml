@@ -18,14 +18,14 @@ leaveMessage: <red>«</red> <gray>{0}</gray>
 
 # Permission aocommands.fly /fly <player> <speed>
 fly-syntax: <yellow>/fly <jogador> <velocidade></yellow>
-setFlySpeed: <gray>Sua velocidade de voo foi definida para</gray> <yellow>{0}</yellow> <gray>.</gray>
+setFlySpeed: <gray>Sua velocidade de voo foi definida para</gray> <yellow>{0}</yellow><gray>.</gray>
 flyDisabled: <gray>Você</gray> <red>não está</red> <gray>permitido a voar!</gray>
 flyEnabled: <gray>Você está</gray> <green>permitido</green> <gray>a voar!</gray>
 
 # Permission aocommands.heal /heal <player>
 heal-syntax: <yellow>/heal <jogador></yellow>
 playerGotHealed: <gray>Você foi curado.</gray>
-playerHealedTarget: <gray>Você curou o jogador</gray> <green>{0}</green> <gray>.</gray>
+playerHealedTarget: <gray>Você curou o jogador</gray> <green>{0}</green><gray>.</gray>
 targetGotHealed: <gray>Você foi curado.</gray>
 
 # Permission aocommands.vote /vote
@@ -41,7 +41,7 @@ allowedCharLengthReached: <gray>Você pode usar um máximo de</gray> <red>{0}</r
 noValidItemInHand-rename: <gray>Você precisa de um item</gray> <red>válido</red> <gray>na sua mão!</gray>
 cmdItemsNotRenameable: <gray>Itens com um CustomModelId</gray> <red>não podem</red> <gray>ser renomeados!</gray>
 itemContainsNoItemMeta: <gray>Esse item</gray> <red>não tem ItemMeta</red> <gray>e por isso não pode ser renomeado!</gray>
-itemSuccessfullyRenamed: <gray>O item foi renomeado com</gray> <green>sucesso</green> <gray>.</gray>
+itemSuccessfullyRenamed: <gray>O item foi renomeado com</gray> <green>sucesso</green><gray>.</gray>
 
 # Permission aocommands.hat /hat
 noValidItemInHand-hat: <gray>Você precisa de um item</gray> <red>válido</red> <gray>na sua mão!</gray>
@@ -121,6 +121,14 @@ gmChangedFrom: <gray>Your game mode was changed by the player</gray> <yellow>{0}
 # Permission aocommands.reloadconfig
 configFileNotExists: <gray>The file</gray> <yellow>config.yml</yellow> <gray>cannot be found in plugin folder!</gray>
 configFileReloaded: <gray>The file</gray> <yellow>config.yml</yellow> <gray>got successfully reloaded!</gray>
+
+# Permission aocommands.itemedit
+itemedit-syntax: <yellow>/itemedit <name|lore|enchant|amount> <...></yellow>
+itemedit-syntax-lore: <yellow>/itemedit <lore> <delete> <line></yellow>
+itemedit-syntax-enchant: <yellow>/itemedit enchant edit <enchantment> <level></yellow>
+enchantNotValid: <gray>The enchantment</gray> <red>{0}</red> <gray>cannot be found.</gray>
+noValidItemInHand-itemedit: <gray>You need a</gray> <red>valid</red> <gray>item in your hand!</gray>
+noValidInputNumber-itemedit: <gray>You must enter a valid number!</gray>
 
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml

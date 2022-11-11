@@ -1,9 +1,9 @@
-###
+########################################################################################################################################################################
 ### Please make sure to read the document of https://docs.adventure.kyori.net/minimessage/format.html#minimessage-format
 ### Since the default color code design is disabled! §, & will not work!
 ### Creator of this Plugin: AlphaOmega-IT | SaltyFeaRz
 ### Unique Oneblock: Atramis.de | 1.19.X |
-###
+########################################################################################################################################################################
 
 prefix: <color:#cc0000>AOCommands</color> <gray><bold>»</bold></gray> <gray>
 noPerms: <gray>Du hast</gray> <red>keine</red> <gray>Rechte um diesen Befehl auszuführen!</gray>
@@ -120,6 +120,14 @@ gmChangedFrom: <gray>Dein Spielmodus wurde von dem Spieler</gray> <yellow>{0}</y
 # Permission aocommands.reloadconfig
 configFileNotExists: <gray>Die Datei</gray> <yellow>config.yml</yellow> <gray>existiert nicht in dem Plugin Ordner!</gray>
 configFileReloaded: <gray>Die Datei</gray> <yellow>config.yml</yellow> <gray>wurde erfolgreich reloaded!</gray>
+
+# Permission aocommands.itemedit
+itemedit-syntax: <yellow>/itemedit <name|lore|enchant|amount> <...></yellow>
+itemedit-syntax-lore: <yellow>/itemedit lore delete <line></yellow>
+itemedit-syntax-enchant: <yellow>/itemedit enchant edit <enchantment> <level></yellow>
+enchantNotValid: <gray>Die Verzauberung</gray> <red>{0}</red> <gray>existiert nicht.</gray>
+noValidItemInHand-itemedit: <gray>Du benötigst einen</gray> <red>gültigen</red> <gray>Gegenstand in deiner Hand!</gray>
+noValidInputNumber-itemedit: <gray>Du musst eine Ganze Zahl eingeben!</gray>
 
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml

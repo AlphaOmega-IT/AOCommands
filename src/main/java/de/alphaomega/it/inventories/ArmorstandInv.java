@@ -1,5 +1,7 @@
 package de.alphaomega.it.inventories;
 
+
+
 import de.alphaomega.it.AOCommands;
 import de.alphaomega.it.entities.heads.BackArrow;
 import de.alphaomega.it.invHandler.AOCItem;
@@ -16,15 +18,18 @@ import org.bukkit.entity.Player;
 
 public class ArmorstandInv implements InvProvider {
 
-    public static AOInv getInv() {
+    private AOCommands pl;
+
+    public AOInv getInv(final AOCommands pl) {
+        this.pl = pl;
         return AOInv.builder()
-                .manager(AOCommands.getInstance().getManager())
+                .manager(pl.getManager())
                 .id("ArmorstandSubInv")
                 .closeable(true)
                 .size(3, 9)
                 .title("<color:#d60946>Armorstand</color>")
                 .provider(new ArmorstandInv())
-                .build();
+                .build(pl);
     }
 
     @Override
@@ -37,7 +42,7 @@ public class ArmorstandInv implements InvProvider {
             as.setVisible(false);
             as.setGravity(false);
             as.setBasePlate(false);
-            ArmorstandSubInv.getInv(as).open(p);
+            new ArmorstandSubInv().getInv(as, pl).open(p);
         }));
 
         c.set(2, 0, AOCItem.from(HeadsUtil.getSpecifiedHead(BackArrow.class, p), e -> p.closeInventory()));

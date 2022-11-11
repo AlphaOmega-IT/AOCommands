@@ -1,5 +1,7 @@
 package de.alphaomega.it.inventories;
 
+
+
 import de.alphaomega.it.AOCommands;
 import de.alphaomega.it.invHandler.AOCItem;
 import de.alphaomega.it.invHandler.AOInv;
@@ -13,19 +15,22 @@ public class EnderchestInv implements InvProvider {
 
     private final Inventory eInv;
 
+
+    private AOCommands pl;
+
     public EnderchestInv(final Inventory eInv) {
         this.eInv = eInv;
     }
 
-    public static AOInv getInv(final Inventory eInv, final Player target) {
-        return AOInv.builder()
-                .manager(AOCommands.getInstance().getManager())
+    public void getInv(final Inventory eInv, final Player target) {
+        AOInv.builder()
+                .manager(pl.getManager())
                 .id("EnderchestInv")
                 .provider(new EnderchestInv(eInv))
                 .size(eInv.getSize() / 9, 9)
                 .closeable(true)
                 .title("Enderchest » " + target.getName())
-                .build();
+                .build(pl);
     }
 
     @Override

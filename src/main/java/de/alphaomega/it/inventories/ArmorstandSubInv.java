@@ -1,8 +1,10 @@
 package de.alphaomega.it.inventories;
 
+
 import de.alphaomega.it.AOCommands;
 import de.alphaomega.it.entities.heads.BackArrow;
 import de.alphaomega.it.entities.heads.Confirm;
+
 import de.alphaomega.it.invHandler.AOCItem;
 import de.alphaomega.it.invHandler.AOInv;
 import de.alphaomega.it.invHandler.content.InvContents;
@@ -25,41 +27,42 @@ public class ArmorstandSubInv implements InvProvider, Listener {
 
     private ArmorStand as;
 
-    public ArmorstandSubInv(final ArmorStand as) {
-        this.as = as;
-    }
 
-    public static AOInv getInv(final ArmorStand as) {
+    private AOCommands pl;
+
+    public AOInv getInv(final ArmorStand as, final AOCommands pl) {
+        this.pl = pl;
+        this.as = as;
         return AOInv.builder()
-                .manager(AOCommands.getInstance().getManager())
+                .manager(pl.getManager())
                 .id("ArmorstandSubInv")
                 .closeable(false)
                 .size(6, 9)
                 .title("<color:#d60946>Armorstand</color>")
-                .provider(new ArmorstandSubInv(as))
-                .build();
+                .provider(new ArmorstandSubInv())
+                .build(pl);
     }
 
     @Override
     public void init(final Player p, final InvContents c) {
         final Message msg = new Message(p);
 
-        if (!AOCommands.getInstance().getArmorStands().containsKey(p.getUniqueId()))
-            AOCommands.getInstance().getArmorStands().put(p.getUniqueId(), as);
+        if (!pl.getArmorStands().containsKey(p.getUniqueId()))
+            pl.getArmorStands().put(p.getUniqueId(), as);
         else
-            as = AOCommands.getInstance().getArmorStands().get(p.getUniqueId());
+            as = pl.getArmorStands().get(p.getUniqueId());
 
         c.fill(AOCItem.empty());
 
         c.set(5, 0, AOCItem.from(HeadsUtil.getSpecifiedHead(BackArrow.class, p), e -> {
-            AOCommands.getInstance().getArmorStands().remove(p.getUniqueId());
-            AOCommands.getInstance().getArmorStands().put(p.getUniqueId(), as);
+            pl.getArmorStands().remove(p.getUniqueId());
+            pl.getArmorStands().put(p.getUniqueId(), as);
             c.inv().setCloseable(true);
-            ArmorstandInv.getInv().open(p);
+            new ArmorstandInv().getInv(pl).open(p);
         }));
 
         c.set(5, 1, AOCItem.from(HeadsUtil.getSpecifiedHead(Confirm.class, p), e -> {
-            AOCommands.getInstance().getArmorStands().remove(p.getUniqueId());
+            pl.getArmorStands().remove(p.getUniqueId());
             as.setVisible(true);
             c.inv().setCloseable(true);
             p.closeInventory();
@@ -91,7 +94,7 @@ public class ArmorstandSubInv implements InvProvider, Listener {
                 c.inv().setCloseable(true);
                 p.closeInventory();
 
-                AOCommands.getInstance().getIsUsingAnvil().put(p.getUniqueId(), true);
+                pl.getIsUsingAnvil().put(p.getUniqueId(), true);
 
                 p.openAnvil(p.getLocation(), true);
                 p.getOpenInventory().getTopInventory().setItem(0, new ItemBuilder(Material.NAME_TAG).setCustomModelData(99999).setName(msg.showMessage("asSaveName", false, false)).build());
@@ -117,11 +120,11 @@ public class ArmorstandSubInv implements InvProvider, Listener {
         }
         try {
             final Player p = (Player) e.getView().getPlayer();
-            if (!AOCommands.getInstance().getIsUsingAnvil().containsKey(p.getUniqueId())) return;
-            if (AOCommands.getInstance().getArmorStands().containsKey(p.getUniqueId())) {
-                ArmorStand as = AOCommands.getInstance().getArmorStands().get(p.getUniqueId());
+            if (!pl.getIsUsingAnvil().containsKey(p.getUniqueId())) return;
+            if (pl.getArmorStands().containsKey(p.getUniqueId())) {
+                ArmorStand as = pl.getArmorStands().get(p.getUniqueId());
                 as.customName(MiniMessage.miniMessage().deserialize(e.getInventory().getRenameText() == null ? "" : e.getInventory().getRenameText()));
-                AOCommands.getInstance().getArmorStands().computeIfPresent(p.getUniqueId(), ((uuid, armorStand) -> as));
+                pl.getArmorStands().computeIfPresent(p.getUniqueId(), ((uuid, armorStand) -> as));
             }
         } catch (Exception ignored) {
         }
@@ -136,12 +139,12 @@ public class ArmorstandSubInv implements InvProvider, Listener {
             if (e.getRawSlot() != 2) return;
             if (e.getCurrentItem() == null || e.getCurrentItem().getType().isAir()) return;
             if (e.getCurrentItem().getItemMeta() == null || e.getCurrentItem().getItemMeta().displayName() == null) return;
-            if (!AOCommands.getInstance().getIsUsingAnvil().containsKey(p.getUniqueId())) return;
+            if (!pl.getIsUsingAnvil().containsKey(p.getUniqueId())) return;
             e.getClickedInventory().setItem(0, null);
             e.getClickedInventory().setItem(1, null);
             e.getClickedInventory().setItem(2, null);
             p.closeInventory();
-            ArmorstandSubInv.getInv(AOCommands.getInstance().getArmorStands().get(p.getUniqueId())).open(p);
+            new ArmorstandSubInv().getInv(pl.getArmorStands().get(p.getUniqueId()), pl).open(p);
         }
     }
 }

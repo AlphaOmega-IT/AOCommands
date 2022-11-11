@@ -1,6 +1,8 @@
 package de.alphaomega.it.entities;
 
+
 import de.alphaomega.it.AOCommands;
+
 import de.alphaomega.it.utils.HeadBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,7 +21,8 @@ import java.util.*;
 @NoArgsConstructor
 public abstract class AHead {
 
-    protected static final String HEX_COLOR = "#cf9c11";
+    protected final String hexColor = "#cf9c11";
+    protected AOCommands pl;
 
     private UUID uuid;
 
@@ -35,25 +38,30 @@ public abstract class AHead {
     public abstract Map<String, String> setNames();
     public abstract Map<String, List<String>> setLore();
 
+
+    public AHead(final AOCommands pl) {
+        this.pl = pl;
+    }
+
     public AHead(final String name, final UUID uuid) {
         this.headName = name;
         this.uuid = uuid;
 
-        final String color = AOCommands.getInstance().getBaseConfig().getString("default-hexColor-from-heads");
+        final String color = pl.getBaseConfig().getString("default-hexColor-from-heads");
         this.color = color == null ? "#cf9c11" : color;
     }
 
     public ItemStack getHeadAsItemStack(final String locale) {
-        final String newLocale = AOCommands.getInstance().getTranslations().get(locale) == null ? "en_US" : locale;
+        final String newLocale = pl.getTranslations().get(locale) == null ? "en_US" : locale;
         return new HeadBuilder(this, newLocale).build();
     }
 
     public String getName(final String locale) {
-        return getNames().get(AOCommands.getInstance().getTranslations().get(locale) == null ? "en_US" : locale);
+        return getNames().get(pl.getTranslations().get(locale) == null ? "en_US" : locale);
     }
 
     public List<Component> getLore(final String locale) {
-        final List<String> sLore = getLores().get(AOCommands.getInstance().getTranslations().get(locale) == null ? "en_US" : locale);
+        final List<String> sLore = getLores().get(pl.getTranslations().get(locale) == null ? "en_US" : locale);
         final List<Component> cLore = new ArrayList<>();
         sLore.forEach(loreLine -> cLore.add(MiniMessage.miniMessage().deserialize(loreLine).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE)));
         return cLore;

@@ -6,7 +6,6 @@ import de.alphaomega.it.cmdHandler.CommandArgs;
 import de.alphaomega.it.msgHandler.Message;
 import de.alphaomega.it.utils.CheckPlayer;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 
 import java.util.List;

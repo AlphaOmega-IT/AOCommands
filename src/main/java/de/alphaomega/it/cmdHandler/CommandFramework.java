@@ -1,7 +1,9 @@
 package de.alphaomega.it.cmdHandler;
 
+
 import de.alphaomega.it.AOCommands;
 import de.alphaomega.it.msgHandler.Message;
+import lombok.NonNull;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -12,7 +14,6 @@ import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicComparator;
 import org.bukkit.help.IndexHelpTopic;
 import org.bukkit.plugin.SimplePluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -21,16 +22,18 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.*;
 import java.util.Map.Entry;
 
-@SuppressWarnings("ALL")
+
 public class CommandFramework implements CommandExecutor {
 
     private final Map<String, Entry<Method, Object>> commandMap = new HashMap<>();
     private CommandMap map;
-    private final JavaPlugin plugin;
 
-    public CommandFramework(final JavaPlugin plugin) {
-        this.plugin = plugin;
-        if (plugin.getServer().getPluginManager() instanceof SimplePluginManager manager) {
+    private final AOCommands pl;
+
+
+    public CommandFramework(final AOCommands pl) {
+        this.pl = pl;
+        if (pl.getServer().getPluginManager() instanceof SimplePluginManager manager) {
             try {
                 Field field = SimplePluginManager.class.getDeclaredField("commandMap");
                 field.setAccessible(true);
@@ -39,14 +42,14 @@ public class CommandFramework implements CommandExecutor {
                 exc.printStackTrace();
             }
         }
-
+        registerHelp();
     }
 
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean onCommand(final @NonNull CommandSender sender, final @NonNull Command cmd, final @NonNull String label, final @NonNull String[] args) {
         return this.handleCommand(sender, cmd, label, args);
     }
 
-    public boolean handleCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean handleCommand(final CommandSender sender, final Command cmd, final String label, final String[] args) {
         for (int i = args.length; i >= 0; --i) {
             StringBuilder buffer = new StringBuilder();
             buffer.append(label.toLowerCase());
@@ -57,13 +60,13 @@ public class CommandFramework implements CommandExecutor {
 
             String cmdLabel = buffer.toString();
             if (this.commandMap.containsKey(cmdLabel)) {
-                Method method = (Method) ((Entry) this.commandMap.get(cmdLabel)).getKey();
+                Method method = (Method) ((Entry<?, ?>) this.commandMap.get(cmdLabel)).getKey();
                 Object methodObject = this.commandMap.get(cmdLabel).getValue();
                 de.alphaomega.it.cmdHandler.Command command = method.getAnnotation(de.alphaomega.it.cmdHandler.Command.class);
                 if (sender instanceof Player p) {
                     if (!command.permission().equals("") && !sender.hasPermission(command.permission()) && !sender.isOp()) {
                         final Message msg = new Message(p);
-                        if (p.locale().toString() == "de_DE") {
+                        if (p.locale().toString().equals("de_DE")) {
                             sender.sendMessage(MiniMessage.miniMessage().deserialize(msg.showMessage("prefix", false, false) + AOCommands.getNoPermsMessage().get("de_DE")));
                         } else {
                             sender.sendMessage(MiniMessage.miniMessage().deserialize(msg.showMessage("prefix", false, false) + AOCommands.getNoPermsMessage().get("en_US")));
@@ -146,22 +149,24 @@ public class CommandFramework implements CommandExecutor {
         for (String s : this.commandMap.keySet()) {
             if (!s.contains(".")) {
                 Command cmd = this.map.getCommand(s);
-                HelpTopic topic = new GenericCommandHelpTopic(cmd);
-                help.add(topic);
+                if (cmd != null) {
+                    HelpTopic topic = new GenericCommandHelpTopic(cmd);
+                    help.add(topic);
+                }
             }
         }
 
-        IndexHelpTopic topic = new IndexHelpTopic(this.plugin.getName(), "All commands for " + this.plugin.getName(), null, help, "Below is a list of all " + this.plugin.getName() + " commands:");
+        IndexHelpTopic topic = new IndexHelpTopic(pl.getName(), "All commands for " + pl.getName(), null, help, "Below is a list of all " + pl.getName() + " commands:");
         Bukkit.getServer().getHelpMap().addTopic(topic);
     }
 
     public void registerCommand(de.alphaomega.it.cmdHandler.Command command, String label, Method m, Object obj) {
         this.commandMap.put(label.toLowerCase(), new SimpleEntry<>(m, obj));
-        this.commandMap.put(this.plugin.getName() + ':' + label.toLowerCase(), new SimpleEntry<>(m, obj));
+        this.commandMap.put(pl.getName() + ':' + label.toLowerCase(), new SimpleEntry<>(m, obj));
         String cmdLabel = label.split("\\.")[0].toLowerCase();
         if (this.map.getCommand(cmdLabel) == null) {
-            Command cmd = new BukkitCommand(cmdLabel, this, this.plugin);
-            this.map.register(this.plugin.getName(), cmd);
+            Command cmd = new BukkitCommand(cmdLabel, this, pl);
+            this.map.register(pl.getName(), cmd);
         }
 
         if (!command.description().equalsIgnoreCase("") && cmdLabel.equals(label)) {
@@ -178,8 +183,8 @@ public class CommandFramework implements CommandExecutor {
         String cmdLabel = label.split("\\.")[0].toLowerCase();
         BukkitCommand bCommand;
         if (this.map.getCommand(cmdLabel) == null) {
-            bCommand = new BukkitCommand(cmdLabel, this, this.plugin);
-            this.map.register(this.plugin.getName(), bCommand);
+            bCommand = new BukkitCommand(cmdLabel, this, pl);
+            this.map.register(pl.getName(), bCommand);
         }
 
         if (this.map.getCommand(cmdLabel) instanceof BukkitCommand) {

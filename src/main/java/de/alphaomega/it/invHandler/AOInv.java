@@ -1,5 +1,6 @@
 package de.alphaomega.it.invHandler;
 
+
 import de.alphaomega.it.AOCommands;
 import de.alphaomega.it.invHandler.content.InvContents;
 import de.alphaomega.it.invHandler.content.InvProvider;
@@ -161,12 +162,12 @@ public class AOInv {
 			return this;
 		}
 
-		public AOInv build() {
+		public AOInv build(final AOCommands pl) {
 			if (this.provider == null)
 				throw new IllegalStateException("Provider is not set!");
 
 			if (this.manager == null) {
-				this.manager = AOCommands.getInstance().getManager();
+				this.manager = pl.getManager();
 				if (this.manager == null) {
 					throw new IllegalStateException("InvManager is not set!");
 				}

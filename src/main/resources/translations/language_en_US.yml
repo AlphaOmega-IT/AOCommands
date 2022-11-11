@@ -17,14 +17,14 @@ leaveMessage: <red>«</red> <gray>{0}</gray>
 
 # Permission aocommands.fly /fly <player> <speed>
 fly-syntax: <yellow>/fly <player> <speed></yellow>
-setFlySpeed: <gray>Your fly speed was set to</gray> <yellow>{0}</yellow> <gray>.</gray>
+setFlySpeed: <gray>Your fly speed was set to</gray> <yellow>{0}</yellow><gray>.</gray>
 flyDisabled: <gray>You are</gray> <red>not</red> <gray>able to fly anymore!</gray>
 flyEnabled: <gray>You are</gray> <green>able</green> <gray>to fly!</gray>
 
 # Permission aocommands.heal /heal <player>
 heal-syntax: <yellow>/heal <player></yellow>
 playerGotHealed: <gray>You got healed.</gray>
-playerHealedTarget: <gray>You healed the player</gray> <green>{0}</green> <gray>.</gray>
+playerHealedTarget: <gray>You healed the player</gray> <green>{0}</green><gray>.</gray>
 targetGotHealed: <gray>You got healed.</gray>
 
 # Permission aocommands.vote /vote
@@ -120,6 +120,14 @@ gmChangedFrom: <gray>Your game mode was changed by the player</gray> <yellow>{0}
 # Permission aocommands.reloadconfig
 configFileNotExists: <gray>The file</gray> <yellow>config.yml</yellow> <gray>cannot be found in plugin folder!</gray>
 configFileReloaded: <gray>The file</gray> <yellow>config.yml</yellow> <gray>got successfully reloaded!</gray>
+
+# Permission aocommands.itemedit
+itemedit-syntax: <yellow>/itemedit <name|lore|enchant|amount> <...></yellow>
+itemedit-syntax-lore: <yellow>/itemedit <lore> <delete> <line></yellow>
+itemedit-syntax-enchant: <yellow>/itemedit enchant edit <enchantment> <level></yellow>
+enchantNotValid: <gray>The enchantment</gray> <red>{0}</red> <gray>cannot be found.</gray>
+noValidItemInHand-itemedit: <gray>You need a</gray> <red>valid</red> <gray>item in your hand!</gray>
+noValidInputNumber-itemedit: <gray>You must enter a valid number!</gray>
 
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml

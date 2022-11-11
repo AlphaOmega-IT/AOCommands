@@ -3,6 +3,8 @@
     <output-path>$PROJECT_DIR$/../../Atramis/Atramis Network/Lobby/plugins</output-path>
     <root id="archive" name="AOCommands.jar">
       <element id="module-output" name="AOCommands" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/inject/guice/5.1.0/guice-5.1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

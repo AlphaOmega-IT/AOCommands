@@ -113,8 +113,8 @@ public class ItemEditor {
             if (iS.containsEnchantment(e)) {
                 iS.removeEnchantment(e);
                 iS.addUnsafeEnchantment(e, lvl);
-                iM.getEnchants().remove(e);
-                iM.getEnchants().put(e, lvl);
+                iM.removeEnchant(e);
+                iM.addEnchant(e, lvl, true);
             }
         }
         return this;

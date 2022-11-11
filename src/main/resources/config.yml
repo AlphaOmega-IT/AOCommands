@@ -16,7 +16,10 @@ food_level_amount: 20
 allowed_custom_model_data_item_fix: true
 
 ### Gamemode ###
-allowed_ingame_command: true
+allowed_ingame_command: false
+
+### ItemEdit ###
+allow_not_valid_enchantments: true
 
 ### Heads ###
 ### Default Hex color from inventory heads

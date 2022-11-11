@@ -1,5 +1,6 @@
 package de.alphaomega.it.invHandler;
 
+
 import de.alphaomega.it.AOCommands;
 import de.alphaomega.it.invHandler.content.InvContents;
 import de.alphaomega.it.invHandler.content.InvProvider;
@@ -20,6 +21,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
+
 public class InvManager {
 
     private final Map<Player, AOInv> inventories;
@@ -29,7 +31,12 @@ public class InvManager {
     private final List<InvOpener> defaultOpeners;
     private final List<InvOpener> openers;
 
-    public InvManager() {
+
+    private final AOCommands pl;
+
+
+    public InvManager(final AOCommands pl) {
+        this.pl = pl;
         this.inventories = new HashMap<>();
         this.contents = new HashMap<>();
         this.updateTasks = new HashMap<>();
@@ -42,7 +49,7 @@ public class InvManager {
     }
 
     public void init() {
-        AOCommands.getInstance().getServer().getPluginManager().registerEvents(new InvListener(), AOCommands.getInstance());
+        pl.getServer().getPluginManager().registerEvents(new InvListener(), pl);
     }
 
     public Optional<InvOpener> findOpener(final InventoryType type) {
@@ -89,7 +96,7 @@ public class InvManager {
 
     protected void scheduleUpdateTask(final Player p, final AOInv inv) {
         PlayerInvTask task = new PlayerInvTask(p, inv.getProvider(), contents.get(p));
-        task.runTaskTimer(AOCommands.getInstance(), 1, inv.getUpdateFrequency());
+        task.runTaskTimer(pl, 1, inv.getUpdateFrequency());
         this.updateTasks.put(p, task);
     }
 
@@ -102,6 +109,7 @@ public class InvManager {
     }
 
     @SuppressWarnings("unchecked")
+
     class InvListener implements Listener {
 
         @EventHandler(priority = EventPriority.LOWEST)
@@ -203,7 +211,7 @@ public class InvManager {
 
                     inventories.remove(p);
                     contents.remove(p);
-                } else Bukkit.getScheduler().runTask(AOCommands.getInstance(), () -> p.openInventory(e.getInventory()));
+                } else Bukkit.getScheduler().runTask(pl, () -> p.openInventory(e.getInventory()));
             }
         }
 
