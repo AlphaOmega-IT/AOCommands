@@ -11,3 +11,13 @@ A possible beta of the system can you find entering the ip Atramis.de in your mc
 
 The Ressource can you find here:
 https://www.spigotmc.org/resources/aocommands-alternative-essentials.105963/
+
+
+You also are able to enjoy the great functionalitites of the inventoryhandler, commandhandler including the repository! 
+
+        <dependency>
+            <groupId>de.alphaomega.it</groupId>
+            <artifactId>AOCommands</artifactId>
+            <version>1.5</version>
+        </dependency>
+        
