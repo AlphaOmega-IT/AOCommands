@@ -22,3 +22,4 @@ You also are able to enjoy the great functionalitites of the inventoryhandler, c
         </dependency>
         
 
+You will find examples and a better documentation in the wiki section! 
