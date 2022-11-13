@@ -10,16 +10,4 @@ If you have any ideas feel free to message me!
 A possible beta of the system can you find entering the ip Atramis.de in your mc laucher. I might implement as well my unique oneblock system with a unique style of gameplay! Make sure to stay hyped until it gonna cost few bucks! :D 
 
 The Ressource can you find here:
-https://www.spigotmc.org/resources/aocommands-alternative-essentials.105963/
-
-
-You also are able to enjoy the great functionalitites of the inventoryhandler, commandhandler including the repository! 
-
-        <dependency>
-            <groupId>de.alphaomega.it</groupId>
-            <artifactId>AOCommands</artifactId>
-            <version>1.5</version>
-        </dependency>
-        
-
-You will find examples and a better documentation in the wiki section! 
+https://www.spigotmc.org/resources/aocommands-many-commands-functions-features.105963/
