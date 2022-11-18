@@ -17,6 +17,7 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
@@ -31,7 +32,7 @@ public class InvManager {
     private final List<InvOpener> defaultOpeners;
     private final List<InvOpener> openers;
 
-    public InvManager() {
+    public InvManager(final JavaPlugin pl) {
         this.inventories = new HashMap<>();
         this.contents = new HashMap<>();
         this.updateTasks = new HashMap<>();
@@ -40,11 +41,11 @@ public class InvManager {
 
         this.openers = new ArrayList<>();
 
-        init();
+        init(pl);
     }
 
-    public void init() {
-        AOCommands.getInstance().getServer().getPluginManager().registerEvents(new InvListener(), AOCommands.getInstance());
+    public void init(final JavaPlugin pl) {
+        pl.getServer().getPluginManager().registerEvents(new InvListener(), pl);
     }
 
     public Optional<InvOpener> findOpener(final InventoryType type) {

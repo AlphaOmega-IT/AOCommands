@@ -5,6 +5,7 @@ import de.alphaomega.it.utils.CheckPlayer;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class OnJoin implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onJoin(final PlayerJoinEvent e) {
         final Player p = e.getPlayer();
         final Message msg = new Message(p);
