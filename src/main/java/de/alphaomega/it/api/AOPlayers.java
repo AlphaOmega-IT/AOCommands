@@ -20,8 +20,8 @@ public class AOPlayers {
 
     @SneakyThrows
     public void createPlayer(final Player p) {
-        if (AOCommandsAPI.players.containsKey(p.getUniqueId())) {
-            AOCommandsAPI.players.get(p.getUniqueId());
+        if (api.getPlayers().containsKey(p.getUniqueId())) {
+            api.getPlayers().get(p.getUniqueId());
             return;
         }
 
@@ -32,7 +32,7 @@ public class AOPlayers {
             return aoPlayer;
         }).thenApply(aoPlayer -> {
             api.getAoPlayers().updateUser(aoPlayer);
-            AOCommandsAPI.players.put(p.getUniqueId(), aoPlayer);
+            api.getPlayers().put(p.getUniqueId(), aoPlayer);
             return aoPlayer;
         });
     }
@@ -53,11 +53,11 @@ public class AOPlayers {
     }
 
     public AOPlayer getAOPlayer(final Player p) {
-        return AOCommandsAPI.players.get(p.getUniqueId());
+        return api.getPlayers().get(p.getUniqueId());
     }
 
     public void updateUser(final AOPlayer aoP) {
-        AOCommandsAPI.players.computeIfPresent(aoP.getUuid(), ((uuid, aoPlayer) -> aoP));
+        api.getPlayers().computeIfPresent(aoP.getUuid(), ((uuid, aoPlayer) -> aoP));
     }
 
     public void dbUserUpdate(final AOPlayer aoP) {

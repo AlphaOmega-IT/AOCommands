@@ -1,6 +1,6 @@
-package de.alphaomega.it.invHandler;
+package de.alphaomega.it.invhandler;
 
-import de.alphaomega.it.invHandler.content.SlotPos;
+import de.alphaomega.it.invhandler.content.SlotPos;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;

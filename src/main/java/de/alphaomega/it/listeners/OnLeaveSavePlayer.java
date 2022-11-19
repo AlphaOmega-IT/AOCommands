@@ -1,6 +1,6 @@
 package de.alphaomega.it.listeners;
 
-import de.alphaomega.it.api.AOCommandsAPI;
+import de.alphaomega.it.AOCommands;
 import de.alphaomega.it.database.entities.AOPlayer;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
@@ -11,7 +11,13 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.concurrent.CompletableFuture;
 
-public record OnLeaveSavePlayer(AOCommandsAPI api) implements Listener {
+public class OnLeaveSavePlayer implements Listener {
+
+    private final AOCommands aoCommands;
+
+    public OnLeaveSavePlayer(final AOCommands aoCommands) {
+        this.aoCommands = aoCommands;
+    }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerQuit(final PlayerQuitEvent e) {
@@ -19,12 +25,12 @@ public record OnLeaveSavePlayer(AOCommandsAPI api) implements Listener {
         e.quitMessage(Component.empty()); //will be handled in OnLeave.class
 
         CompletableFuture.supplyAsync(() -> {
-            AOPlayer aoP = AOCommandsAPI.players.get(p.getUniqueId());
+            AOPlayer aoP = this.aoCommands.getAoCommandsAPI().getPlayers().get(p.getUniqueId());
             aoP.setPlaytime(p.getPlayerTime());
             return aoP;
         }).thenApplyAsync(aoPlayer -> {
-            api.getAoPlayers().dbUserUpdate(aoPlayer);
+            this.aoCommands.getAoCommandsAPI().getAoPlayers().dbUserUpdate(aoPlayer);
             return aoPlayer;
-        }).thenAccept(aoPlayer -> AOCommandsAPI.players.remove(p.getUniqueId())).join();
+        }).thenAccept(aoPlayer -> this.aoCommands.getAoCommandsAPI().getPlayers().remove(p.getUniqueId())).join();
     }
 }

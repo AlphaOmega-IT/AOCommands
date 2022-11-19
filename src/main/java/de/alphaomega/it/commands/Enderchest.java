@@ -1,21 +1,22 @@
 package de.alphaomega.it.commands;
 
 
-
 import de.alphaomega.it.AOCommands;
-import de.alphaomega.it.cmdHandler.Command;
-import de.alphaomega.it.cmdHandler.CommandArgs;
-
+import de.alphaomega.it.cmdhandler.Command;
+import de.alphaomega.it.cmdhandler.CommandArgs;
 import de.alphaomega.it.inventories.EnderchestInv;
-import de.alphaomega.it.msgHandler.Message;
+import de.alphaomega.it.msghandler.Message;
 import de.alphaomega.it.utils.CheckPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class Enderchest {
 
+    private final AOCommands aoCommands;
 
-    private AOCommands pl;
+    public Enderchest(final AOCommands aoCommands) {
+        this.aoCommands = aoCommands;
+    }
 
     @Command(
             name = "enderchest",
@@ -23,9 +24,9 @@ public class Enderchest {
             permission = "aocommands.enderchest"
     )
     public void onCommand(final CommandArgs arg) {
-        final Player p = arg.getPlayer();
+        final Player player = arg.getPlayer();
         final String[] args = arg.getArgs();
-        final Message msg = new Message(p);
+        final Message msg = new Message(player);
 
         if (args.length > 1) {
             msg.sendMessage("enderchest-syntax", false, true);
@@ -33,15 +34,15 @@ public class Enderchest {
         }
 
         if (args.length == 1) {
-            if (!CheckPlayer.isOnline(args[0], p)) return;
+            if (!CheckPlayer.isOnline(args[0], player)) return;
             final Player target = Bukkit.getPlayer(args[0]);
-            if (p.isOp() || p.hasPermission("aocommands.enderchest.*"))
-                p.openInventory(target.getEnderChest());
+            if (player.isOp() || player.hasPermission("aocommands.enderchest.*"))
+                player.openInventory(target.getEnderChest());
             else
-                new EnderchestInv(target.getEnderChest()).getInv(target.getEnderChest(), target);
+                new EnderchestInv(target.getEnderChest(), this.aoCommands).getInv(target);
             return;
         }
 
-        p.openInventory(p.getEnderChest());
+        player.openInventory(player.getEnderChest());
     }
 }

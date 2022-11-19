@@ -14,26 +14,26 @@ public class SessionFactoryManager {
     private SessionFactory sF;
     private Configuration cfg;
 
-    public SessionFactoryManager(final JavaPlugin pl) {
-        pl.saveResource("database/hibernate.cfg.xml", false);
-        File f = new File(pl.getDataFolder() + "/database/", "hibernate.cfg.xml");
+    public SessionFactoryManager(final JavaPlugin plugin) {
+        plugin.saveResource("database/hibernate.cfg.xml", false);
+        File f = new File(plugin.getDataFolder() + "/database/", "hibernate.cfg.xml");
 
         try {
-            cfg = new Configuration().configure(f);
+            this.cfg = new Configuration().configure(f);
         } catch (final Exception e) {
-            pl.getLogger().log(Level.SEVERE, "Hibernate.cfg.xml file does not exists in database folder.");
-            pl.onDisable();
+            plugin.getLogger().log(Level.SEVERE, "Hibernate.cfg.xml file does not exists in database folder.");
+            plugin.onDisable();
         }
     }
 
     public SessionFactoryManager addAnnotatedClazz(final Class<?> clazz) {
-        cfg.addAnnotatedClass(clazz);
+        this.cfg.addAnnotatedClass(clazz);
         return this;
     }
 
     public SessionFactory build() {
-        sF = cfg.buildSessionFactory();
-        return sF;
+        this.sF = this.cfg.buildSessionFactory();
+        return this.sF;
     }
 
 }

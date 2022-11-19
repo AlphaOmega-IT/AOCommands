@@ -1,12 +1,19 @@
 package de.alphaomega.it.commands;
 
-import de.alphaomega.it.cmdHandler.Command;
-import de.alphaomega.it.cmdHandler.CommandArgs;
-import de.alphaomega.it.msgHandler.Message;
+import de.alphaomega.it.AOCommands;
+import de.alphaomega.it.cmdhandler.Command;
+import de.alphaomega.it.cmdhandler.CommandArgs;
+import de.alphaomega.it.msghandler.Message;
 import de.alphaomega.it.utils.CheckPlayer;
 import org.bukkit.entity.Player;
 
 public class Vanish {
+
+    private final AOCommands aoCommands;
+
+    public Vanish(final AOCommands aoCommands) {
+        this.aoCommands = aoCommands;
+    }
 
     @Command(
             name = "vanish",
@@ -14,14 +21,14 @@ public class Vanish {
             permission = "aocommands.vanish"
     )
     public void onCommand(final CommandArgs arg) {
-        final Player p = arg.getPlayer();
-        final Message msg = new Message(p);
+        final Player player = arg.getPlayer();
+        final Message msg = new Message(player);
 
-        if (CheckPlayer.isVanished(p.getUniqueId())) {
-            CheckPlayer.setVanished(p.getUniqueId(), false);
+        if (CheckPlayer.isVanished(this.aoCommands, player.getUniqueId())) {
+            CheckPlayer.setVanished(this.aoCommands, player.getUniqueId(), false);
             msg.sendMessage("nonVanish", false, true);
         } else {
-            CheckPlayer.setVanished(p.getUniqueId(), true);
+            CheckPlayer.setVanished(this.aoCommands, player.getUniqueId(), true);
             msg.sendMessage("setVanish", false, true);
         }
     }

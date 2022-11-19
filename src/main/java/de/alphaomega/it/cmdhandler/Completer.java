@@ -1,4 +1,4 @@
-package de.alphaomega.it.cmdHandler;
+package de.alphaomega.it.cmdhandler;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

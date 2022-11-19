@@ -1,8 +1,8 @@
 package de.alphaomega.it.commands;
 
-import de.alphaomega.it.cmdHandler.Command;
-import de.alphaomega.it.cmdHandler.CommandArgs;
-import de.alphaomega.it.msgHandler.Message;
+import de.alphaomega.it.cmdhandler.Command;
+import de.alphaomega.it.cmdhandler.CommandArgs;
+import de.alphaomega.it.msghandler.Message;
 import de.alphaomega.it.utils.CheckPlayer;
 import de.alphaomega.it.utils.InputCheck;
 import de.alphaomega.it.utils.ItemBuilder;
@@ -21,34 +21,34 @@ public class Give {
             permission = "aocommands.give"
     )
     public void onCommand(final CommandArgs arg) {
-        final Player p = arg.getPlayer();
+        final Player player = arg.getPlayer();
         final String[] args = arg.getArgs();
-        final Message msg = new Message(p);
+        final Message msg = new Message(player);
 
         if (args.length < 2 || args.length > 4) {
             msg.sendMessage("give-syntax", false, true);
             return;
         }
 
-        if (!CheckPlayer.isOnline(args[0], p)) return;
+        if (!CheckPlayer.isOnline(args[0], player)) return;
         final Player target = Bukkit.getPlayer(args[0]);
 
         final int amount = args.length >= 3 && InputCheck.isFullNumber(args[2]) ? Integer.parseInt(args[2]) : 1;
-        Material m;
+        Material material;
         try {
-            m = Material.valueOf(args[1].replaceAll(" ", "_").toUpperCase());
+            material = Material.valueOf(args[1].replaceAll(" ", "_").toUpperCase());
         } catch (final IllegalArgumentException exc) {
             msg.setArgs(List.of(args[1]));
             msg.sendMessage("itemDoesNotExists", true, true);
             return;
         }
 
-        if (m.isAir()) {
+        if (material.isAir()) {
             msg.sendMessage("itemCannotBeAir", false, true);
             return;
         }
 
-        ItemBuilder iBuilder = new ItemBuilder(m, amount);
+        ItemBuilder iBuilder = new ItemBuilder(material, amount);
         if (args.length == 4) {
             if (InputCheck.isFullNumber(args[3]))
                 iBuilder.setCustomModelData(Integer.parseInt(args[3]));
@@ -58,14 +58,14 @@ public class Give {
                 return;
             }
         }
-        final ItemStack iS = iBuilder.build();
-        target.getInventory().addItem(iS);
+        final ItemStack item = iBuilder.build();
+        target.getInventory().addItem(item);
 
         Message msgTarget = new Message(target);
         msgTarget.setArgs(List.of(args[1], args.length < 3 || !InputCheck.isFullNumber(args[2]) ? "1" : args[2], args.length == 4 && InputCheck.isFullNumber(args[3]) ? args[3] : "-/-"));
         msgTarget.sendMessage("addedItemToInventory", true, true);
 
-        if (p != target) {
+        if (player != target) {
             msg.setArgs(List.of(args[0], args.length < 3 || !InputCheck.isFullNumber(args[2]) ? "1" : args[2], args.length == 4 && InputCheck.isFullNumber(args[3]) ? args[3] : "-/-"));
             msg.sendMessage("addedItemToTargetInventory", true, true);
         }

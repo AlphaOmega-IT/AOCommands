@@ -1,11 +1,11 @@
 package de.alphaomega.it.inventories;
 
 import de.alphaomega.it.AOCommands;
-import de.alphaomega.it.invHandler.AOCItem;
-import de.alphaomega.it.invHandler.AOInv;
-import de.alphaomega.it.invHandler.content.InvContents;
-import de.alphaomega.it.invHandler.content.InvProvider;
-import de.alphaomega.it.msgHandler.Message;
+import de.alphaomega.it.invhandler.AOCItem;
+import de.alphaomega.it.invhandler.AOInv;
+import de.alphaomega.it.invhandler.content.InvContents;
+import de.alphaomega.it.invhandler.content.InvProvider;
+import de.alphaomega.it.msghandler.Message;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -14,25 +14,25 @@ import java.util.List;
 
 public class InvseeInv implements InvProvider {
 
-    private final AOCommands pl;
-    private final Player t;
+    private final AOCommands aoCommands;
+    private final Player target;
 
-    public InvseeInv(final AOCommands pl, final Player t) {
-        this.pl = pl;
-        this.t = t;
+    public InvseeInv(final AOCommands aoCommands, final Player target) {
+        this.aoCommands = aoCommands;
+        this.target = target;
     }
 
     public AOInv getInv(final Player p) {
         final Message msg = new Message(p);
-        msg.setArgs(List.of(t.getName()));
+        msg.setArgs(List.of(target.getName()));
         return AOInv.builder()
-                .manager(pl.getManager())
-                .id("InvseeInv_" + t.getUniqueId())
+                .manager(this.aoCommands.getManager())
+                .id("InvseeInv_" + this.target.getUniqueId())
                 .updateFrequency(2)
                 .size(6, 9)
                 .closeable(true)
-                .provider(new InvseeInv(pl, t))
-                .title(msg.showMessage("invseeInvName", true, false)).build(pl);
+                .provider(new InvseeInv(this.aoCommands, this.target))
+                .title(msg.showMessage("invseeInvName", true, false)).build(this.aoCommands);
     }
 
     @Override
@@ -51,9 +51,9 @@ public class InvseeInv implements InvProvider {
         int x = 0;
         int y = 0;
 
-        final PlayerInventory tInv = t.getInventory();
-        for (ItemStack iS : tInv.getContents()) {
-            c.set(y, x, AOCItem.empty(iS == null || iS.getType().isAir() ? AOCItem.empty().getItem() : iS));
+        final PlayerInventory tInv = this.target.getInventory();
+        for (ItemStack item : tInv.getContents()) {
+            c.set(y, x, AOCItem.empty(item == null || item.getType().isAir() ? AOCItem.empty().getItem() : item));
             x++;
 
             if (x == 9) {
@@ -63,12 +63,12 @@ public class InvseeInv implements InvProvider {
             if (y == 4) break;
         }
 
-        for (ItemStack iS : tInv.getArmorContents()) {
-            c.set(y, x, AOCItem.empty(iS == null || iS.getType().isAir() ? AOCItem.empty().getItem() : iS));
+        for (ItemStack item : tInv.getArmorContents()) {
+            c.set(y, x, AOCItem.empty(item == null || item.getType().isAir() ? AOCItem.empty().getItem() : item));
             x++;
         }
 
-        final ItemStack iS = tInv.getItemInOffHand();
-        c.set(5, 0, AOCItem.empty(iS.getType().isAir() ? AOCItem.empty().getItem() : iS));
+        final ItemStack item = tInv.getItemInOffHand();
+        c.set(5, 0, AOCItem.empty(item.getType().isAir() ? AOCItem.empty().getItem() : item));
     }
 }

@@ -1,9 +1,9 @@
 package de.alphaomega.it.commands;
 
 import de.alphaomega.it.AOCommands;
-import de.alphaomega.it.cmdHandler.Command;
-import de.alphaomega.it.cmdHandler.CommandArgs;
-import de.alphaomega.it.msgHandler.Message;
+import de.alphaomega.it.cmdhandler.Command;
+import de.alphaomega.it.cmdhandler.CommandArgs;
+import de.alphaomega.it.msghandler.Message;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -11,7 +11,13 @@ import org.bukkit.inventory.meta.Damageable;
 import java.util.ArrayList;
 import java.util.List;
 
-public record Repair(AOCommands pl) {
+public class Repair {
+
+    private final AOCommands aoCommands;
+
+    public Repair(final AOCommands aoCommands) {
+        this.aoCommands = aoCommands;
+    }
 
     @Command(
             name = "repair",
@@ -19,24 +25,24 @@ public record Repair(AOCommands pl) {
             permission = "aocommands.fix"
     )
     public void onCommandFix(final CommandArgs arg) {
-        final Player p = arg.getPlayer();
-        final Message msg = new Message(p);
-        final ItemStack iS = p.getInventory().getItemInMainHand();
+        final Player player = arg.getPlayer();
+        final Message msg = new Message(player);
+        final ItemStack item = player.getInventory().getItemInMainHand();
 
-        if (iS.getItemMeta() == null || !(iS.getItemMeta() instanceof Damageable)) {
+        if (item.getItemMeta() == null || !(item.getItemMeta() instanceof Damageable)) {
             msg.sendMessage("toolNotFixable", false, true);
             return;
         }
 
-        final boolean cmdToolFix = pl.getBaseConfig().getBoolean("allowed_custom_model_data_item_fix");
+        final boolean cmdToolFix = this.aoCommands.getBaseConfig().getBoolean("allowed_custom_model_data_item_fix");
 
         if (!cmdToolFix) {
-            if (iS.getItemMeta().hasCustomModelData()) {
+            if (item.getItemMeta().hasCustomModelData()) {
                 msg.sendMessage("cmdToolNotFixable", false, true);
                 return;
             }
         }
-        repair(p, msg, List.of(iS));
+        repair(player, msg, List.of(item));
     }
 
     @Command(
@@ -48,12 +54,12 @@ public record Repair(AOCommands pl) {
         final Player p = arg.getPlayer();
         final Message msg = new Message(p);
         final List<ItemStack> repairableItems = new ArrayList<>();
-        final boolean cmdToolFix = pl.getBaseConfig().getBoolean("allowed_custom_model_data_item_fix");
+        final boolean cmdToolFix = this.aoCommands.getBaseConfig().getBoolean("allowed_custom_model_data_item_fix");
 
-        for (ItemStack iS : p.getInventory().getContents()) {
-            if (iS == null || iS.hasItemMeta() && !(iS.getItemMeta() instanceof Damageable)) continue;
-            if (!cmdToolFix && iS.hasItemMeta() && iS.getItemMeta().hasCustomModelData()) continue;
-            repairableItems.add(iS);
+        for (ItemStack item : p.getInventory().getContents()) {
+            if (item == null || item.hasItemMeta() && !(item.getItemMeta() instanceof Damageable)) continue;
+            if (!cmdToolFix && item.hasItemMeta() && item.getItemMeta().hasCustomModelData()) continue;
+            repairableItems.add(item);
         }
 
         if (repairableItems.isEmpty()) {
@@ -64,17 +70,17 @@ public record Repair(AOCommands pl) {
         repair(p, msg, repairableItems);
     }
 
-    private void repair(final Player p, final Message msg, final List<ItemStack> iSs) {
-        for (ItemStack iS : iSs) {
-            Damageable iM = (Damageable) iS.getItemMeta();
-            iM.setDamage(0);
-            iS.setItemMeta(iM);
-            p.getInventory().remove(iS);
-            p.updateInventory();
-            p.getInventory().addItem(iS);
-            p.updateInventory();
+    private void repair(final Player player, final Message msg, final List<ItemStack> items) {
+        for (ItemStack item : items) {
+            Damageable itemMeta = (Damageable) item.getItemMeta();
+            itemMeta.setDamage(0);
+            item.setItemMeta(itemMeta);
+            player.getInventory().remove(item);
+            player.updateInventory();
+            player.getInventory().addItem(item);
+            player.updateInventory();
         }
-        if (iSs.size() == 1)
+        if (items.size() == 1)
             msg.sendMessage("toolRepaired", false, true);
         else
             msg.sendMessage("toolsRepaired", false, true);

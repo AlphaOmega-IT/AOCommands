@@ -21,12 +21,14 @@
             <version>LATEST</version>
             <scope>compile</scope>
         </dependency>
+        <!-- Hibernate Framework -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>6.1.5.Final</version>
             <scope>compile</scope>
         </dependency>
+        <!-- MySQL Connector -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

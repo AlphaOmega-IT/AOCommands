@@ -1,4 +1,4 @@
-package de.alphaomega.it.invHandler.content;
+package de.alphaomega.it.invhandler.content;
 
 import org.bukkit.entity.Player;
 

@@ -1,23 +1,16 @@
 package de.alphaomega.it.utils;
 
 
-
 import de.alphaomega.it.AOCommands;
-
-import de.alphaomega.it.msgHandler.Message;
-import lombok.Getter;
+import de.alphaomega.it.msghandler.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 public class CheckPlayer {
-
-
-    private static AOCommands pl;
-
-    @Getter
-    private static final Set<UUID> vanishedPlayers = new LinkedHashSet<>();
 
     public static boolean isOnline(final String targetName, final Player p) {
         final Player target = Bukkit.getPlayer(targetName);
@@ -29,28 +22,28 @@ public class CheckPlayer {
         return false;
     }
 
-    public static boolean isVanished(final UUID uniqueId) {
-        return vanishedPlayers.contains(uniqueId);
+    public static boolean isVanished(final AOCommands aoCommands, final UUID uniqueId) {
+        return aoCommands.getVanishedPlayers().contains(uniqueId);
     }
 
-    public static void setVanished(final UUID uniqueId, final boolean vanish) {
+    public static void setVanished(final AOCommands aoCommands, final UUID uniqueId, final boolean vanish) {
         if (vanish) {
-            if (!isVanished(uniqueId))
-                vanishedPlayers.add(uniqueId);
+            if (!isVanished(aoCommands, uniqueId))
+                aoCommands.getVanishedPlayers().add(uniqueId);
         } else {
-            if (isVanished(uniqueId))
-                vanishedPlayers.remove(uniqueId);
+            if (isVanished(aoCommands, uniqueId))
+                aoCommands.getVanishedPlayers().remove(uniqueId);
         }
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (p.getUniqueId().equals(uniqueId)) continue;
-            if (vanish) p.hidePlayer(pl, Objects.requireNonNull(Bukkit.getPlayer(uniqueId)));
-            else p.showPlayer(pl, Objects.requireNonNull(Bukkit.getPlayer(uniqueId)));
+            if (vanish) p.hidePlayer(aoCommands, Objects.requireNonNull(Bukkit.getPlayer(uniqueId)));
+            else p.showPlayer(aoCommands, Objects.requireNonNull(Bukkit.getPlayer(uniqueId)));
         }
     }
 
-    public static void hideAllPlayers(final UUID uniqueId) {
+    public static void hideAllPlayers(final AOCommands aoCommands, final UUID uniqueId) {
         try {
-            vanishedPlayers.forEach(uuid -> Objects.requireNonNull(Bukkit.getPlayer(uniqueId)).hidePlayer(pl, Objects.requireNonNull(Bukkit.getPlayer(uuid))));
+            aoCommands.getVanishedPlayers().forEach(uuid -> Objects.requireNonNull(Bukkit.getPlayer(uniqueId)).hidePlayer(aoCommands, Objects.requireNonNull(Bukkit.getPlayer(uuid))));
         } catch (final NullPointerException ignored) {}
     }
 }

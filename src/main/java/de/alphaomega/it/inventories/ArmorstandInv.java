@@ -3,11 +3,11 @@ package de.alphaomega.it.inventories;
 
 import de.alphaomega.it.AOCommands;
 import de.alphaomega.it.entities.heads.BackArrow;
-import de.alphaomega.it.invHandler.AOCItem;
-import de.alphaomega.it.invHandler.AOInv;
-import de.alphaomega.it.invHandler.content.InvContents;
-import de.alphaomega.it.invHandler.content.InvProvider;
-import de.alphaomega.it.msgHandler.Message;
+import de.alphaomega.it.invhandler.AOCItem;
+import de.alphaomega.it.invhandler.AOInv;
+import de.alphaomega.it.invhandler.content.InvContents;
+import de.alphaomega.it.invhandler.content.InvProvider;
+import de.alphaomega.it.msghandler.Message;
 import de.alphaomega.it.utils.HeadsUtil;
 import de.alphaomega.it.utils.ItemBuilder;
 import org.bukkit.Material;
@@ -17,37 +17,37 @@ import org.bukkit.entity.Player;
 
 public class ArmorstandInv implements InvProvider {
 
-    private AOCommands pl;
+    private final AOCommands aoCommands;
 
-    public ArmorstandInv(final AOCommands pl) {
-        this.pl = pl;
+    public ArmorstandInv(final AOCommands aoCommands) {
+        this.aoCommands = aoCommands;
     }
 
-    public static AOInv getInv(final AOCommands pl) {
+    public static AOInv getInv(final AOCommands aoCommands) {
         return AOInv.builder()
-                .manager(pl.getManager())
+                .manager(aoCommands.getManager())
                 .id("ArmorstandSubInv")
                 .closeable(true)
                 .size(3, 9)
                 .title("<color:#d60946>Armorstand</color>")
-                .provider(new ArmorstandInv(pl))
-                .build(pl);
+                .provider(new ArmorstandInv(aoCommands))
+                .build(aoCommands);
     }
 
     @Override
-    public void init(final Player p, final InvContents c) {
-        final Message msg = new Message(p);
+    public void init(final Player player, final InvContents c) {
+        final Message msg = new Message(player);
         c.fill(AOCItem.empty());
 
         c.set(1, 4, AOCItem.from(new ItemBuilder(Material.ARMOR_STAND).setName(msg.showMessage("asNameCreate", false, false)).setLore(msg.showMessage("asLoreCreate", false, false)).build(), e -> {
-            ArmorStand as = (ArmorStand) p.getWorld().spawnEntity(p.getLocation(), EntityType.ARMOR_STAND);
+            ArmorStand as = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
             as.setVisible(false);
             as.setGravity(false);
             as.setBasePlate(false);
-            ArmorstandSubInv.getInv(as, pl).open(p);
+            ArmorstandSubInv.getInv(as, this.aoCommands).open(player);
         }));
 
-        c.set(2, 0, AOCItem.from(HeadsUtil.getSpecifiedHead(BackArrow.class, p), e -> p.closeInventory()));
+        c.set(2, 0, AOCItem.from(new HeadsUtil().getSpecifiedHead(BackArrow.class, player), e -> player.closeInventory()));
     }
 
     @Override

@@ -1,6 +1,6 @@
 package de.alphaomega.it.listeners;
 
-import de.alphaomega.it.msgHandler.Message;
+import de.alphaomega.it.msghandler.Message;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

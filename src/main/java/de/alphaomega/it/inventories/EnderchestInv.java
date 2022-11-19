@@ -3,10 +3,10 @@ package de.alphaomega.it.inventories;
 
 
 import de.alphaomega.it.AOCommands;
-import de.alphaomega.it.invHandler.AOCItem;
-import de.alphaomega.it.invHandler.AOInv;
-import de.alphaomega.it.invHandler.content.InvContents;
-import de.alphaomega.it.invHandler.content.InvProvider;
+import de.alphaomega.it.invhandler.AOCItem;
+import de.alphaomega.it.invhandler.AOInv;
+import de.alphaomega.it.invhandler.content.InvContents;
+import de.alphaomega.it.invhandler.content.InvProvider;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -14,34 +14,33 @@ import org.bukkit.inventory.ItemStack;
 public class EnderchestInv implements InvProvider {
 
     private final Inventory eInv;
+    private final AOCommands aoCommands;
 
-
-    private AOCommands pl;
-
-    public EnderchestInv(final Inventory eInv) {
+    public EnderchestInv(final Inventory eInv, final AOCommands aoCommands) {
         this.eInv = eInv;
+        this.aoCommands = aoCommands;
     }
 
-    public void getInv(final Inventory eInv, final Player target) {
+    public void getInv(final Player target) {
         AOInv.builder()
-                .manager(pl.getManager())
+                .manager(this.aoCommands.getManager())
                 .id("EnderchestInv")
-                .provider(new EnderchestInv(eInv))
-                .size(eInv.getSize() / 9, 9)
+                .provider(new EnderchestInv(this.eInv, this.aoCommands))
+                .size(this.eInv.getSize() / 9, 9)
                 .closeable(true)
                 .title("Enderchest » " + target.getName())
-                .build(pl);
+                .build(this.aoCommands);
     }
 
     @Override
-    public void init(Player p, InvContents c) {
+    public void init(Player player, InvContents c) {
         c.fill(AOCItem.empty());
 
         int x = 0;
         int y = 0;
 
-        for (ItemStack iS : eInv.getStorageContents()) {
-            c.set(x, y, iS == null ? AOCItem.empty() : AOCItem.empty(iS));
+        for (ItemStack item : this.eInv.getStorageContents()) {
+            c.set(x, y, item == null ? AOCItem.empty() : AOCItem.empty(item));
             y++;
 
             if (y == 9) {
@@ -52,7 +51,7 @@ public class EnderchestInv implements InvProvider {
     }
 
     @Override
-    public void update(Player p, InvContents c) {
+    public void update(Player player, InvContents c) {
 
     }
 }

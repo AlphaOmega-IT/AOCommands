@@ -37,7 +37,7 @@ public class HeadBuilder extends ItemBuilder {
             sM = setSM(getIS().getItemMeta());
         else {
             if (head.getBase64() != null && !head.getBase64().equals(""))
-                setIS(ItemStackSerialization.getItemStackFromBase64(head.getBase64()));
+                setIS(ItemStackSerialization.getItemStackFromBase64String(head.getBase64()));
             else
                 setIS(new ItemBuilder(Material.PLAYER_HEAD).build());
             sM = setSM(getIS().getItemMeta());

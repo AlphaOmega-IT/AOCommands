@@ -1,6 +1,4 @@
-package de.alphaomega.it.cmdHandler;
-
-import de.alphaomega.it.AOCommands;
+package de.alphaomega.it.cmdhandler;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

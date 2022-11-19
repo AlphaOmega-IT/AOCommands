@@ -9,54 +9,54 @@ public abstract class BaseDao<T> {
     protected abstract Class<T> getClassType();
 
     public void create(final T data) {
-        Session s = AOCommandsAPI.sF.openSession();
+        Session session = AOCommandsAPI.sF.openSession();
         try {
-            s.clear();
-            s.beginTransaction();
-            s.persist(data);
-            s.getTransaction().commit();
+            session.clear();
+            session.beginTransaction();
+            session.persist(data);
+            session.getTransaction().commit();
         } catch (final Exception e) {
-            if (s.getTransaction() != null && s.getTransaction().isActive())
-                s.getTransaction().rollback();
+            if (session.getTransaction() != null && session.getTransaction().isActive())
+                session.getTransaction().rollback();
         } finally {
-            s.close();
+            session.close();
         }
     }
 
     public void update(final T data) {
-        Session s = AOCommandsAPI.sF.openSession();
+        Session session = AOCommandsAPI.sF.openSession();
         try {
-            s.clear();
-            s.beginTransaction();
-            s.merge(data);
-            s.flush();
-            s.getTransaction().commit();
+            session.clear();
+            session.beginTransaction();
+            session.merge(data);
+            session.flush();
+            session.getTransaction().commit();
         } catch (final Exception e) {
-            if (s.getTransaction() != null && s.getTransaction().isActive())
-                s.getTransaction().rollback();
+            if (session.getTransaction() != null && session.getTransaction().isActive())
+                session.getTransaction().rollback();
         } finally {
-            s.close();
+            session.close();
         }
     }
 
     public void delete(final T data) {
-        Session s = AOCommandsAPI.sF.openSession();
+        Session session = AOCommandsAPI.sF.openSession();
         try {
-            s.clear();
-            s.beginTransaction();
-            s.remove(data);
-            s.flush();
-            s.getTransaction().commit();
+            session.clear();
+            session.beginTransaction();
+            session.remove(data);
+            session.flush();
+            session.getTransaction().commit();
         } catch (final Exception e) {
-            if (s.getTransaction() != null && s.getTransaction().isActive())
-                s.getTransaction().rollback();
+            if (session.getTransaction() != null && session.getTransaction().isActive())
+                session.getTransaction().rollback();
         } finally {
-            s.close();
+            session.close();
         }
     }
 
     public Query<T> createNamedQuery(final String queryName) {
-        Session s = AOCommandsAPI.sF.openSession();
-        return s.createNamedQuery(queryName, getClassType());
+        Session session = AOCommandsAPI.sF.openSession();
+        return session.createNamedQuery(queryName, getClassType());
     }
 }

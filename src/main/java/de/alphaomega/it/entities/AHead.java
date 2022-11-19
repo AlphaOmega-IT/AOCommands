@@ -22,7 +22,7 @@ import java.util.*;
 public abstract class AHead {
 
     protected final String hexColor = "#cf9c11";
-    protected AOCommands pl = AOCommands.getInstance();
+    protected AOCommands aoCommands = AOCommands.getInstance();
 
     private UUID uuid;
 
@@ -42,21 +42,21 @@ public abstract class AHead {
         this.headName = name;
         this.uuid = uuid;
 
-        final String color = pl.getBaseConfig().getString("default-hexColor-from-heads");
+        final String color = this.aoCommands.getBaseConfig().getString("default-hexColor-from-heads");
         this.color = color == null ? "#cf9c11" : color;
     }
 
     public ItemStack getHeadAsItemStack(final String locale) {
-        final String newLocale = pl.getTranslations().get(locale) == null ? "en_US" : locale;
+        final String newLocale = this.aoCommands.getTranslations().get(locale) == null ? "en_US" : locale;
         return new HeadBuilder(this, newLocale).build();
     }
 
     public String getName(final String locale) {
-        return getNames().get(pl.getTranslations().get(locale) == null ? "en_US" : locale);
+        return getNames().get(this.aoCommands.getTranslations().get(locale) == null ? "en_US" : locale);
     }
 
     public List<Component> getLore(final String locale) {
-        final List<String> sLore = getLores().get(pl.getTranslations().get(locale) == null ? "en_US" : locale);
+        final List<String> sLore = getLores().get(this.aoCommands.getTranslations().get(locale) == null ? "en_US" : locale);
         final List<Component> cLore = new ArrayList<>();
         sLore.forEach(loreLine -> cLore.add(MiniMessage.miniMessage().deserialize(loreLine).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE)));
         return cLore;

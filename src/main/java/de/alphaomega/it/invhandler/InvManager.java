@@ -1,13 +1,13 @@
-package de.alphaomega.it.invHandler;
+package de.alphaomega.it.invhandler;
 
 
 import de.alphaomega.it.AOCommands;
-import de.alphaomega.it.invHandler.content.InvContents;
-import de.alphaomega.it.invHandler.content.InvProvider;
-import de.alphaomega.it.invHandler.content.SlotPos;
-import de.alphaomega.it.invHandler.opener.ChestInvOpener;
-import de.alphaomega.it.invHandler.opener.InvOpener;
-import de.alphaomega.it.invHandler.opener.SpecialInvOpener;
+import de.alphaomega.it.invhandler.content.InvContents;
+import de.alphaomega.it.invhandler.content.InvProvider;
+import de.alphaomega.it.invhandler.content.SlotPos;
+import de.alphaomega.it.invhandler.opener.ChestInvOpener;
+import de.alphaomega.it.invhandler.opener.InvOpener;
+import de.alphaomega.it.invhandler.opener.SpecialInvOpener;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -127,7 +127,7 @@ public class InvManager {
                     return;
                 }
 
-                inv.getListeners().stream().filter(listener -> listener.type() == InventoryClickEvent.class).forEach(listener -> ((de.alphaomega.it.invHandler.InvListener<InventoryClickEvent>) listener).accept(e));
+                inv.getListeners().stream().filter(listener -> listener.type() == InventoryClickEvent.class).forEach(listener -> ((de.alphaomega.it.invhandler.InvListener<InventoryClickEvent>) listener).accept(e));
 
                 invContents.get(firstEmptySlot).ifPresent(item -> item.run(new AOCData(e, p, e.getCurrentItem(), firstEmptySlot)));
             } else if (e.getClickedInventory() == topInv) {
@@ -147,7 +147,7 @@ public class InvManager {
 
                 if (!invContents.isEditable(slot)) e.setCancelled(true);
 
-                inv.getListeners().stream().filter(listener -> listener.type() == InventoryClickEvent.class).forEach(listener -> ((de.alphaomega.it.invHandler.InvListener<InventoryClickEvent>) listener).accept(e));
+                inv.getListeners().stream().filter(listener -> listener.type() == InventoryClickEvent.class).forEach(listener -> ((de.alphaomega.it.invhandler.InvListener<InventoryClickEvent>) listener).accept(e));
 
                 invContents.get(slot).ifPresent(item -> item.run(new AOCData(e, p, e.getCurrentItem(), slot)));
 
@@ -175,7 +175,7 @@ public class InvManager {
                 break;
             }
 
-            inv.getListeners().stream().filter(listener -> listener.type() == InventoryDragEvent.class).forEach(listener -> ((de.alphaomega.it.invHandler.InvListener<InventoryDragEvent>) listener).accept(e));
+            inv.getListeners().stream().filter(listener -> listener.type() == InventoryDragEvent.class).forEach(listener -> ((de.alphaomega.it.invhandler.InvListener<InventoryDragEvent>) listener).accept(e));
         }
 
         @EventHandler(priority = EventPriority.LOW)
@@ -186,7 +186,7 @@ public class InvManager {
 
             AOInv inv = inventories.get(p);
 
-            inv.getListeners().stream().filter(listener -> listener.type() == InventoryOpenEvent.class).forEach(listener -> ((de.alphaomega.it.invHandler.InvListener<InventoryOpenEvent>) listener).accept(e));
+            inv.getListeners().stream().filter(listener -> listener.type() == InventoryOpenEvent.class).forEach(listener -> ((de.alphaomega.it.invhandler.InvListener<InventoryOpenEvent>) listener).accept(e));
         }
 
         @EventHandler(priority = EventPriority.LOW)
@@ -198,7 +198,7 @@ public class InvManager {
             AOInv inv = inventories.get(p);
 
             try {
-                inv.getListeners().stream().filter(listener -> listener.type() == InventoryCloseEvent.class).forEach(listener -> ((de.alphaomega.it.invHandler.InvListener<InventoryCloseEvent>) listener).accept(e));
+                inv.getListeners().stream().filter(listener -> listener.type() == InventoryCloseEvent.class).forEach(listener -> ((de.alphaomega.it.invhandler.InvListener<InventoryCloseEvent>) listener).accept(e));
             } finally {
                 if (inv.isCloseable()) {
                     e.getInventory().clear();
@@ -219,7 +219,7 @@ public class InvManager {
             AOInv inv = inventories.get(p);
 
             try {
-                inv.getListeners().stream().filter(listener -> listener.type() == PlayerQuitEvent.class).forEach(listener -> ((de.alphaomega.it.invHandler.InvListener<PlayerQuitEvent>) listener).accept(e));
+                inv.getListeners().stream().filter(listener -> listener.type() == PlayerQuitEvent.class).forEach(listener -> ((de.alphaomega.it.invhandler.InvListener<PlayerQuitEvent>) listener).accept(e));
             } finally {
                 inventories.remove(p);
                 contents.remove(p);
@@ -230,7 +230,7 @@ public class InvManager {
         public void onPluginDisable(PluginDisableEvent e) {
             new HashMap<>(inventories).forEach((p, inv) -> {
                 try {
-                    inv.getListeners().stream().filter(listener -> listener.type() == PluginDisableEvent.class).forEach(listener -> ((de.alphaomega.it.invHandler.InvListener<PluginDisableEvent>) listener).accept(e));
+                    inv.getListeners().stream().filter(listener -> listener.type() == PluginDisableEvent.class).forEach(listener -> ((de.alphaomega.it.invhandler.InvListener<PluginDisableEvent>) listener).accept(e));
                 } finally {
                     inv.close(p);
                 }

@@ -1,9 +1,9 @@
-package de.alphaomega.it.invHandler.opener;
+package de.alphaomega.it.invhandler.opener;
 
-import de.alphaomega.it.invHandler.AOCItem;
-import de.alphaomega.it.invHandler.AOInv;
-import de.alphaomega.it.invHandler.content.InvContents;
-import de.alphaomega.it.invHandler.content.SlotPos;
+import de.alphaomega.it.invhandler.AOCItem;
+import de.alphaomega.it.invhandler.AOInv;
+import de.alphaomega.it.invhandler.content.InvContents;
+import de.alphaomega.it.invhandler.content.SlotPos;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;

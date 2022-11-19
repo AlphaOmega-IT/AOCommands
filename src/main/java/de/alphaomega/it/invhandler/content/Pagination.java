@@ -1,6 +1,6 @@
-package de.alphaomega.it.invHandler.content;
+package de.alphaomega.it.invhandler.content;
 
-import de.alphaomega.it.invHandler.AOCItem;
+import de.alphaomega.it.invhandler.AOCItem;
 
 import java.util.Arrays;
 

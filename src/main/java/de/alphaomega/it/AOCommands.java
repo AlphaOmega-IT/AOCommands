@@ -2,15 +2,15 @@ package de.alphaomega.it;
 
 
 import de.alphaomega.it.api.AOCommandsAPI;
-import de.alphaomega.it.cmdHandler.CommandFramework;
+import de.alphaomega.it.cmdhandler.CommandFramework;
 import de.alphaomega.it.commands.*;
-import de.alphaomega.it.invHandler.InvManager;
+import de.alphaomega.it.invhandler.InvManager;
 import de.alphaomega.it.inventories.ArmorstandSubInv;
 import de.alphaomega.it.listeners.OnJoin;
 import de.alphaomega.it.listeners.OnJoinInitPlayer;
 import de.alphaomega.it.listeners.OnLeave;
 import de.alphaomega.it.listeners.OnLeaveSavePlayer;
-import de.alphaomega.it.msgHandler.Message;
+import de.alphaomega.it.msghandler.Message;
 import de.alphaomega.it.utils.UpdateChecker;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,9 +23,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.hibernate.SessionFactory;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Level;
 
 @Getter
@@ -34,11 +32,11 @@ public class AOCommands extends JavaPlugin {
 
 
     private static AOCommands instance;
-    private static AOCommandsAPI aoCommandsAPI;
+    private AOCommandsAPI aoCommandsAPI;
 
     private HashMap<String, FileConfiguration> translations = new HashMap<>();
 
-    private static final HashMap<String, String> noPermsMessage = new HashMap<>();
+    private final HashMap<String, String> noPermsMessage = new HashMap<>();
 
     private FileConfiguration baseConfig;
     private SessionFactory sF;
@@ -46,25 +44,27 @@ public class AOCommands extends JavaPlugin {
     private final HashMap<UUID, ArmorStand> armorStands = new LinkedHashMap<>();
     private final HashMap<UUID, Boolean> isUsingAnvil = new LinkedHashMap<>();
 
+    private final Set<UUID> vanishedPlayers = new LinkedHashSet<>();
+
     private InvManager manager;
 
     @Override
     public void onLoad() {
         instance = this;
 
-        if (!this.getDataFolder().exists()) {
-            if (this.getDataFolder().mkdir()) {
-                this.saveResource("translations/", false);
+        if (!getDataFolder().exists()) {
+            if (getDataFolder().mkdir()) {
+                saveResource("translations/", false);
                 Bukkit.getLogger().log(Level.INFO, "[AOCommands] - Translations got created");
             }
         }
 
-        this.saveResource("translations/language_de_DE.yml", true);
-        this.saveResource("translations/language_en_US.yml", true);
-        this.saveResource("translations/language_pt_BR.yml", true);
+        saveResource("translations/language_de_DE.yml", true);
+        saveResource("translations/language_en_US.yml", true);
+        saveResource("translations/language_pt_BR.yml", true);
 
-        if (this.getResource("config.yml") != null)
-            this.saveResource("config.yml", true);
+        if (getResource("config.yml") != null)
+            saveResource("config.yml", true);
 
         File configFile = new File(this.getDataFolder() + "/config.yml");
         if (configFile.exists())
@@ -78,27 +78,27 @@ public class AOCommands extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        aoCommandsAPI = new AOCommandsAPI(this);
-        this.manager = aoCommandsAPI.getInvManager();
+        this.aoCommandsAPI = new AOCommandsAPI(this);
+        this.manager = this.aoCommandsAPI.getInvManager();
 
         registerCommands();
         registerListener();
 
-        translations = new Message().loadTranslationFiles();
+        this.translations = new Message().loadTranslationFiles();
 
-        noPermsMessage.put("de_DE", translations.get("de_DE").getString("noPerms"));
-        noPermsMessage.put("en_US", translations.get("en_US").getString("noPerms"));
-        noPermsMessage.put("pt_BR", translations.get("pt_BR").getString("noPerms"));
+        this.noPermsMessage.put("de_DE", this.translations.get("de_DE").getString("noPerms"));
+        this.noPermsMessage.put("en_US", this.translations.get("en_US").getString("noPerms"));
+        this.noPermsMessage.put("pt_BR", this.translations.get("pt_BR").getString("noPerms"));
 
         new UpdateChecker(this, 105963).getVersion(v -> {
-            if (this.getDescription().getVersion().equals(v))
+            if (getDescription().getVersion().equals(v))
                 getLogger().info("[AOCommands] There is not a new update available.");
             else
                 getLogger().info("[AOCommands] There is a new update available.");
         });
 
         this.sF = AOCommandsAPI.sF;
-        if (sF == null) {
+        if (this.sF == null) {
             getLogger().log(Level.SEVERE, "[AOCommands] You need a database in order to run this plugin.");
             getLogger().log(Level.SEVERE, "[AOCommands] Go into your plugin folder, search for the database folder");
             getLogger().log(Level.SEVERE, "[AOCommands] and enter your credentials in the hibernate.cfg.xml file!");
@@ -117,7 +117,7 @@ public class AOCommands extends JavaPlugin {
         cmdF.registerCommands(new Fly());
         cmdF.registerCommands(new Heal());
         cmdF.registerCommands(new Vote());
-        cmdF.registerCommands(new Vanish());
+        cmdF.registerCommands(new Vanish(this));
         cmdF.registerCommands(new Rename(this));
         cmdF.registerCommands(new Hat());
         cmdF.registerCommands(new Feed(this));
@@ -127,7 +127,7 @@ public class AOCommands extends JavaPlugin {
         cmdF.registerCommands(new Msg());
         cmdF.registerCommands(new Armorstand(this));
         cmdF.registerCommands(new ClearInv());
-        cmdF.registerCommands(new Enderchest());
+        cmdF.registerCommands(new Enderchest(this));
         cmdF.registerCommands(new Gamemode(this));
         cmdF.registerCommands(new ConfigReload(this));
         cmdF.registerCommands(new ItemEdit(this));
@@ -137,14 +137,14 @@ public class AOCommands extends JavaPlugin {
 
     private void registerListener() {
         final PluginManager plManager = getServer().getPluginManager();
-        plManager.registerEvents(new OnJoin(), this);
+        plManager.registerEvents(new OnJoin(this), this);
         plManager.registerEvents(new OnLeave(), this);
         plManager.registerEvents(new ArmorstandSubInv(this, null), this);
         plManager.registerEvents(new OnJoinInitPlayer(aoCommandsAPI), this);
-        plManager.registerEvents(new OnLeaveSavePlayer(aoCommandsAPI), this);
+        plManager.registerEvents(new OnLeaveSavePlayer(this), this);
     }
 
-    public static HashMap<String, String> getNoPermsMessage() { return noPermsMessage; }
+    public HashMap<String, String> getNoPermsMessage() { return noPermsMessage; }
 
     public static AOCommands getInstance() { return instance; }
 }

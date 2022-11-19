@@ -1,4 +1,4 @@
-package de.alphaomega.it.cmdHandler;
+package de.alphaomega.it.cmdhandler;
 
 import lombok.Getter;
 import org.bukkit.command.Command;

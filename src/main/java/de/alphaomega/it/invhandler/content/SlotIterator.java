@@ -1,8 +1,8 @@
-package de.alphaomega.it.invHandler.content;
+package de.alphaomega.it.invhandler.content;
 
-import de.alphaomega.it.invHandler.AOCItem;
-import de.alphaomega.it.invHandler.AOInv;
-import de.alphaomega.it.invHandler.util.Pattern;
+import de.alphaomega.it.invhandler.AOCItem;
+import de.alphaomega.it.invhandler.AOInv;
+import de.alphaomega.it.invhandler.util.Pattern;
 
 import java.util.Optional;
 

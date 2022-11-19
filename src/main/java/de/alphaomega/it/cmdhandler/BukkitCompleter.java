@@ -1,4 +1,4 @@
-package de.alphaomega.it.cmdHandler;
+package de.alphaomega.it.cmdhandler;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

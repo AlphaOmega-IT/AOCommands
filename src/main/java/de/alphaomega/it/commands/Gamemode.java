@@ -1,9 +1,9 @@
 package de.alphaomega.it.commands;
 
 import de.alphaomega.it.AOCommands;
-import de.alphaomega.it.cmdHandler.Command;
-import de.alphaomega.it.cmdHandler.CommandArgs;
-import de.alphaomega.it.msgHandler.Message;
+import de.alphaomega.it.cmdhandler.Command;
+import de.alphaomega.it.cmdhandler.CommandArgs;
+import de.alphaomega.it.msghandler.Message;
 import de.alphaomega.it.utils.CheckPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -12,7 +12,13 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public record Gamemode(AOCommands pl) {
+public class Gamemode {
+
+    private final AOCommands aoCommands;
+
+    public Gamemode(final AOCommands aoCommands) {
+        this.aoCommands = aoCommands;
+    }
 
     @Command(
             name = "gamemode",
@@ -21,9 +27,9 @@ public record Gamemode(AOCommands pl) {
             inGameOnly = false
     )
     public void onCommand(final CommandArgs arg) {
-        final Player p = arg.getPlayer();
+        final Player player = arg.getPlayer();
         final String[] args = arg.getArgs();
-        final Message msg = new Message(p);
+        final Message msg = new Message(player);
 
         if (!(arg.getSender() instanceof ConsoleCommandSender)) {
             if (args.length > 2 || args.length < 1) {
@@ -31,25 +37,25 @@ public record Gamemode(AOCommands pl) {
                 return;
             }
 
-            if (!pl.getBaseConfig().getBoolean("allowed_ingame_command")) {
+            if (!this.aoCommands.getBaseConfig().getBoolean("allowed_ingame_command")) {
                 msg.sendMessage("gmNotAllowedIngame", false, true);
                 return;
             }
         }
 
         if (args.length == 1) {
-            setGamemode(p, args, p);
+            setGamemode(player, args, player);
             return;
         }
 
-        if (!CheckPlayer.isOnline(args[1], p)) return;
+        if (!CheckPlayer.isOnline(args[1], player)) return;
         final Player target = Bukkit.getPlayer(args[1]);
-        setGamemode(p, args, target);
+        setGamemode(player, args, target);
     }
 
-    private boolean isSameGamemode(final Player p, final GameMode gm) {
-        final Message msg = new Message(p);
-        if (p.getGameMode().equals(gm)) {
+    private boolean isSameGamemode(final Player player, final GameMode gm) {
+        final Message msg = new Message(player);
+        if (player.getGameMode().equals(gm)) {
             msg.setArgs(List.of(gm.translationKey()));
             msg.sendMessage("alreadyInGM", true, true);
             return true;
@@ -57,28 +63,28 @@ public record Gamemode(AOCommands pl) {
         return false;
     }
 
-    private void setGamemode(Player p, final String[] args, final Player target) {
+    private void setGamemode(Player player, final String[] args, final Player target) {
         final String arg0 = args[0].toLowerCase();
 
         GameMode oldGM = GameMode.SURVIVAL;
-        if (p != null)
-            oldGM = p.getGameMode();
-        Message msg = new Message(p);
+        if (player != null)
+            oldGM = player.getGameMode();
+        Message msg = new Message(player);
         Message msgTarget = null;
         if (target != null) {
             oldGM = target.getGameMode();
-            if (p != target)
+            if (player != target)
                 msgTarget = new Message(target);
-            p = target;
+            player = target;
         }
 
-        if (p == null) return;
+        if (player == null) return;
 
         switch (arg0) {
-            case "s", "survival", "0" -> p.setGameMode(GameMode.SURVIVAL);
-            case "c", "creative", "1" -> p.setGameMode(GameMode.CREATIVE);
-            case "a", "adventure", "2" -> p.setGameMode(GameMode.ADVENTURE);
-            case "spec", "spectator", "3" -> p.setGameMode(GameMode.SPECTATOR);
+            case "s", "survival", "0" -> player.setGameMode(GameMode.SURVIVAL);
+            case "c", "creative", "1" -> player.setGameMode(GameMode.CREATIVE);
+            case "a", "adventure", "2" -> player.setGameMode(GameMode.ADVENTURE);
+            case "spec", "spectator", "3" -> player.setGameMode(GameMode.SPECTATOR);
             default -> {
                 msg.setArgs(List.of(arg0));
                 msg.sendMessage("gmNotExists", true, true);
@@ -86,14 +92,14 @@ public record Gamemode(AOCommands pl) {
             }
         }
         if (target == null || msgTarget == null) {
-            if (isSameGamemode(p, oldGM))
+            if (isSameGamemode(player, oldGM))
                 return;
-            msg.setArgs(List.of(p.getGameMode().translationKey()));
+            msg.setArgs(List.of(player.getGameMode().translationKey()));
             msg.sendMessage("gmChanged", true, true);
             return;
         }
 
-        msgTarget.setArgs(List.of(p.getName(), p.getGameMode().translationKey()));
+        msgTarget.setArgs(List.of(player.getName(), player.getGameMode().translationKey()));
         msgTarget.sendMessage("gmChangedFrom", true, true);
     }
 }

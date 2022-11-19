@@ -4,7 +4,7 @@ import de.alphaomega.it.AOCommand;
 import de.alphaomega.it.database.SessionFactoryManager;
 import de.alphaomega.it.database.daos.AOPlayerDao;
 import de.alphaomega.it.database.entities.AOPlayer;
-import de.alphaomega.it.invHandler.InvManager;
+import de.alphaomega.it.invhandler.InvManager;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.hibernate.SessionFactory;
@@ -24,7 +24,7 @@ public class AOCommandsAPI {
     private final AOPlayerDao aoPlayerDao;
     public static SessionFactory sF;
 
-    public static final Map<UUID, AOPlayer> players = new LinkedHashMap<>();
+    public final Map<UUID, AOPlayer> players = new LinkedHashMap<>();
 
     public AOCommandsAPI(final JavaPlugin pl) {
         setupDatabase(pl);

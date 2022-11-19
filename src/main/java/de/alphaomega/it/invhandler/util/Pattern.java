@@ -1,6 +1,6 @@
-package de.alphaomega.it.invHandler.util;
+package de.alphaomega.it.invhandler.util;
 
-import de.alphaomega.it.invHandler.content.SlotPos;
+import de.alphaomega.it.invhandler.content.SlotPos;
 
 import java.util.*;
 

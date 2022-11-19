@@ -1,6 +1,7 @@
 package de.alphaomega.it.listeners;
 
-import de.alphaomega.it.msgHandler.Message;
+import de.alphaomega.it.AOCommands;
+import de.alphaomega.it.msghandler.Message;
 import de.alphaomega.it.utils.CheckPlayer;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.entity.Player;
@@ -14,13 +15,19 @@ import java.util.List;
 
 public class OnJoin implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onJoin(final PlayerJoinEvent e) {
-        final Player p = e.getPlayer();
-        final Message msg = new Message(p);
+    private final AOCommands aoCommands;
 
-        msg.setArgs(List.of(p.getName()));
-        e.joinMessage(MiniMessage.miniMessage().deserialize(msg.showMessage("joinMessage", true, false)));
-        CheckPlayer.hideAllPlayers(p.getUniqueId());
+    public OnJoin(final AOCommands aoCommands) {
+        this.aoCommands = aoCommands;
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onJoin(final PlayerJoinEvent event) {
+        final Player player = event.getPlayer();
+        final Message msg = new Message(player);
+
+        msg.setArgs(List.of(player.getName()));
+        event.joinMessage(MiniMessage.miniMessage().deserialize(msg.showMessage("joinMessage", true, false)));
+        CheckPlayer.hideAllPlayers(this.aoCommands, player.getUniqueId());
     }
 }

@@ -1,11 +1,11 @@
-package de.alphaomega.it.invHandler;
+package de.alphaomega.it.invhandler;
 
 
 import de.alphaomega.it.AOCommands;
-import de.alphaomega.it.invHandler.content.InvContents;
-import de.alphaomega.it.invHandler.content.InvProvider;
-import de.alphaomega.it.invHandler.content.SlotPos;
-import de.alphaomega.it.invHandler.opener.InvOpener;
+import de.alphaomega.it.invhandler.content.InvContents;
+import de.alphaomega.it.invhandler.content.InvProvider;
+import de.alphaomega.it.invhandler.content.SlotPos;
+import de.alphaomega.it.invhandler.opener.InvOpener;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
@@ -38,50 +38,50 @@ public class AOInv {
 		this.manager = manager;
 	}
 
-	public Inventory open(final Player p) {
-		return open(p, 0, Collections.EMPTY_MAP);
+	public void open(final Player player) {
+		open(player, 0, Collections.EMPTY_MAP);
 	}
 
-	public Inventory open(final Player p, final int page) {
-		return open(p, page, Collections.EMPTY_MAP);
+	public Inventory open(final Player player, final int page) {
+		return open(player, page, Collections.EMPTY_MAP);
 	}
 
-	public Inventory open(final Player p, final Map<String, Object> properties) {
-		return open(p, 0, properties);
+	public Inventory open(final Player player, final Map<String, Object> properties) {
+		return open(player, 0, properties);
 	}
 
-	public Inventory open(final Player p, final int page, final Map<String, Object> properties) {
-		Optional<AOInv> oldInv = this.manager.getInventory(p);
+	public Inventory open(final Player player, final int page, final Map<String, Object> properties) {
+		Optional<AOInv> oldInv = this.manager.getInventory(player);
 
 		oldInv.ifPresent(inv -> {
-			inv.getListeners().stream().filter(listener -> listener.type() == InventoryCloseEvent.class).forEach(listener -> ((InvListener<InventoryCloseEvent>) listener).accept(new InventoryCloseEvent(p.getOpenInventory())));
+			inv.getListeners().stream().filter(listener -> listener.type() == InventoryCloseEvent.class).forEach(listener -> ((InvListener<InventoryCloseEvent>) listener).accept(new InventoryCloseEvent(player.getOpenInventory())));
 
-			this.manager.setInventory(p, null);
+			this.manager.setInventory(player, null);
 		});
 
-		InvContents c = new InvContents.Impl.Impl(this, p);
+		InvContents c = new InvContents.Impl.Impl(this, player);
 		c.pagination().page(page);
 		properties.forEach(c::setProperty);
-		this.manager.setContents(p, c);
-		this.provider.init(p, c);
+		this.manager.setContents(player, c);
+		this.provider.init(player, c);
 
 		InvOpener opener = this.manager.findOpener(type).orElseThrow(() -> new IllegalStateException("No opener found for the inventory type " + type.name()));
-		Inventory inv = opener.open(this, p);
+		Inventory inv = opener.open(this, player);
 
-		this.manager.setInventory(p, this);
-		this.manager.scheduleUpdateTask(p, this);
+		this.manager.setInventory(player, this);
+		this.manager.scheduleUpdateTask(player, this);
 
 		return inv;
 	}
 
-	public void close(Player p) {
-		listeners.stream().filter(listener -> listener.type() == InventoryCloseEvent.class).forEach(listener -> ((InvListener<InventoryCloseEvent>) listener).accept(new InventoryCloseEvent(p.getOpenInventory())));
+	public void close(Player player) {
+		listeners.stream().filter(listener -> listener.type() == InventoryCloseEvent.class).forEach(listener -> ((InvListener<InventoryCloseEvent>) listener).accept(new InventoryCloseEvent(player.getOpenInventory())));
 
-		this.manager.setInventory(p, null);
-		p.closeInventory();
+		this.manager.setInventory(player, null);
+		player.closeInventory();
 
-		this.manager.setContents(p, null);
-		this.manager.cancelUpdateTask(p);
+		this.manager.setContents(player, null);
+		this.manager.cancelUpdateTask(player);
 	}
 
 	public boolean checkBounds(int row, int col) {

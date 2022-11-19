@@ -1,4 +1,4 @@
-package de.alphaomega.it.invHandler;
+package de.alphaomega.it.invhandler;
 
 import de.alphaomega.it.utils.ItemBuilder;
 import org.bukkit.Material;

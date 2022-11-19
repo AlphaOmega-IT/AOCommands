@@ -1,4 +1,4 @@
-package de.alphaomega.it.invHandler;
+package de.alphaomega.it.invhandler;
 
 import java.util.function.Consumer;
 

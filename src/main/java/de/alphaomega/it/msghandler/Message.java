@@ -1,4 +1,4 @@
-package de.alphaomega.it.msgHandler;
+package de.alphaomega.it.msghandler;
 
 
 import de.alphaomega.it.AOCommands;
@@ -23,17 +23,17 @@ import java.util.Objects;
 public class Message {
 
     private final String PREFIX = "prefix";
-    private Player p;
+    private Player player;
     private List<String> args = new ArrayList<>();
 
-    private AOCommands pl = AOCommands.getInstance();
+    private AOCommands aoCommands = AOCommands.getInstance();
 
-    public Message(final Player p) {
-        this.p = p;
+    public Message(final Player player) {
+        this.player = player;
     }
 
     public HashMap<String, FileConfiguration> loadTranslationFiles() {
-        File folder = new File(pl.getDataFolder() + "/translations");
+        File folder = new File(this.aoCommands.getDataFolder() + "/translations");
         HashMap<String, FileConfiguration> translations = new HashMap<>();
         for (File f : Objects.requireNonNull(folder.listFiles())) {
             final String localeStr = f.getName().substring(9, 14);
@@ -53,38 +53,35 @@ public class Message {
     }
 
     public void sendMessage(final String key, final boolean placeholder, final boolean prefix) {
-        if (p == null) return;
-        if (prefix && !placeholder) {
-            this.p.sendMessage(MiniMessage.miniMessage().deserialize("<reset/>" + getPath(PREFIX, getFileConfig()) + " " + getPath(key, getFileConfig())));
-        } else if (!placeholder) {
-            this.p.sendMessage(MiniMessage.miniMessage().deserialize("<reset/>" + getPath(key, getFileConfig())));
-        } else if (prefix) {
-            this.p.sendMessage(MiniMessage.miniMessage().deserialize("<reset/>" + getPlaceholderMessage(key, true)));
-        } else {
-            this.p.sendMessage(MiniMessage.miniMessage().deserialize("<reset/>" + getPlaceholderMessage(key, false)));
-        }
+        if (this.player == null) return;
+        if (prefix && !placeholder)
+            this.player.sendMessage(MiniMessage.miniMessage().deserialize("<reset/>" + getPath(PREFIX, getFileConfig()) + " " + getPath(key, getFileConfig())));
+        else if (!placeholder)
+            this.player.sendMessage(MiniMessage.miniMessage().deserialize("<reset/>" + getPath(key, getFileConfig())));
+        else if (prefix)
+            this.player.sendMessage(MiniMessage.miniMessage().deserialize("<reset/>" + getPlaceholderMessage(key, true)));
+        else
+            this.player.sendMessage(MiniMessage.miniMessage().deserialize("<reset/>" + getPlaceholderMessage(key, false)));
     }
 
     public String showMessage(final String key, final boolean placeholder, final boolean prefix) {
-        if (p == null) return "";
-        if (prefix && !placeholder) {
+        if (this.player == null) return "";
+        if (prefix && !placeholder)
             return getPath(PREFIX, getFileConfig()) + " " + getPath(key, getFileConfig());
-        } else if (!placeholder) {
+        else if (!placeholder)
             return getPath(key, getFileConfig());
-        } else if (prefix) {
+        else if (prefix)
             return getPlaceholderMessage(key, true);
-        } else {
+        else
             return getPlaceholderMessage(key, false);
-        }
     }
 
     private String getPlaceholderMessage(final String key, final boolean withPrefix) {
         String translatedMessageString;
-        if (withPrefix) {
+        if (withPrefix)
             translatedMessageString = getPath(PREFIX, getFileConfig()) + " " + getPath(key, getFileConfig());
-        } else {
+        else
             translatedMessageString = getPath(key, getFileConfig());
-        }
         int i = 0;
         while (translatedMessageString.contains("{" + i + "}") && i <= this.args.size()) {
             translatedMessageString = translatedMessageString.replaceFirst("\\{" + i + "}", this.args.get(i));
@@ -95,11 +92,11 @@ public class Message {
 
 
     private FileConfiguration getFileConfig() {
-        if (p == null) return pl.getTranslations().get("en_US");
-        if (pl.getTranslations().get(p.locale().toString()) == null) {
-            return pl.getTranslations().get("en_US");
-        }
-        return pl.getTranslations().get(p.locale().toString());
+        if (player == null) return this.aoCommands.getTranslations().get("en_US");
+        if (this.aoCommands.getTranslations().get(this.player.locale().toString()) == null)
+            return this.aoCommands.getTranslations().get("en_US");
+
+        return this.aoCommands.getTranslations().get(this.player.locale().toString());
     }
 
     private String getPath(final String key, final FileConfiguration fileConfig) {

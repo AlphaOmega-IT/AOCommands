@@ -2,12 +2,18 @@ package de.alphaomega.it.commands;
 
 
 import de.alphaomega.it.AOCommands;
-import de.alphaomega.it.cmdHandler.Command;
-import de.alphaomega.it.cmdHandler.CommandArgs;
+import de.alphaomega.it.cmdhandler.Command;
+import de.alphaomega.it.cmdhandler.CommandArgs;
 import de.alphaomega.it.inventories.ArmorstandInv;
 import org.bukkit.entity.Player;
 
-public record Armorstand(AOCommands pl) {
+public class Armorstand {
+
+    private final AOCommands aoCommands;
+
+    public Armorstand(final AOCommands aoCommands) {
+        this.aoCommands = aoCommands;
+    }
 
     @Command(
             name = "armorstand",
@@ -15,7 +21,7 @@ public record Armorstand(AOCommands pl) {
             permission = "aocommands.armorstand"
     )
     public void onCommand(final CommandArgs arg) {
-        final Player p = arg.getPlayer();
-        ArmorstandInv.getInv(pl).open(p);
+        final Player player = arg.getPlayer();
+        ArmorstandInv.getInv(aoCommands).open(player);
     }
 }

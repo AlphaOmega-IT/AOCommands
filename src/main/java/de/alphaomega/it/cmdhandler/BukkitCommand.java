@@ -1,4 +1,4 @@
-package de.alphaomega.it.cmdHandler;
+package de.alphaomega.it.cmdhandler;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;

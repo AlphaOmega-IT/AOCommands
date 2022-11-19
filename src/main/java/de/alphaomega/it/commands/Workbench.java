@@ -1,7 +1,7 @@
 package de.alphaomega.it.commands;
 
-import de.alphaomega.it.cmdHandler.Command;
-import de.alphaomega.it.cmdHandler.CommandArgs;
+import de.alphaomega.it.cmdhandler.Command;
+import de.alphaomega.it.cmdhandler.CommandArgs;
 import org.bukkit.entity.Player;
 
 public class Workbench {
@@ -12,7 +12,7 @@ public class Workbench {
             permission = "aocommands.workbench"
     )
     public void onCommand(final CommandArgs arg) {
-        final Player p = arg.getPlayer();
-        p.openWorkbench(p.getLocation(), true);
+        final Player player = arg.getPlayer();
+        player.openWorkbench(player.getLocation(), true);
     }
 }

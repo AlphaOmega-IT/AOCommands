@@ -1,8 +1,8 @@
-package de.alphaomega.it.invHandler.opener;
+package de.alphaomega.it.invhandler.opener;
 
 import com.google.common.base.Preconditions;
-import de.alphaomega.it.invHandler.AOInv;
-import de.alphaomega.it.invHandler.InvManager;
+import de.alphaomega.it.invhandler.AOInv;
+import de.alphaomega.it.invhandler.InvManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

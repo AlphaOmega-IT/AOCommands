@@ -1,8 +1,8 @@
 package de.alphaomega.it.commands;
 
-import de.alphaomega.it.cmdHandler.Command;
-import de.alphaomega.it.cmdHandler.CommandArgs;
-import de.alphaomega.it.msgHandler.Message;
+import de.alphaomega.it.cmdhandler.Command;
+import de.alphaomega.it.cmdhandler.CommandArgs;
+import de.alphaomega.it.msghandler.Message;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -14,19 +14,19 @@ public class Hat {
             permission = "aocommands.hat"
     )
     public void onCommand(final CommandArgs arg) {
-        final Player p = arg.getPlayer();
-        final Message msg = new Message(p);
-        final ItemStack iSMainHand = p.getInventory().getItemInMainHand();
-        final ItemStack iSHelmet = p.getInventory().getHelmet();
+        final Player player = arg.getPlayer();
+        final Message msg = new Message(player);
+        final ItemStack itemMainHand = player.getInventory().getItemInMainHand();
+        final ItemStack itemHelmet = player.getInventory().getHelmet();
 
-        if (!iSMainHand.getType().isItem() || iSMainHand.getType().isAir()) {
+        if (!itemMainHand.getType().isItem() || itemMainHand.getType().isAir()) {
             msg.sendMessage("noValidItemInHand-hat", false, true);
             return;
         }
 
-        p.getInventory().setItemInMainHand(iSHelmet);
-        p.getInventory().setHelmet(iSMainHand);
-        p.updateInventory();
+        player.getInventory().setItemInMainHand(itemHelmet);
+        player.getInventory().setHelmet(itemMainHand);
+        player.updateInventory();
 
         msg.sendMessage("hatCommandExecuted", false, true);
     }
