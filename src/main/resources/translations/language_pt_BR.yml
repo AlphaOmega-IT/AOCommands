@@ -141,6 +141,15 @@ chatclear2: <gray>Chat got cleared by</gray> <red>{0}</red><gray>.</gray>
 chatclear3: <gray></gray>
 chatclear4: <gold>----------</gold> <red>ClearChat</red> <gold>----------</gold>
 
+# Permission aocommands.setspawn
+spawnSet: <gray>The spawnpoint has been</gray> <green>successfully</green> <gray>set.</gray>
+
+# Permission aocommands.spawn | aocommands.spawn.* (admin-cmd)
+spawn-syntax: <yellow>/spawn</yellow>
+spawn-admin-syntax: <yellow>/spawn [<player|all|*|@a>]</yellow>
+teleportToSpawn: <gray>You got teleported to spawn.</gray>
+spawnNotSet: <gray>The spawn is not set.</gray>
+
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml
 ### You can add as many lines in lore as you want!

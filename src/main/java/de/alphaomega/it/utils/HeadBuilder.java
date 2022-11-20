@@ -21,24 +21,24 @@ public class HeadBuilder extends ItemBuilder {
 
     public HeadBuilder(final Integer amount) {
         super(Material.PLAYER_HEAD, amount);
-        this.skullMeta = (SkullMeta) getIS().getItemMeta();
+        this.skullMeta = (SkullMeta) getItem().getItemMeta();
     }
 
     public HeadBuilder() {
         super(Material.PLAYER_HEAD);
-        this.skullMeta = (SkullMeta) getIS().getItemMeta();
+        this.skullMeta = (SkullMeta) getItem().getItemMeta();
     }
 
     public HeadBuilder(final AHead head, final String locale) {
         super(Material.PLAYER_HEAD);
         if (head == null)
-            this.skullMeta = setSM(getIS().getItemMeta());
+            this.skullMeta = setSM(getItem().getItemMeta());
         else {
             if (head.getBase64() != null && !head.getBase64().equals(""))
-                setIS(ItemStackSerialization.getItemStackFromBase64String(head.getBase64()));
+                setItem(ItemStackSerialization.getItemStackFromBase64String(head.getBase64()));
             else
-                setIS(new ItemBuilder(Material.PLAYER_HEAD).build());
-            this.skullMeta = setSM(getIS().getItemMeta());
+                setItem(new ItemBuilder(Material.PLAYER_HEAD).build());
+            this.skullMeta = setSM(getItem().getItemMeta());
 
             PlayerProfile pProfile = Bukkit.createProfile(head.getUuid(), head.getActualName());
             pProfile.setProperty(new ProfileProperty("textures", head.getTexture()));
@@ -46,14 +46,14 @@ public class HeadBuilder extends ItemBuilder {
 
             this.skullMeta.displayName(MiniMessage.miniMessage().deserialize("<color:" + head.getColor() + ">" + head.getName(locale) + "</color>").decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE));
             this.skullMeta.lore(head.getLore(locale));
-            ItemStack iS = getIS();
-            iS.setItemMeta(this.skullMeta);
-            setIS(iS);
+            ItemStack item = getItem();
+            item.setItemMeta(this.skullMeta);
+            setItem(item);
         }
     }
 
     public ItemStack build() {
-        return getIS();
+        return getItem();
     }
 
     private SkullMeta setSM(final ItemMeta iM) {

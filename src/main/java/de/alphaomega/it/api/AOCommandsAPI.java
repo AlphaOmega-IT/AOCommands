@@ -3,7 +3,9 @@ package de.alphaomega.it.api;
 import de.alphaomega.it.AOCommand;
 import de.alphaomega.it.database.SessionFactoryManager;
 import de.alphaomega.it.database.daos.AOPlayerDao;
+import de.alphaomega.it.database.daos.AOSpawnDao;
 import de.alphaomega.it.database.entities.AOPlayer;
+import de.alphaomega.it.database.entities.AOSpawn;
 import de.alphaomega.it.invhandler.InvManager;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,6 +24,7 @@ public class AOCommandsAPI {
 
     private final AOPlayers aoPlayers;
     private final AOPlayerDao aoPlayerDao;
+    private final AOSpawnDao aoSpawnDao;
     private final SessionFactory sF;
 
     public final Map<UUID, AOPlayer> players = new LinkedHashMap<>();
@@ -33,6 +36,7 @@ public class AOCommandsAPI {
         this.aoCommand = new AOCommand(pl);
 
         this.aoPlayerDao = new AOPlayerDao();
+        this.aoSpawnDao = new AOSpawnDao();
         this.aoPlayers = new AOPlayers(this);
     }
 
@@ -40,6 +44,7 @@ public class AOCommandsAPI {
         SessionFactoryManager sFManager = new SessionFactoryManager(pl);
         return sFManager
                 .addAnnotatedClazz(AOPlayer.class)
+                .addAnnotatedClazz(AOSpawn.class)
                 .build();
     }
 }

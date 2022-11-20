@@ -140,6 +140,14 @@ chatclear2: <gray>Chat wurde von</gray> <red>{0}</red> <gray>geleert.</gray>
 chatclear3: <gray></gray>
 chatclear4: <gold>----------</gold> <red>ClearChat</red> <gold>----------</gold>
 
+# Permission aocommands.setspawn
+spawnSet: <gray>Der Spawnpunkt wurde</gray> <green>erfolgreich</green> <gray>gesetzt.</gray>
+
+# Permission aocommands.spawn | aocommands.spawn.* (admin-cmd)
+spawn-syntax: <yellow>/spawn</yellow>
+spawn-admin-syntax: <yellow>/spawn [<player|all|*|@a>]</yellow>
+teleportToSpawn: <gray>Du wurdest zum Spawn teleportiert.</gray>
+spawnNotSet: <gray>Der Spawn wurde noch nicht gesetzt.</gray>
 
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml

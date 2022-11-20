@@ -133,6 +133,7 @@ public class AOCommands extends JavaPlugin {
         cmdF.registerCommands(new ItemEdit(this));
         cmdF.registerCommands(new Invsee(this));
         cmdF.registerCommands(new ClearChat());
+        cmdF.registerCommands(new Spawn(this));
     }
 
     private void registerListener() {
@@ -140,7 +141,7 @@ public class AOCommands extends JavaPlugin {
         plManager.registerEvents(new OnJoin(this), this);
         plManager.registerEvents(new OnLeave(), this);
         plManager.registerEvents(new ArmorstandSubInv(this, null), this);
-        plManager.registerEvents(new OnJoinInitPlayer(aoCommandsAPI), this);
+        plManager.registerEvents(new OnJoinInitPlayer(this), this);
         plManager.registerEvents(new OnLeaveSavePlayer(this), this);
     }
 

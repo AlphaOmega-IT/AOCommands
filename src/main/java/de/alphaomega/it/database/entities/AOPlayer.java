@@ -40,7 +40,7 @@ public class AOPlayer implements Serializable {
     private long _id;
 
     @Convert(converter = UUIDConverter.class)
-    @Column(unique = true, nullable = false)
+    @Column(name = "uuid", unique = true, nullable = false)
     private UUID uuid;
 
     @Column(name = "dName")
