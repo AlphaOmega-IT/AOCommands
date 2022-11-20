@@ -22,14 +22,13 @@ public class AOCommandsAPI {
 
     private final AOPlayers aoPlayers;
     private final AOPlayerDao aoPlayerDao;
-    public static SessionFactory sF;
+    private final SessionFactory sF;
 
     public final Map<UUID, AOPlayer> players = new LinkedHashMap<>();
 
     public AOCommandsAPI(final JavaPlugin pl) {
-        setupDatabase(pl);
-
         this.pl = pl;
+        this.sF = setupDatabase(pl);
         this.invManager = new InvManager(pl);
         this.aoCommand = new AOCommand(pl);
 
@@ -37,9 +36,9 @@ public class AOCommandsAPI {
         this.aoPlayers = new AOPlayers(this);
     }
 
-    private void setupDatabase(final JavaPlugin pl) {
+    private SessionFactory setupDatabase(final JavaPlugin pl) {
         SessionFactoryManager sFManager = new SessionFactoryManager(pl);
-        sF = sFManager
+        return sFManager
                 .addAnnotatedClazz(AOPlayer.class)
                 .build();
     }

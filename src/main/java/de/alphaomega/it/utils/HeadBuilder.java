@@ -17,39 +17,37 @@ import org.bukkit.inventory.meta.SkullMeta;
 @Setter
 public class HeadBuilder extends ItemBuilder {
 
-    final static Material PLAYER_HEAD = Material.PLAYER_HEAD;
-
-    private final SkullMeta sM;
+    private final SkullMeta skullMeta;
 
     public HeadBuilder(final Integer amount) {
-        super(PLAYER_HEAD, amount);
-        this.sM = (SkullMeta) getIS().getItemMeta();
+        super(Material.PLAYER_HEAD, amount);
+        this.skullMeta = (SkullMeta) getIS().getItemMeta();
     }
 
     public HeadBuilder() {
-        super(PLAYER_HEAD);
-        this.sM = (SkullMeta) getIS().getItemMeta();
+        super(Material.PLAYER_HEAD);
+        this.skullMeta = (SkullMeta) getIS().getItemMeta();
     }
 
     public HeadBuilder(final AHead head, final String locale) {
-        super(PLAYER_HEAD);
+        super(Material.PLAYER_HEAD);
         if (head == null)
-            sM = setSM(getIS().getItemMeta());
+            this.skullMeta = setSM(getIS().getItemMeta());
         else {
             if (head.getBase64() != null && !head.getBase64().equals(""))
                 setIS(ItemStackSerialization.getItemStackFromBase64String(head.getBase64()));
             else
                 setIS(new ItemBuilder(Material.PLAYER_HEAD).build());
-            sM = setSM(getIS().getItemMeta());
+            this.skullMeta = setSM(getIS().getItemMeta());
 
             PlayerProfile pProfile = Bukkit.createProfile(head.getUuid(), head.getActualName());
             pProfile.setProperty(new ProfileProperty("textures", head.getTexture()));
-            sM.setPlayerProfile(pProfile);
+            this.skullMeta.setPlayerProfile(pProfile);
 
-            sM.displayName(MiniMessage.miniMessage().deserialize("<color:" + head.getColor() + ">" + head.getName(locale) + "</color>").decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE));
-            sM.lore(head.getLore(locale));
+            this.skullMeta.displayName(MiniMessage.miniMessage().deserialize("<color:" + head.getColor() + ">" + head.getName(locale) + "</color>").decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE));
+            this.skullMeta.lore(head.getLore(locale));
             ItemStack iS = getIS();
-            iS.setItemMeta(sM);
+            iS.setItemMeta(this.skullMeta);
             setIS(iS);
         }
     }

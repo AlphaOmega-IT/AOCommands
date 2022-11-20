@@ -1,6 +1,6 @@
 package de.alphaomega.it.database.daos;
 
-import de.alphaomega.it.api.AOCommandsAPI;
+import de.alphaomega.it.AOCommands;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -9,7 +9,7 @@ public abstract class BaseDao<T> {
     protected abstract Class<T> getClassType();
 
     public void create(final T data) {
-        Session session = AOCommandsAPI.sF.openSession();
+        Session session = AOCommands.getInstance().getSF().openSession();;
         try {
             session.clear();
             session.beginTransaction();
@@ -24,7 +24,7 @@ public abstract class BaseDao<T> {
     }
 
     public void update(final T data) {
-        Session session = AOCommandsAPI.sF.openSession();
+        Session session = AOCommands.getInstance().getSF().openSession();;
         try {
             session.clear();
             session.beginTransaction();
@@ -40,7 +40,7 @@ public abstract class BaseDao<T> {
     }
 
     public void delete(final T data) {
-        Session session = AOCommandsAPI.sF.openSession();
+        Session session = AOCommands.getInstance().getSF().openSession();;
         try {
             session.clear();
             session.beginTransaction();
@@ -56,7 +56,7 @@ public abstract class BaseDao<T> {
     }
 
     public Query<T> createNamedQuery(final String queryName) {
-        Session session = AOCommandsAPI.sF.openSession();
+        Session session = AOCommands.getInstance().getSF().openSession();;
         return session.createNamedQuery(queryName, getClassType());
     }
 }

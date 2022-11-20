@@ -18,32 +18,32 @@ import java.util.List;
 @Setter
 public class ItemBuilder {
 
-    private ItemStack iS;
-    private ItemMeta iM;
+    private ItemStack item;
+    private ItemMeta itemMeta;
 
-    public ItemBuilder(final Material m, final Integer amount) {
-        if (m != null && !m.isAir()) {
-            this.iS = new ItemStack(m);
-            this.iS.setAmount(amount);
-            this.iM = iS.getItemMeta();
+    public ItemBuilder(final Material material, final Integer amount) {
+        if (material != null && !material.isAir()) {
+            this.item = new ItemStack(material);
+            this.item.setAmount(amount);
+            this.itemMeta = this.item.getItemMeta();
         }
     }
 
-    public ItemBuilder(final Material m) {
-        if (m != null && !m.isAir()) {
-            this.iS = new ItemStack(m);
-            this.iS.setAmount(1);
-            this.iM = iS.getItemMeta();
+    public ItemBuilder(final Material material) {
+        if (material != null && !material.isAir()) {
+            this.item = new ItemStack(material);
+            this.item.setAmount(1);
+            this.itemMeta = this.item.getItemMeta();
         }
     }
 
     public ItemBuilder setCustomModelData(final int id) {
-        this.iM.setCustomModelData(id);
+        this.itemMeta.setCustomModelData(id);
         return this;
     }
 
     public ItemBuilder setName(final String name) {
-        this.iM.displayName(MiniMessage.miniMessage().deserialize(name).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE));
+        this.itemMeta.displayName(MiniMessage.miniMessage().deserialize(name).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE));
         return this;
     }
 
@@ -51,34 +51,34 @@ public class ItemBuilder {
         final List<String> sLore = new ArrayList<>(List.of(lines));
         final List<Component> cLore = new ArrayList<>();
         sLore.forEach(line -> cLore.add(MiniMessage.miniMessage().deserialize(line).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE)));
-        this.iM.lore(cLore);
+        this.itemMeta.lore(cLore);
         return this;
     }
 
     public ItemBuilder addItemFlags(final ItemFlag... flags) {
-        this.iS.addItemFlags(flags);
+        this.item.addItemFlags(flags);
         return this;
     }
 
     public ItemBuilder setGlow(final boolean isGlowing) {
         if (isGlowing) {
-            this.iM.addEnchant(Enchantment.DURABILITY, 0, true);
-            this.iM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            this.iM.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+            this.itemMeta.addEnchant(Enchantment.DURABILITY, 0, true);
+            this.itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            this.itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         } else {
-            this.iM.removeEnchant(Enchantment.DURABILITY);
-            this.iM.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
-            this.iM.removeItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+            this.itemMeta.removeEnchant(Enchantment.DURABILITY);
+            this.itemMeta.removeItemFlags(ItemFlag.HIDE_ENCHANTS);
+            this.itemMeta.removeItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         }
         return this;
     }
 
     public ItemStack build() {
         setIM();
-        return this.iS;
+        return this.item;
     }
 
     private void setIM() {
-        if (this.iM != null) iS.setItemMeta(iM);
+        if (this.itemMeta != null) item.setItemMeta(this.itemMeta);
     }
 }

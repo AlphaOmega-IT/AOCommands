@@ -48,10 +48,6 @@ public class Message {
         return translations;
     }
 
-    public HashMap<String, FileConfiguration> updateTranslations() {
-        return loadTranslationFiles();
-    }
-
     public void sendMessage(final String key, final boolean placeholder, final boolean prefix) {
         if (this.player == null) return;
         if (prefix && !placeholder)

@@ -97,7 +97,7 @@ public class AOCommands extends JavaPlugin {
                 getLogger().info("[AOCommands] There is a new update available.");
         });
 
-        this.sF = AOCommandsAPI.sF;
+        this.sF = aoCommandsAPI.getSF();
         if (this.sF == null) {
             getLogger().log(Level.SEVERE, "[AOCommands] You need a database in order to run this plugin.");
             getLogger().log(Level.SEVERE, "[AOCommands] Go into your plugin folder, search for the database folder");

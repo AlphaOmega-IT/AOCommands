@@ -13,59 +13,57 @@ import java.util.concurrent.CompletableFuture;
 public class AOPlayers {
 
     private final AOCommandsAPI api;
-
     public AOPlayers(final AOCommandsAPI api) {
         this.api = api;
     }
-
     @SneakyThrows
-    public void createPlayer(final Player p) {
-        if (api.getPlayers().containsKey(p.getUniqueId())) {
-            api.getPlayers().get(p.getUniqueId());
+    public void createPlayer(final Player player) {
+        if (this.api.getPlayers().containsKey(player.getUniqueId())) {
+            this.api.getPlayers().get(player.getUniqueId());
             return;
         }
 
-        AOPlayer aoP = api.getAoPlayerDao().findByUUID(p.getUniqueId());
+        final AOPlayer aoPlayer = this.api.getAoPlayerDao().findByUUID(player.getUniqueId());
 
-        CompletableFuture.supplyAsync(() -> aoP == null ? dbUserCreate(new AOPlayer(p)) : aoP).thenApplyAsync(aoPlayer -> {
-            updateDName(p, aoPlayer);
-            return aoPlayer;
-        }).thenApply(aoPlayer -> {
-            api.getAoPlayers().updateUser(aoPlayer);
-            api.getPlayers().put(p.getUniqueId(), aoPlayer);
-            return aoPlayer;
+        CompletableFuture.supplyAsync(() -> aoPlayer == null ? dbUserCreate(new AOPlayer(player)) : aoPlayer).thenApplyAsync(aaoPlayer -> {
+            updateDName(player, aoPlayer);
+            return aaoPlayer;
+        }).thenApply(aaoPlayer -> {
+            api.getAoPlayers().updateUser(aaoPlayer);
+            api.getPlayers().put(player.getUniqueId(), aaoPlayer);
+            return aaoPlayer;
         });
     }
 
-    public void updateDName(final Player p, final AOPlayer aoP) {
-        if (StringUtils.nullSafeEqual(p.getName(), aoP.getDName())) return;
+    public void updateDName(final Player player, final AOPlayer aoPlayer) {
+        if (StringUtils.nullSafeEqual(player.getName(), aoPlayer.getDName())) return;
 
-        aoP.setDName(p.getName());
+        aoPlayer.setDName(player.getName());
 
         CompletableFuture.supplyAsync(() -> {
-            dbUserUpdate(aoP);
-            return aoP;
+            dbUserUpdate(aoPlayer);
+            return aoPlayer;
         }).thenAccept(this::updateUser);
     }
 
-    public Player getPlayer(final AOPlayer aoP) {
-        return Bukkit.getServer().getOfflinePlayer(aoP.getUuid()).getPlayer();
+    public Player getPlayer(final AOPlayer aoPlayer) {
+        return Bukkit.getServer().getOfflinePlayer(aoPlayer.getUuid()).getPlayer();
     }
 
-    public AOPlayer getAOPlayer(final Player p) {
-        return api.getPlayers().get(p.getUniqueId());
+    public AOPlayer getAOPlayer(final Player player) {
+        return this.api.getPlayers().get(player.getUniqueId());
     }
 
-    public void updateUser(final AOPlayer aoP) {
-        api.getPlayers().computeIfPresent(aoP.getUuid(), ((uuid, aoPlayer) -> aoP));
+    public void updateUser(final AOPlayer aoPlayer) {
+        this.api.getPlayers().computeIfPresent(aoPlayer.getUuid(), ((uuid, aoP) -> aoPlayer));
     }
 
-    public void dbUserUpdate(final AOPlayer aoP) {
-        api.getAoPlayerDao().update(aoP);
+    public void dbUserUpdate(final AOPlayer aoPlayer) {
+        this.api.getAoPlayerDao().update(aoPlayer);
     }
 
-    private AOPlayer dbUserCreate(final AOPlayer aoP) {
-        api.getAoPlayerDao().create(aoP);
-        return aoP;
+    private AOPlayer dbUserCreate(final AOPlayer aoPlayer) {
+        this.api.getAoPlayerDao().create(aoPlayer);
+        return aoPlayer;
     }
 }

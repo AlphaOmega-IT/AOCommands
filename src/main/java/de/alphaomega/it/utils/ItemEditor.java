@@ -17,104 +17,104 @@ import java.util.Objects;
 
 public class ItemEditor {
 
-    private final ItemStack iS;
-    private ItemMeta iM;
+    private final ItemStack item;
+    private ItemMeta itemMeta;
 
-    public ItemEditor(final ItemStack iS) {
-        this.iS = iS;
-        if (this.iS.hasItemMeta())
-            this.iM = iS.getItemMeta();
+    public ItemEditor(final ItemStack item) {
+        this.item = item;
+        if (this.item.hasItemMeta())
+            this.itemMeta = this.item.getItemMeta();
         else
-            if (iS.getType().isItem())
-                this.iM = Bukkit.getItemFactory().getItemMeta(iS.getType());
+            if (this.item.getType().isItem())
+                this.itemMeta = Bukkit.getItemFactory().getItemMeta(this.item.getType());
     }
 
     public ItemEditor setName(final String name) {
-        iM.displayName(MiniMessage.miniMessage().deserialize(name).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE));
+        itemMeta.displayName(MiniMessage.miniMessage().deserialize(name).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE));
         return this;
     }
 
     public ItemEditor addLoreLine(final String loreLine) {
-        if (iM.hasLore()) {
-            List<Component> iLore = iM.lore();
+        if (this.itemMeta.hasLore()) {
+            List<Component> iLore = this.itemMeta.lore();
             if (iLore != null)
                 iLore.add(MiniMessage.miniMessage().deserialize(loreLine).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE));
-            iM.lore(iLore);
+            this.itemMeta.lore(iLore);
             return this;
         }
 
-        iM.lore(List.of(MiniMessage.miniMessage().deserialize(loreLine)));
+        this.itemMeta.lore(List.of(MiniMessage.miniMessage().deserialize(loreLine)));
         return this;
     }
 
     public ItemEditor removeLoreLine(final int loreLine) {
-        if (iM.hasLore()) {
-            List<Component> iLore = new ArrayList<>(Objects.requireNonNull(iM.lore()));
+        if (this.itemMeta.hasLore()) {
+            List<Component> iLore = new ArrayList<>(Objects.requireNonNull(this.itemMeta.lore()));
             if (iLore.size() > loreLine) {
                 iLore.remove(loreLine);
-                iM.lore(iLore);
+                this.itemMeta.lore(iLore);
             }
         }
         return this;
     }
 
     public ItemEditor setUnbreakable(final boolean isUnbreakable) {
-        iM.setUnbreakable(isUnbreakable);
+        this.itemMeta.setUnbreakable(isUnbreakable);
         return this;
     }
 
     public ItemEditor setItemFlags(final ItemFlag... flags) {
-        iM.addItemFlags(flags);
+        this.itemMeta.addItemFlags(flags);
         return this;
     }
 
     public ItemEditor setAmount(final int amount) {
-        iS.setAmount(amount);
+        this.item.setAmount(amount);
         return this;
     }
 
-    public ItemEditor addEnchantment(final Enchantment e, final Integer lvl) {
+    public ItemEditor addEnchantment(final Enchantment enchantment, final Integer lvl) {
         prepareEnchantingTask();
-        if (iS.getType().equals(Material.ENCHANTED_BOOK)) {
-            if (iM instanceof EnchantmentStorageMeta eSM) {
-                eSM.addStoredEnchant(e, lvl, true);
-                iM = eSM;
+        if (this.item.getType().equals(Material.ENCHANTED_BOOK)) {
+            if (this.itemMeta instanceof EnchantmentStorageMeta eSM) {
+                eSM.addStoredEnchant(enchantment, lvl, true);
+                this.itemMeta = eSM;
             }
         }
-        iS.addUnsafeEnchantment(e, lvl);
-        iM.addEnchant(e, lvl, true);
+        item.addUnsafeEnchantment(enchantment, lvl);
+        this.itemMeta.addEnchant(enchantment, lvl, true);
         return this;
     }
 
-    public ItemEditor removeEnchantment(final Enchantment e) {
+    public ItemEditor removeEnchantment(final Enchantment enchantment) {
         prepareEnchantingTask();
-        if (iS.getType().equals(Material.ENCHANTED_BOOK)) {
-            if (iM instanceof EnchantmentStorageMeta eSM) {
-                eSM.removeStoredEnchant(e);
-                iM = eSM;
+        if (this.item.getType().equals(Material.ENCHANTED_BOOK)) {
+            if (this.itemMeta instanceof EnchantmentStorageMeta eSM) {
+                eSM.removeStoredEnchant(enchantment);
+                this.itemMeta = eSM;
             }
         } else {
-            iS.removeEnchantment(e);
-            iM.removeEnchant(e);
+            item.removeEnchantment(enchantment);
+            this.itemMeta.removeEnchant(enchantment);
         }
         return this;
     }
 
-    public ItemEditor adjustEnchantment(final Enchantment e, final Integer lvl) {
+    public ItemEditor adjustEnchantment(final Enchantment enchantment, final Integer lvl) {
         prepareEnchantingTask();
-        if (iS.getType().equals(Material.ENCHANTED_BOOK)) {
-            if (iM instanceof EnchantmentStorageMeta eSM) {
-                if (eSM.hasStoredEnchant(e))
-                    eSM.getStoredEnchants().compute(e, ((enchantment, level) -> lvl));
+        if (this.item.getType().equals(Material.ENCHANTED_BOOK)) {
+            if (this.itemMeta instanceof EnchantmentStorageMeta eSM) {
+                if (eSM.hasStoredEnchant(enchantment))
+                    eSM.getStoredEnchants().compute(enchantment, ((ench, level) -> lvl));
 
-                iM = eSM;
+                this.itemMeta = eSM;
             }
         } else {
-            if (iS.containsEnchantment(e)) {
-                iS.removeEnchantment(e);
-                iS.addUnsafeEnchantment(e, lvl);
-                iM.removeEnchant(e);
-                iM.addEnchant(e, lvl, true);
+            if (this.item.containsEnchantment(enchantment)) {
+                this.item.removeEnchantment(enchantment);
+                this.item.addUnsafeEnchantment(enchantment, lvl);
+                this.itemMeta.removeEnchant(enchantment);
+                this.itemMeta.addEnchant(enchantment, lvl, true);
             }
         }
         return this;
@@ -122,30 +122,30 @@ public class ItemEditor {
 
     public ItemEditor setType(final Material type) {
         if (type.isItem())
-            iS.setType(type);
+            this.item.setType(type);
         return this;
     }
 
     public ItemEditor removeLore() {
-        iM.lore(new ArrayList<>());
+        this.itemMeta.lore(new ArrayList<>());
         return this;
     }
 
     public ItemEditor setCustomModelData(final int cmd) {
-        iM.setCustomModelData(cmd);
+        this.itemMeta.setCustomModelData(cmd);
         return this;
     }
 
     public ItemStack build() {
         setIM();
-        return iS;
+        return this.item;
     }
 
     private void setIM() {
-        if (this.iM != null) iS.setItemMeta(iM);
+        if (this.itemMeta != null) this.item.setItemMeta(this.itemMeta);
     }
 
     private void prepareEnchantingTask() {
-        if (iS.getType().equals(Material.BOOK)) iS.setType(Material.ENCHANTED_BOOK);
+        if (this.item.getType().equals(Material.BOOK)) this.item.setType(Material.ENCHANTED_BOOK);
     }
 }

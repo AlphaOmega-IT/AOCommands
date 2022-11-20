@@ -1,6 +1,6 @@
 package de.alphaomega.it.database.daos;
 
-import de.alphaomega.it.api.AOCommandsAPI;
+import de.alphaomega.it.AOCommands;
 import de.alphaomega.it.database.entities.AOPlayer;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaUpdate;
@@ -36,7 +36,7 @@ public class AOPlayerDao extends BaseDao<AOPlayer> {
     }
 
     public void updateByUser(final AOPlayer aoP) {
-        Session s = AOCommandsAPI.sF.openSession();
+        Session s = AOCommands.getInstance().getSF().openSession();
         try {
             s.clear();
             s.beginTransaction();
