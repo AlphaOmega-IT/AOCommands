@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AOCommands">
+    <output-path>$PROJECT_DIR$/../../Atramis/Atramis Network/Lobby/plugins</output-path>
+    <root id="archive" name="AOCommands.jar">
+      <element id="module-output" name="AOCommands" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/de/alphaomega/it/AOCommand/2.1/AOCommand-2.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

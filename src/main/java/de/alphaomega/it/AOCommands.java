@@ -4,8 +4,8 @@ package de.alphaomega.it;
 import de.alphaomega.it.api.AOCommandsAPI;
 import de.alphaomega.it.cmdhandler.CommandFramework;
 import de.alphaomega.it.commands.*;
-import de.alphaomega.it.invhandler.InvManager;
 import de.alphaomega.it.inventories.ArmorstandSubInv;
+import de.alphaomega.it.invhandler.InvManager;
 import de.alphaomega.it.listeners.OnJoin;
 import de.alphaomega.it.listeners.OnJoinInitPlayer;
 import de.alphaomega.it.listeners.OnLeave;
@@ -32,21 +32,19 @@ public class AOCommands extends JavaPlugin {
 
 
     private static AOCommands instance;
-    private AOCommandsAPI aoCommandsAPI;
-
-    private HashMap<String, FileConfiguration> translations = new HashMap<>();
-
     private final HashMap<String, String> noPermsMessage = new HashMap<>();
-
-    private FileConfiguration baseConfig;
-    private SessionFactory sF;
-
     private final HashMap<UUID, ArmorStand> armorStands = new LinkedHashMap<>();
     private final HashMap<UUID, Boolean> isUsingAnvil = new LinkedHashMap<>();
-
     private final Set<UUID> vanishedPlayers = new LinkedHashSet<>();
-
+    private AOCommandsAPI aoCommandsAPI;
+    private HashMap<String, FileConfiguration> translations = new HashMap<>();
+    private FileConfiguration baseConfig;
+    private SessionFactory sF;
     private InvManager manager;
+
+    public static AOCommands getInstance() {
+        return instance;
+    }
 
     @Override
     public void onLoad() {
@@ -57,6 +55,11 @@ public class AOCommands extends JavaPlugin {
                 saveResource("translations/", false);
                 Bukkit.getLogger().log(Level.INFO, "[AOCommands] - Translations got created");
             }
+        }
+
+        if (getDataFolder().exists()) {
+            if (new File(getDataFolder() + "/libs/").mkdir())
+                Bukkit.getLogger().log(Level.INFO, "[AOCommands] - Libraries got created");
         }
 
         saveResource("translations/language_de_DE.yml", true);
@@ -144,8 +147,4 @@ public class AOCommands extends JavaPlugin {
         plManager.registerEvents(new OnJoinInitPlayer(this), this);
         plManager.registerEvents(new OnLeaveSavePlayer(this), this);
     }
-
-    public HashMap<String, String> getNoPermsMessage() { return noPermsMessage; }
-
-    public static AOCommands getInstance() { return instance; }
 }
