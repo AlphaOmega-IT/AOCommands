@@ -149,6 +149,8 @@ spawn-admin-syntax: <yellow>/spawn [<player|all|*|@a>]</yellow>
 teleportToSpawn: <gray>You got teleported to spawn.</gray>
 spawnNotSet: <gray>The spawn is not set.</gray>
 
+spawnTeleportNotAllowed: <gray>You could not be teleported to spawn yet because</gray> <red>none</red> <gray>has been set.</gray>
+
 ### Custom Inventory Heads
 ### Color of name is changeable in config.yml
 ### You can add as many lines in lore as you want!

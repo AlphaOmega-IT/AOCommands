@@ -21,6 +21,9 @@ allowed_ingame_command: false
 ### ItemEdit ###
 allow_not_valid_enchantments: true
 
+### Spawnpoint of Player after login ###
+teleport_player_to_spawn: true
+
 ### Heads ###
 ### Default Hex color from inventory heads
 ### Default: #cf9c11

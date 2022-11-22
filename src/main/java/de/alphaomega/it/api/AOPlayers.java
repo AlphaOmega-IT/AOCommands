@@ -13,9 +13,11 @@ import java.util.concurrent.CompletableFuture;
 public class AOPlayers {
 
     private final AOCommandsAPI api;
+
     public AOPlayers(final AOCommandsAPI api) {
         this.api = api;
     }
+
     @SneakyThrows
     public void createPlayer(final Player player) {
         if (this.api.getPlayers().containsKey(player.getUniqueId())) {
