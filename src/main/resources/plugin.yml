@@ -1,8 +1,8 @@
 name: AOCommands
 version: 2.0
-main: de.alphaomega.it.AOCommands
+main: de.alphaomega.it.aocommands.AOCommands
 api-version: 1.19
 prefix: AOCommands
-authors: [AlphaOmega-IT, SaltyFeaRz, Justin]
+authors: [ AlphaOmega-IT, SaltyFeaRz, Justin ]
 description: Several useful commands for your server network! | 01
 website: https://atramis.de | https://alphaomega-it.de
